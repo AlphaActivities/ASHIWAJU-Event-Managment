@@ -28,11 +28,13 @@ export default function AboutSection() {
         </div>
 
         <div className="mt-10 grid gap-10 lg:gap-12 lg:grid-cols-2 items-stretch">
-          {/* LEFT - Image Placeholder */}
-          <div className="relative overflow-hidden rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.25)] bg-neutral-200 w-full h-full min-h-[520px] flex items-center justify-center">
-            <span className="text-neutral-500 tracking-wide text-sm">
-              Image Placeholder
-            </span>
+          {/* LEFT - Profile Image */}
+          <div className="relative overflow-hidden rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.25)] bg-neutral-200 w-full h-full min-h-[520px]">
+            <img
+              src="/images/profile.photo.webp"
+              alt="Ashiwaju Event Planning Team"
+              className="w-full h-full object-cover"
+            />
           </div>
 
           {/* RIGHT - Body Copy */}
