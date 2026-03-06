@@ -75,7 +75,7 @@ const Navbar: React.FC = () => {
         <button
           type="button"
           onClick={() => scrollToSection('home')}
-          className="flex items-center gap-4 rounded-full bg-[#C4A46A]/70 px-8 py-4 shadow-[0_10px_30px_rgba(15,23,42,0.18)] ring-1 ring-[#e3c58a]/40 transition-all duration-500 hover:shadow-[0_15px_50px_rgba(196,164,106,0.35)] hover:ring-[#e3c58a]/70 hover:bg-[#C4A46A]/85 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#e5c98f]/80 min-w-0 max-w-[72vw] sm:max-w-none shrink"
+          className="flex items-center gap-4 rounded-full bg-[#C4A46A]/70 px-3 sm:px-8 py-4 shadow-[0_10px_30px_rgba(15,23,42,0.18)] ring-1 ring-[#e3c58a]/40 transition-transform duration-200 hover:-translate-y-[1px] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#e5c98f]/80 min-w-0 max-w-[calc(100vw-120px)] sm:max-w-none shrink"
         >
           <div className="flex items-center gap-4 min-w-0">
 
@@ -86,10 +86,10 @@ const Navbar: React.FC = () => {
             />
 
             <div className="leading-tight min-w-0">
-              <div className="font-serif text-xl md:text-2xl tracking-[0.25em] uppercase font-medium text-black truncate">
+              <div className="font-serif text-xl md:text-2xl tracking-[0.25em] uppercase font-medium text-black whitespace-nowrap">
                 ASHIWAJU
               </div>
-              <div className="text-xs tracking-[0.18em] uppercase text-black/80 truncate">
+              <div className="text-[0.65rem] sm:text-xs tracking-[0.14em] sm:tracking-[0.18em] uppercase text-black/80 whitespace-normal break-words leading-[1.15] max-w-[38vw] sm:max-w-none">
                 Event Management & Consultant
               </div>
             </div>
