@@ -9,39 +9,37 @@ export default function FormSection() {
   const [plannedBudget, setPlannedBudget] = useState("");
   const [guestSize, setGuestSize] = useState("");
 
-  const encode = (data: FormData) =>
-    new URLSearchParams(data as any).toString();
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setSubmitting(true);
+    setError(null);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {console.log("FORM SUBMITTED");
-  e.preventDefault();
+    const form = e.currentTarget;
+    const formData = new FormData(form);
 
-  const form = e.currentTarget;
-
-  const formData = new FormData(form);
-
-  const data = {
-    name: formData.get("name"),
-    email: formData.get("email"),
-    phone: formData.get("phone"),
-  };
-
-  try {
-    await fetch(
-      "https://script.google.com/macros/s/AKfycbyY0o2AEwikZfVrLR0juzavdCNCbQ3IgcmVj89-A7xgu9ncqMKhfSAGpMVnjsQ5R_lT/exec",
-      {
+    try {
+      await fetch("/", {
         method: "POST",
-        body: JSON.stringify(data),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(formData as any).toString(),
+      });
 
-    window.location.href = "/thank-you";
-  } catch (error) {
-    console.error("Submission error:", error);
-  }
-};
+      setSubmitted(true);
+      setSubmitting(false);
+
+      setTimeout(() => {
+        form.reset();
+        setWeddingDate("");
+        setPlannedBudget("");
+        setGuestSize("");
+      }, 2000);
+
+    } catch (error) {
+      console.error("Submission error:", error);
+      setError("Something went wrong. Please try again.");
+      setSubmitting(false);
+    }
+  };
 
   useEffect(() => {
     if (!submitted) return;
@@ -75,10 +73,15 @@ export default function FormSection() {
               <div className="relative rounded-3xl bg-gradient-to-br from-[#8B6F47]/95 via-[#7A5F3C]/95 to-[#6B5335]/95 border border-[#c29f63]/40 backdrop-blur-[40px] shadow-[0_24px_60px_rgba(0,0,0,0.85)] px-6 py-7 md:px-8 md:py-9 lg:px-10 lg:py-10">
 
               <form
+  name="contact"
+  method="POST"
+  data-netlify="true"
   onSubmit={handleSubmit}
   className="space-y-5"
 >
-                 
+                  <input type="hidden" name="form-name" value="contact" />
+                  <input type="text" name="bot-field" style={{ display: 'none' }} />
+
                   <div className="space-y-2">
                     <label
                       htmlFor="contact-name"
@@ -90,6 +93,7 @@ export default function FormSection() {
                       id="contact-name"
                       name="name"
                       type="text"
+                      required
                       autoComplete="name"
                       placeholder=""
                       className="w-full rounded-xl bg-white/5 border border-white/18 px-4 py-3.5 text-sm md:text-[15px] text-neutral-50 placeholder:text-neutral-300/60 focus:outline-none focus:ring-2 focus:ring-[#F5E6C8] focus:border-transparent transition"
@@ -107,6 +111,7 @@ export default function FormSection() {
                       id="contact-email"
                       name="email"
                       type="email"
+                      required
                       autoComplete="email"
                       placeholder=""
                       className="w-full rounded-xl bg-white/5 border border-white/18 px-4 py-3.5 text-sm md:text-[15px] text-neutral-50 placeholder:text-neutral-300/60 focus:outline-none focus:ring-2 focus:ring-[#F5E6C8] focus:border-transparent transition"
@@ -123,7 +128,8 @@ export default function FormSection() {
                     <input
                       id="contact-phone"
                       name="phone"
-                      type="tel"required
+                      type="tel"
+                      required
                       autoComplete="tel"
                       placeholder=""
                       className="w-full rounded-xl bg-white/5 border border-white/18 px-4 py-3.5 text-sm md:text-[15px] text-neutral-50 placeholder:text-neutral-300/60 focus:outline-none focus:ring-2 focus:ring-[#F5E6C8] focus:border-transparent transition"
@@ -213,6 +219,12 @@ export default function FormSection() {
                 {submitted && (
                   <div className="mt-4 rounded-xl bg-green-600/20 border border-green-500/50 px-4 py-3.5 text-sm text-green-100 backdrop-blur-sm">
                     Your message has been sent successfully. We'll be in touch soon.
+                  </div>
+                )}
+
+                {error && (
+                  <div className="mt-4 rounded-xl bg-red-600/20 border border-red-500/50 px-4 py-3.5 text-sm text-red-100 backdrop-blur-sm">
+                    {error}
                   </div>
                 )}
               </div>
