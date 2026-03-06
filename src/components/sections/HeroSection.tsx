@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { LuxFadeIn } from '../ui/LuxFadeIn';
+import { scrollToSection } from '../../utils/scrollToSection';
 
 const HERO_IMAGES = [
   "/images/hero/hero-01.jpg",
@@ -61,12 +62,13 @@ export default function HeroSection() {
 
             <LuxFadeIn delay={0.25}>
               <div className="flex justify-center">
-                <a
-                  href="#contact"
+                <button
+                  type="button"
+                  onClick={() => scrollToSection('contact')}
                   className="inline-block bg-[#C4A46A] text-black font-medium px-7 py-3 rounded-full shadow-[0_0_20px_rgba(196,164,106,0.4)] hover:shadow-[0_0_35px_rgba(196,164,106,0.7)] transition-all"
                 >
                   Book your planning clarity session
-                </a>
+                </button>
               </div>
             </LuxFadeIn>
           </div>
