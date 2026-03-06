@@ -90,7 +90,7 @@ const Navbar: React.FC = () => {
                 ASHIWAJU
               </div>
               <div className="text-[0.65rem] sm:text-xs tracking-[0.14em] sm:tracking-[0.18em] uppercase text-black/80 whitespace-normal break-words leading-[1.15] max-w-[38vw] sm:max-w-none">
-                Event Management & Consultant
+                Event Management <br className="sm:hidden" />& Consultant
               </div>
             </div>
 
