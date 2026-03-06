@@ -75,9 +75,14 @@ const Navbar: React.FC = () => {
         <button
           type="button"
           onClick={() => scrollToSection('home')}
-          className="flex items-center gap-4 rounded-full bg-[#C4A46A]/70 px-3 sm:px-8 py-4 shadow-[0_10px_30px_rgba(15,23,42,0.18)] ring-1 ring-[#e3c58a]/40 transition-transform duration-200 hover:-translate-y-[1px] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#e5c98f]/80 min-w-0 max-w-[calc(100vw-120px)] sm:max-w-none shrink"
+          className="group relative flex items-center gap-4 rounded-full bg-[#C4A46A]/70 px-3 sm:px-8 py-4 shadow-[0_10px_30px_rgba(15,23,42,0.18)] ring-1 ring-[#e3c58a]/40 transition-all duration-500 hover:shadow-[0_15px_50px_rgba(196,164,106,0.45),0_0_60px_rgba(227,197,138,0.3)] hover:ring-[#f5e3b6]/60 hover:bg-[#d4b47a]/75 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#e5c98f]/80 min-w-0 max-w-[calc(100vw-120px)] sm:max-w-none shrink overflow-hidden"
         >
-          <div className="flex items-center gap-4 min-w-0">
+          {/* Shimmer overlay */}
+          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
+          </div>
+
+          <div className="flex items-center gap-4 min-w-0 relative z-10">
 
             <img
               src="/images/ashiwaju-logo.png"
