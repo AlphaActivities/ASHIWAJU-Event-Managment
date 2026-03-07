@@ -24,7 +24,11 @@ export default function FormSection() {
         body: new URLSearchParams(formData as any).toString(),
       });
 
-      setSubmitted(true);
+      setSubmitted(true);// Redirect to thank-you page after brief delay
+setTimeout(() => {
+  window.location.href = '/thank-you.html';
+}, 1000);
+
       setSubmitting(false);
 
       setTimeout(() => {
