@@ -72,11 +72,11 @@ export default function FormSection() {
               <div className="absolute inset-0 rounded-3xl bg-[#8B6F47]/40 blur-[80px] pointer-events-none" />
               <div className="relative rounded-3xl bg-gradient-to-br from-[#8B6F47]/95 via-[#7A5F3C]/95 to-[#6B5335]/95 border border-[#c29f63]/40 backdrop-blur-[40px] shadow-[0_24px_60px_rgba(0,0,0,0.85)] px-6 py-7 md:px-8 md:py-9 lg:px-10 lg:py-10">
 
-              <form
+<form
   name="contact"
   method="POST"
   data-netlify="true"
-  onSubmit={handleSubmit}
+  action="/thank-you"
   className="space-y-5"
 >
                   <input type="hidden" name="form-name" value="contact" />
