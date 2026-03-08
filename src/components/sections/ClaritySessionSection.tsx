@@ -1,69 +1,95 @@
 import { LuxFadeIn } from "../ui/LuxFadeIn";
 import { scrollToSection } from "../../utils/scrollToSection";
+import { Check } from "lucide-react";
 
 export default function ClaritySessionSection() {
   return (
-    <section className="relative bg-transparent text-white py-24">
-      <div className="max-w-6xl mx-auto px-6">
+    <section className="relative bg-[#FAF8F4] text-neutral-900 py-24">
+      <div className="max-w-4xl mx-auto px-6">
         <LuxFadeIn delay={0.1}>
           <h2 className="text-3xl md:text-4xl font-semibold text-center mb-12">
             What to expect in your Clarity Session
           </h2>
         </LuxFadeIn>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+        <div className="space-y-6 mb-16">
           <LuxFadeIn delay={0.15}>
-            <div className="rounded-xl border border-neutral-200 p-6 bg-white shadow-sm">
-              <h3 className="font-semibold text-lg mb-2 text-black">
-                Get Clear On Your Vision
-              </h3>
-              <p className="text-neutral-600 leading-relaxed">
-                Define what truly matters for your wedding so every decision becomes easier.
-              </p>
+            <div className="flex gap-4 items-start">
+              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-[#F5E6C8] to-[#E9C88A] flex items-center justify-center mt-1">
+                <Check className="w-5 h-5 text-neutral-800" strokeWidth={2.5} />
+              </div>
+              <div className="flex-1">
+                <h3 className="font-semibold text-lg mb-1">
+                  Get Clear On Your Vision
+                </h3>
+                <p className="text-neutral-600 leading-relaxed">
+                  Define what truly matters for your wedding so every decision becomes easier.
+                </p>
+              </div>
             </div>
           </LuxFadeIn>
 
           <LuxFadeIn delay={0.2}>
-            <div className="rounded-xl border border-neutral-200 p-6 bg-white shadow-sm">
-              <h3 className="font-semibold text-lg mb-2 text-black">
-                Avoid Expensive Mistakes
-              </h3>
-              <p className="text-neutral-600 leading-relaxed">
-                Learn where couples usually overspend and how to protect your budget.
-              </p>
+            <div className="flex gap-4 items-start">
+              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-[#F5E6C8] to-[#E9C88A] flex items-center justify-center mt-1">
+                <Check className="w-5 h-5 text-neutral-800" strokeWidth={2.5} />
+              </div>
+              <div className="flex-1">
+                <h3 className="font-semibold text-lg mb-1">
+                  Avoid Expensive Mistakes
+                </h3>
+                <p className="text-neutral-600 leading-relaxed">
+                  Learn where couples usually overspend and how to protect your budget.
+                </p>
+              </div>
             </div>
           </LuxFadeIn>
 
           <LuxFadeIn delay={0.25}>
-            <div className="rounded-xl border border-neutral-200 p-6 bg-white shadow-sm">
-              <h3 className="font-semibold text-lg mb-2 text-black">
-                Choose The Right Vendors
-              </h3>
-              <p className="text-neutral-600 leading-relaxed">
-                Identify trustworthy vendors and avoid the ones that cause stress on your wedding day.
-              </p>
+            <div className="flex gap-4 items-start">
+              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-[#F5E6C8] to-[#E9C88A] flex items-center justify-center mt-1">
+                <Check className="w-5 h-5 text-neutral-800" strokeWidth={2.5} />
+              </div>
+              <div className="flex-1">
+                <h3 className="font-semibold text-lg mb-1">
+                  Choose The Right Vendors
+                </h3>
+                <p className="text-neutral-600 leading-relaxed">
+                  Identify trustworthy vendors and avoid the ones that cause stress on your wedding day.
+                </p>
+              </div>
             </div>
           </LuxFadeIn>
 
           <LuxFadeIn delay={0.3}>
-            <div className="rounded-xl border border-neutral-200 p-6 bg-white shadow-sm">
-              <h3 className="font-semibold text-lg mb-2 text-black">
-                Handle Family Pressure Calmly
-              </h3>
-              <p className="text-neutral-600 leading-relaxed">
-                Set clear boundaries so opinions don't take over your wedding.
-              </p>
+            <div className="flex gap-4 items-start">
+              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-[#F5E6C8] to-[#E9C88A] flex items-center justify-center mt-1">
+                <Check className="w-5 h-5 text-neutral-800" strokeWidth={2.5} />
+              </div>
+              <div className="flex-1">
+                <h3 className="font-semibold text-lg mb-1">
+                  Handle Family Pressure Calmly
+                </h3>
+                <p className="text-neutral-600 leading-relaxed">
+                  Set clear boundaries so opinions don't take over your wedding.
+                </p>
+              </div>
             </div>
           </LuxFadeIn>
 
           <LuxFadeIn delay={0.35}>
-            <div className="rounded-xl border border-neutral-200 p-6 bg-white shadow-sm md:col-span-2">
-              <h3 className="font-semibold text-lg mb-2 text-black">
-                Leave With A Clear Plan
-              </h3>
-              <p className="text-neutral-600 leading-relaxed">
-                By the end of the session, you'll know exactly what to do next.
-              </p>
+            <div className="flex gap-4 items-start">
+              <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-[#F5E6C8] to-[#E9C88A] flex items-center justify-center mt-1">
+                <Check className="w-5 h-5 text-neutral-800" strokeWidth={2.5} />
+              </div>
+              <div className="flex-1">
+                <h3 className="font-semibold text-lg mb-1">
+                  Leave With A Clear Plan
+                </h3>
+                <p className="text-neutral-600 leading-relaxed">
+                  By the end of the session, you'll know exactly what to do next.
+                </p>
+              </div>
             </div>
           </LuxFadeIn>
         </div>
