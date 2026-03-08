@@ -30,13 +30,13 @@ export default function FearSection() {
 
           {/* RIGHT — FEAR COPY */}
           <LuxFadeIn delay={0.2}>
-            <div className="flex flex-col justify-center gap-6 lg:gap-7 text-center lg:text-left">
+            <div className="flex flex-col justify-center gap-6 lg:gap-7">
 
               {/* GOLD ACCENT RULE */}
-              <div className="h-[1px] w-14 bg-gradient-to-r from-[#f3d7a0] via-[#f9e9c6] to-transparent mb-2 mx-auto lg:mx-0"></div>
+              <div className="h-[1px] w-14 bg-gradient-to-r from-[#f3d7a0] via-[#f9e9c6] to-transparent mb-2"></div>
 
               {/* COPY */}
-              <div className="text-[0.98rem] sm:text-base leading-relaxed text-[#3b3b3b]/90 space-y-3 max-w-[42rem]">
+              <div className="text-left text-[0.98rem] sm:text-base leading-relaxed text-[#3b3b3b]/90 space-y-5 max-w-prose">
                 <p>Many couples think they can handle everything themselves.</p>
                 <p>After all, there are checklists and YouTube videos everywhere.</p>
                 <p>
@@ -65,7 +65,7 @@ export default function FearSection() {
 
               {/* CTA BUTTON */}
               <div className="mt-4 sm:mt-6">
-                <div className="flex flex-wrap gap-3 sm:gap-4 justify-center lg:justify-start">
+                <div className="flex flex-wrap gap-3 sm:gap-4">
                   <button
                     type="button"
                     onClick={() => scrollToSection('contact')}
