@@ -1,58 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { LuxFadeIn } from "../ui/LuxFadeIn";
 
 export default function FormSection() {
-  const [submitting, setSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
-  const [error, setError] = useState<string | null>(null);
   const [weddingDate, setWeddingDate] = useState("");
   const [plannedBudget, setPlannedBudget] = useState("");
   const [guestSize, setGuestSize] = useState("");
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setSubmitting(true);
-    setError(null);
-
-    const form = e.currentTarget;
-    const formData = new FormData(form);
-
-    try {
-      await fetch("/", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams(formData as any).toString(),
-      });
-
-      setSubmitted(true);// Redirect to thank-you page after brief delay
-setTimeout(() => {
-  window.location.href = '/thank-you.html';
-}, 1000);
-
-      setSubmitting(false);
-
-      setTimeout(() => {
-        form.reset();
-        setWeddingDate("");
-        setPlannedBudget("");
-        setGuestSize("");
-      }, 2000);
-
-    } catch (error) {
-      console.error("Submission error:", error);
-      setError("Something went wrong. Please try again.");
-      setSubmitting(false);
-    }
-  };
-
-  useEffect(() => {
-    if (!submitted) return;
-    const timer = setTimeout(() => {
-      setSubmitted(false);
-      setError(null);
-    }, 6000);
-    return () => clearTimeout(timer);
-  }, [submitted]);
 
   return (
     <section
@@ -80,7 +32,7 @@ setTimeout(() => {
   name="contact"
   method="POST"
   data-netlify="true"
-  action="/thank-you"
+  action="/thank-you.html"
   className="space-y-5"
 >
                   <input type="hidden" name="form-name" value="contact" />
@@ -213,25 +165,12 @@ setTimeout(() => {
                   <div className="pt-1">
                     <button
                       type="submit"
-                      disabled={submitting}
-                      className="w-full inline-flex items-center justify-center rounded-full bg-gradient-to-r from-[#F5E6C8] via-[#F2D9A3] to-[#E9C88A] px-6 py-3.5 text-sm md:text-[15px] font-semibold text-black shadow-[0_14px_35px_rgba(0,0,0,0.65)] hover:brightness-110 active:translate-y-px transition-transform transition-[filter] disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="w-full inline-flex items-center justify-center rounded-full bg-gradient-to-r from-[#F5E6C8] via-[#F2D9A3] to-[#E9C88A] px-6 py-3.5 text-sm md:text-[15px] font-semibold text-black shadow-[0_14px_35px_rgba(0,0,0,0.65)] hover:brightness-110 active:translate-y-px transition-transform transition-[filter]"
                     >
-                      {submitting ? "Sending..." : "Book my planning clarity session"}
+                      Book my planning clarity session
                     </button>
                   </div>
                 </form>
-
-                {submitted && (
-                  <div className="mt-4 rounded-xl bg-green-600/20 border border-green-500/50 px-4 py-3.5 text-sm text-green-100 backdrop-blur-sm">
-                    Your message has been sent successfully. We'll be in touch soon.
-                  </div>
-                )}
-
-                {error && (
-                  <div className="mt-4 rounded-xl bg-red-600/20 border border-red-500/50 px-4 py-3.5 text-sm text-red-100 backdrop-blur-sm">
-                    {error}
-                  </div>
-                )}
               </div>
             </div>
           </LuxFadeIn>
