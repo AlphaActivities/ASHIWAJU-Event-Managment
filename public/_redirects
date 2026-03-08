@@ -1,2 +1,5 @@
-# SPA fallback - redirect all requests to index.html except for files that exist
+# Explicitly serve the thank-you page (static HTML file)
+/thank-you.html   /thank-you.html   200
+
+# SPA fallback - redirect all other requests to index.html
 /*    /index.html   200

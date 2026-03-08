@@ -36,7 +36,6 @@ export default function FormSection() {
   className="space-y-5"
 >
                   <input type="hidden" name="form-name" value="contact" />
-                  <input type="hidden" name="redirect" value="/thank-you.html" />
                   <input type="text" name="bot-field" style={{ display: 'none' }} />
 
                   <div className="space-y-2">

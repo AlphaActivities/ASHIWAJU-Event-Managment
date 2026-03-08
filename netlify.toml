@@ -3,6 +3,12 @@ command = "npx vite build"
 publish = "dist"
 
 [[redirects]]
+from = "/thank-you.html"
+to = "/thank-you.html"
+status = 200
+force = true
+
+[[redirects]]
 from = "/*"
 to = "/index.html"
 status = 200
