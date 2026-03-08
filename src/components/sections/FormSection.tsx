@@ -78,7 +78,7 @@ export default function FormSection() {
                       type="text"
                       required
                       autoComplete="name"
-                      placeholder=""
+                      placeholder="John Smith"
                       className="w-full rounded-xl bg-white/5 border border-white/18 px-4 py-3.5 text-sm md:text-[15px] text-neutral-50 placeholder:text-neutral-300/60 focus:outline-none focus:ring-2 focus:ring-[#F5E6C8] focus:border-transparent transition"
                     />
                   </div>
@@ -96,7 +96,7 @@ export default function FormSection() {
                       type="email"
                       required
                       autoComplete="email"
-                      placeholder=""
+                      placeholder="john@email.com"
                       className="w-full rounded-xl bg-white/5 border border-white/18 px-4 py-3.5 text-sm md:text-[15px] text-neutral-50 placeholder:text-neutral-300/60 focus:outline-none focus:ring-2 focus:ring-[#F5E6C8] focus:border-transparent transition"
                     />
                   </div>
@@ -114,7 +114,7 @@ export default function FormSection() {
                       type="tel"
                       required
                       autoComplete="tel"
-                      placeholder=""
+                      placeholder="(555) 123-4567"
                       className="w-full rounded-xl bg-white/5 border border-white/18 px-4 py-3.5 text-sm md:text-[15px] text-neutral-50 placeholder:text-neutral-300/60 focus:outline-none focus:ring-2 focus:ring-[#F5E6C8] focus:border-transparent transition"
                     />
                   </div>
