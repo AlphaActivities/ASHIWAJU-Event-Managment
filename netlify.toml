@@ -1,0 +1,10 @@
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+  force = false
+  conditions = {Role = ["user"]}
+
+# This tells Netlify to use our custom thank you page for form submissions
+[[plugins]]
+  package = "@netlify/plugin-forms"

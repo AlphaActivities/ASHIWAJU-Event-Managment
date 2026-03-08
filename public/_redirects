@@ -1,0 +1,2 @@
+# SPA fallback - redirect all requests to index.html except for files that exist
+/*    /index.html   200
