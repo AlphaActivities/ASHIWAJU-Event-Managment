@@ -37,9 +37,9 @@ export default function HeroSection() {
         ))}
       </div>
 
-      <div className="absolute inset-0 bg-black/40"></div>
+      <div className="absolute inset-0 bg-black/45"></div>
 
-      <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/30 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-black/35 to-transparent" />
 
       <div className="relative z-10 min-h-screen flex items-center">
         <div className="lux-content max-w-7xl mx-auto px-6 md:px-10 lg:px-16 w-full pt-28 md:pt-32">
@@ -51,14 +51,26 @@ export default function HeroSection() {
             </LuxFadeIn>
 
             <LuxFadeIn delay={0.15}>
-              <p className="text-neutral-300 text-base md:text-lg leading-relaxed max-w-2xl mb-10">
+              <p className="text-white text-lg md:text-xl leading-relaxed max-w-2xl mb-10">
                 Enjoy every single moment of your day stress free
               </p>
             </LuxFadeIn>
 
-            <LuxFadeIn delay={0.05}>
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-6">
-                <div className="flex -space-x-3">
+            <LuxFadeIn delay={0.2}>
+              <div className="flex justify-center mb-8">
+                <button
+                  type="button"
+                  onClick={() => scrollToSection('contact')}
+                  className="inline-block bg-[#C4A46A] text-black font-medium px-7 py-3 rounded-full shadow-[0_0_20px_rgba(196,164,106,0.4)] hover:shadow-[0_0_35px_rgba(196,164,106,0.7)] transition-all"
+                >
+                  Book your planning clarity session
+                </button>
+              </div>
+            </LuxFadeIn>
+
+            <LuxFadeIn delay={0.25}>
+              <div className="flex flex-row items-center justify-center gap-3 flex-wrap">
+                <div className="flex -space-x-3 shrink-0">
                   <img
                     src="/images/avatar/avatar-1.jpeg"
                     alt="Happy couple"
@@ -75,21 +87,9 @@ export default function HeroSection() {
                     className="w-10 h-10 rounded-full border-2 border-white object-cover"
                   />
                 </div>
-                <p className="text-xs md:text-sm text-neutral-300 text-center sm:text-left">
-                  Trusted by 50+ couples who planned their wedding stress free after just ONE clarity session
+                <p className="text-sm md:text-base text-white">
+                  50+ couples planned their wedding stress free after one clarity session
                 </p>
-              </div>
-            </LuxFadeIn>
-
-            <LuxFadeIn delay={0.25}>
-              <div className="flex justify-center">
-                <button
-                  type="button"
-                  onClick={() => scrollToSection('contact')}
-                  className="inline-block bg-[#C4A46A] text-black font-medium px-7 py-3 rounded-full shadow-[0_0_20px_rgba(196,164,106,0.4)] hover:shadow-[0_0_35px_rgba(196,164,106,0.7)] transition-all"
-                >
-                  Book your planning clarity session
-                </button>
               </div>
             </LuxFadeIn>
           </div>
