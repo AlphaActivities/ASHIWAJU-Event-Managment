@@ -69,8 +69,8 @@ export default function HeroSection() {
             </LuxFadeIn>
 
             <LuxFadeIn delay={0.25}>
-              <div className="flex flex-row items-center justify-center gap-3 flex-wrap">
-                <div className="flex -space-x-3 shrink-0">
+              <div className="flex flex-row items-center justify-center gap-3 flex-nowrap">
+                <div className="flex -space-x-2 shrink-0">
                   <img
                     src="/images/avatar/avatar-1.jpeg"
                     alt="Happy couple"
@@ -87,7 +87,7 @@ export default function HeroSection() {
                     className="w-10 h-10 rounded-full border-2 border-white object-cover"
                   />
                 </div>
-                <p className="text-sm md:text-base text-white">
+                <p className="text-sm md:text-base text-white text-left leading-snug max-w-[220px]">
                   50+ couples planned their wedding stress free after one clarity session
                 </p>
               </div>
