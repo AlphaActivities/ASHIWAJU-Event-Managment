@@ -5,6 +5,33 @@ export default function FormSection() {
   const [weddingDate, setWeddingDate] = useState("");
   const [plannedBudget, setPlannedBudget] = useState("");
   const [guestSize, setGuestSize] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(formData as any).toString()
+      });
+
+      if (response.ok) {
+        window.location.href = '/thank-you.html';
+      } else {
+        throw new Error('Form submission failed');
+      }
+    } catch (error) {
+      setIsSubmitting(false);
+      alert('We encountered an issue submitting your form. Please try again or contact us directly.');
+      console.error('Form submission error:', error);
+    }
+  };
 
   return (
     <section
@@ -32,7 +59,7 @@ export default function FormSection() {
   name="contact"
   method="POST"
   data-netlify="true"
-  action="/thank-you.html"
+  onSubmit={handleSubmit}
   className="space-y-5"
 >
                   <input type="hidden" name="form-name" value="contact" />
@@ -164,9 +191,10 @@ export default function FormSection() {
                   <div className="pt-1">
                     <button
                       type="submit"
-                      className="w-full inline-flex items-center justify-center rounded-full bg-gradient-to-r from-[#F5E6C8] via-[#F2D9A3] to-[#E9C88A] px-6 py-3.5 text-sm md:text-[15px] font-semibold text-black shadow-[0_14px_35px_rgba(0,0,0,0.65)] hover:brightness-110 active:translate-y-px transition-transform transition-[filter]"
+                      disabled={isSubmitting}
+                      className="w-full inline-flex items-center justify-center rounded-full bg-gradient-to-r from-[#F5E6C8] via-[#F2D9A3] to-[#E9C88A] px-6 py-3.5 text-sm md:text-[15px] font-semibold text-black shadow-[0_14px_35px_rgba(0,0,0,0.65)] hover:brightness-110 active:translate-y-px transition-transform transition-[filter] disabled:opacity-60 disabled:cursor-not-allowed"
                     >
-                      Book my planning clarity session
+                      {isSubmitting ? 'Submitting...' : 'Book my planning clarity session'}
                     </button>
                   </div>
                 </form>
