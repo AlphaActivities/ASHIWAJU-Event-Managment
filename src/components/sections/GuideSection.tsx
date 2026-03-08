@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { LuxFadeIn } from "../ui/LuxFadeIn";
 import { scrollToSection } from "../../utils/scrollToSection";
+import { supabase } from "../../utils/supabase";
 
 export default function GuideSection() {
   const [isGuideOpen, setIsGuideOpen] = useState(false);
@@ -8,6 +9,7 @@ export default function GuideSection() {
   const [guideEmail, setGuideEmail] = useState("");
   const [guidePhone, setGuidePhone] = useState("");
   const [guideError, setGuideError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   return (
     <section id="guide" className="relative py-20 md:py-28 lg:py-32">
       <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-10">
@@ -54,7 +56,7 @@ export default function GuideSection() {
             </p>
 
             <form
-              onSubmit={(e) => {
+              onSubmit={async (e) => {
                 e.preventDefault();
                 setGuideError("");
 
@@ -63,12 +65,41 @@ export default function GuideSection() {
                   return;
                 }
 
-                const link = document.createElement("a");
-                link.href = "/guides/ashiwaju-wedding-guide.pdf";
-                link.download = "Ashiwaju-Wedding-Guide.pdf";
-                link.click();
+                setIsSubmitting(true);
 
-                setIsGuideOpen(false);
+                try {
+                  const { error } = await supabase
+                    .from('guide_downloads')
+                    .insert([
+                      {
+                        full_name: guideName,
+                        email: guideEmail,
+                        phone: guidePhone
+                      }
+                    ]);
+
+                  if (error) {
+                    console.error('Error saving lead:', error);
+                    setGuideError("An error occurred. Please try again.");
+                    setIsSubmitting(false);
+                    return;
+                  }
+
+                  const link = document.createElement("a");
+                  link.href = "/guide/ashiwaju-wedding-guide.pdf";
+                  link.download = "Ashiwaju-Wedding-Guide.pdf";
+                  link.click();
+
+                  setIsGuideOpen(false);
+                  setGuideName("");
+                  setGuideEmail("");
+                  setGuidePhone("");
+                } catch (err) {
+                  console.error('Unexpected error:', err);
+                  setGuideError("An unexpected error occurred. Please try again.");
+                } finally {
+                  setIsSubmitting(false);
+                }
               }}
               className="space-y-4"
             >
@@ -98,9 +129,10 @@ export default function GuideSection() {
 
               <button
                 type="submit"
-                className="w-full rounded-full bg-[#C4A46A] py-3 font-medium text-white"
+                disabled={isSubmitting}
+                className="w-full rounded-full bg-[#C4A46A] py-3 font-medium text-white disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Download Guide
+                {isSubmitting ? "Processing..." : "Download Guide"}
               </button>
             </form>
           </div>
