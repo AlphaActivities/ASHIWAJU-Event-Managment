@@ -53,7 +53,7 @@ export default function GuideSection() {
             </button>
 
             <div className="relative">
-              <h3 className="text-2xl sm:text-3xl font-serif font-semibold tracking-tight text-[#1b1b1b] mb-2">
+              <h3 className="text-xl sm:text-2xl font-serif font-semibold tracking-tight text-[#1b1b1b] mb-2 whitespace-nowrap">
                 Download the Wedding Guide
               </h3>
               <p className="text-sm text-[#2c2c2c]/80 mb-6 leading-relaxed">
