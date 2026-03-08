@@ -52,7 +52,7 @@ export default function HeroSection() {
 
             <LuxFadeIn delay={0.15}>
               <p className="text-neutral-300 text-base md:text-lg leading-relaxed max-w-2xl mb-10">
-                Experience how calm and enjoyable wedding planning can feel with Ashiwaju Event.
+                Enjoy every single moment of your day stress free
               </p>
             </LuxFadeIn>
 
