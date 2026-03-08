@@ -4,15 +4,15 @@ import { Check } from "lucide-react";
 
 export default function ClaritySessionSection() {
   return (
-    <section className="relative bg-[#FAF8F4] text-neutral-900 py-24">
+    <section className="relative bg-[#f7f3ea] text-neutral-900 py-24">
       <div className="max-w-4xl mx-auto px-6">
         <LuxFadeIn delay={0.1}>
-          <h2 className="text-3xl md:text-4xl font-semibold text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-semibold text-center mb-16">
             What to expect in your Clarity Session
           </h2>
         </LuxFadeIn>
 
-        <div className="space-y-6 mb-16">
+        <div className="space-y-6 mb-20">
           <LuxFadeIn delay={0.15}>
             <div className="flex gap-4 items-start">
               <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-[#F5E6C8] to-[#E9C88A] flex items-center justify-center mt-1">
@@ -95,18 +95,18 @@ export default function ClaritySessionSection() {
         </div>
 
         <LuxFadeIn delay={0.4}>
-          <div className="mt-16 rounded-2xl bg-neutral-50 p-10 text-center border border-neutral-200">
+          <div className="bg-white rounded-2xl shadow-xl border border-neutral-200 p-10 text-center">
             <p className="text-neutral-700 leading-relaxed mb-4">
               You can find wedding advice anywhere.
             </p>
             <p className="text-neutral-700 leading-relaxed mb-4">
               Applying it correctly to your wedding is where most couples struggle.
             </p>
-            <p className="text-neutral-900 font-semibold mb-6">
+            <p className="text-neutral-900 font-semibold mb-8">
               That's what this session solves.
             </p>
 
-            <p className="text-2xl font-semibold text-black my-6">
+            <p className="text-2xl font-semibold text-black my-8">
               All of this for just ₦60,000.
             </p>
 
@@ -120,8 +120,8 @@ export default function ClaritySessionSection() {
         </LuxFadeIn>
 
         <LuxFadeIn delay={0.45}>
-          <div className="text-center mt-12">
-            <p className="text-white text-lg md:text-xl mb-6 max-w-3xl mx-auto">
+          <div className="text-center mt-16">
+            <p className="text-neutral-800 text-lg md:text-xl mb-8 max-w-3xl mx-auto">
               Want guests talking about the little details that made your wedding special?
             </p>
             <button
