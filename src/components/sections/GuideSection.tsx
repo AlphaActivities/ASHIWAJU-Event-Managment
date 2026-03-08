@@ -40,101 +40,107 @@ export default function GuideSection() {
       </div>
 
       {isGuideOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 px-6">
-          <div className="w-full max-w-md rounded-2xl bg-white p-8 shadow-2xl relative">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm px-6">
+          <div className="w-full max-w-md rounded-3xl bg-gradient-to-b from-white to-[#fdfbf7] p-8 sm:p-10 shadow-[0_28px_80px_rgba(0,0,0,0.25)] border border-[#C4A46A]/20 relative">
+            <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_top,rgba(199,155,75,0.08),transparent_65%)] rounded-3xl" />
+
             <button
               type="button"
               onClick={() => setIsGuideOpen(false)}
-              className="absolute top-4 right-4 text-gray-400 hover:text-black"
+              className="absolute top-5 right-5 text-[#2c2c2c]/60 hover:text-[#1b1b1b] transition-colors duration-200 z-10"
             >
               ✕
             </button>
 
-            <h3 className="text-2xl font-semibold mb-2">Download the Wedding Guide</h3>
-            <p className="text-sm text-gray-600 mb-6">
-              Enter your details to instantly access your guide.
-            </p>
+            <div className="relative">
+              <h3 className="text-2xl sm:text-3xl font-serif font-semibold tracking-tight text-[#1b1b1b] mb-2">
+                Download the Wedding Guide
+              </h3>
+              <p className="text-sm text-[#2c2c2c]/80 mb-6 leading-relaxed">
+                Enter your details to instantly access your guide.
+              </p>
 
-            <form
-              onSubmit={async (e) => {
-                e.preventDefault();
-                setGuideError("");
+              <form
+                onSubmit={async (e) => {
+                  e.preventDefault();
+                  setGuideError("");
 
-                if (!guideName || !guideEmail || !guidePhone) {
-                  setGuideError("Please fill all fields.");
-                  return;
-                }
-
-                setIsSubmitting(true);
-
-                try {
-                  const { error } = await supabase
-                    .from('guide_downloads')
-                    .insert([
-                      {
-                        full_name: guideName,
-                        email: guideEmail,
-                        phone: guidePhone
-                      }
-                    ]);
-
-                  if (error) {
-                    console.error('Error saving lead:', error);
-                    setGuideError("An error occurred. Please try again.");
-                    setIsSubmitting(false);
+                  if (!guideName || !guideEmail || !guidePhone) {
+                    setGuideError("Please fill all fields.");
                     return;
                   }
 
-                  const link = document.createElement("a");
-                  link.href = "/guide/ashiwaju-wedding-guide.pdf";
-                  link.download = "Ashiwaju-Wedding-Guide.pdf";
-                  link.click();
+                  setIsSubmitting(true);
 
-                  setIsGuideOpen(false);
-                  setGuideName("");
-                  setGuideEmail("");
-                  setGuidePhone("");
-                } catch (err) {
-                  console.error('Unexpected error:', err);
-                  setGuideError("An unexpected error occurred. Please try again.");
-                } finally {
-                  setIsSubmitting(false);
-                }
-              }}
-              className="space-y-4"
-            >
-              <input
-                type="text"
-                placeholder="Full Name"
-                value={guideName}
-                onChange={(e) => setGuideName(e.target.value)}
-                className="w-full rounded-lg border border-gray-300 px-4 py-3"
-              />
-              <input
-                type="email"
-                placeholder="Email Address"
-                value={guideEmail}
-                onChange={(e) => setGuideEmail(e.target.value)}
-                className="w-full rounded-lg border border-gray-300 px-4 py-3"
-              />
-              <input
-                type="tel"
-                placeholder="Phone Number"
-                value={guidePhone}
-                onChange={(e) => setGuidePhone(e.target.value)}
-                className="w-full rounded-lg border border-gray-300 px-4 py-3"
-              />
+                  try {
+                    const { error } = await supabase
+                      .from('guide_downloads')
+                      .insert([
+                        {
+                          full_name: guideName,
+                          email: guideEmail,
+                          phone: guidePhone
+                        }
+                      ]);
 
-              {guideError && <p className="text-sm text-red-500">{guideError}</p>}
+                    if (error) {
+                      console.error('Error saving lead:', error);
+                      setGuideError("An error occurred. Please try again.");
+                      setIsSubmitting(false);
+                      return;
+                    }
 
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full rounded-full bg-[#C4A46A] py-3 font-medium text-white disabled:opacity-50 disabled:cursor-not-allowed"
+                    const link = document.createElement("a");
+                    link.href = "/guide/ashiwaju-wedding-guide.pdf";
+                    link.download = "Ashiwaju-Wedding-Guide.pdf";
+                    link.click();
+
+                    setIsGuideOpen(false);
+                    setGuideName("");
+                    setGuideEmail("");
+                    setGuidePhone("");
+                  } catch (err) {
+                    console.error('Unexpected error:', err);
+                    setGuideError("An unexpected error occurred. Please try again.");
+                  } finally {
+                    setIsSubmitting(false);
+                  }
+                }}
+                className="space-y-4"
               >
-                {isSubmitting ? "Processing..." : "Download Guide"}
-              </button>
-            </form>
+                <input
+                  type="text"
+                  placeholder="Full Name"
+                  value={guideName}
+                  onChange={(e) => setGuideName(e.target.value)}
+                  className="w-full rounded-lg border border-gray-300 px-4 py-3 text-[#1b1b1b] placeholder:text-gray-500 focus:border-[#C4A46A] focus:ring-2 focus:ring-[#C4A46A]/20 focus:outline-none transition-all duration-200"
+                />
+                <input
+                  type="email"
+                  placeholder="Email Address"
+                  value={guideEmail}
+                  onChange={(e) => setGuideEmail(e.target.value)}
+                  className="w-full rounded-lg border border-gray-300 px-4 py-3 text-[#1b1b1b] placeholder:text-gray-500 focus:border-[#C4A46A] focus:ring-2 focus:ring-[#C4A46A]/20 focus:outline-none transition-all duration-200"
+                />
+                <input
+                  type="tel"
+                  placeholder="Phone Number"
+                  value={guidePhone}
+                  onChange={(e) => setGuidePhone(e.target.value)}
+                  className="w-full rounded-lg border border-gray-300 px-4 py-3 text-[#1b1b1b] placeholder:text-gray-500 focus:border-[#C4A46A] focus:ring-2 focus:ring-[#C4A46A]/20 focus:outline-none transition-all duration-200"
+                />
+
+                {guideError && <p className="text-sm text-red-600 font-medium">{guideError}</p>}
+
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full rounded-full bg-gradient-to-r from-[#f5e3b6] via-[#e7c78a] to-[#c89c4f] py-3 font-medium text-[#1b1b1b] shadow-[0_12px_28px_rgba(0,0,0,0.15)] hover:brightness-105 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {isSubmitting ? "Processing..." : "Download Guide"}
+                </button>
+              </form>
+            </div>
           </div>
         </div>
       )}
