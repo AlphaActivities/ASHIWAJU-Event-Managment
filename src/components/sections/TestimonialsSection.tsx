@@ -1,20 +1,91 @@
+import { useState, useEffect, useRef } from "react";
 import { LuxFadeIn } from "../ui/LuxFadeIn";
-import { Star } from 'lucide-react';
+import { Star, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const testimonials = [
 {
 id: 1,
-chatImage: "/images/testimonials/whatsapp-1.jpg",
-coupleImage: "/images/testimonials/couple-1.jpg"
+chatImage: "/images/testimonials /whatsapp-1.jpeg",
+coupleImage: "/images/testimonials /couple-1.jpeg"
 },
 {
 id: 2,
-chatImage: "/images/testimonials/whatsapp-2.jpg",
-coupleImage: "/images/testimonials/couple-2.jpg"
+chatImage: "/images/testimonials /whatsapp-2.jpeg",
+coupleImage: "/images/testimonials /couple-2.jpeg"
 }
 ];
 
 export default function TestimonialsSection() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
+  const autoSlideTimer = useRef<number | null>(null);
+
+  const goToNext = () => {
+    if (isTransitioning) return;
+    setIsTransitioning(true);
+    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+    setTimeout(() => setIsTransitioning(false), 500);
+  };
+
+  const goToPrev = () => {
+    if (isTransitioning) return;
+    setIsTransitioning(true);
+    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+    setTimeout(() => setIsTransitioning(false), 500);
+  };
+
+  const resetAutoSlide = () => {
+    if (autoSlideTimer.current) {
+      clearInterval(autoSlideTimer.current);
+    }
+    autoSlideTimer.current = window.setInterval(() => {
+      goToNext();
+    }, 5000);
+  };
+
+  useEffect(() => {
+    resetAutoSlide();
+    return () => {
+      if (autoSlideTimer.current) {
+        clearInterval(autoSlideTimer.current);
+      }
+    };
+  }, [currentIndex]);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    const swipeDistance = touchStartX.current - touchEndX.current;
+    const minSwipeDistance = 50;
+
+    if (Math.abs(swipeDistance) > minSwipeDistance) {
+      if (swipeDistance > 0) {
+        goToNext();
+      } else {
+        goToPrev();
+      }
+      resetAutoSlide();
+    }
+  };
+
+  const handlePrevClick = () => {
+    goToPrev();
+    resetAutoSlide();
+  };
+
+  const handleNextClick = () => {
+    goToNext();
+    resetAutoSlide();
+  };
+
   return (
     <section
       id="reviews"
@@ -29,40 +100,92 @@ export default function TestimonialsSection() {
           </h2>
         </LuxFadeIn>
 
-        {/* TESTIMONIAL GRID */}
-        <div className="grid grid-cols-1 max-w-2xl mx-auto gap-8">
-          {testimonials.map((testimonial, index) => (
-            <LuxFadeIn key={testimonial.id} delay={0.1 + index * 0.08}>
-              <article className="group relative h-full rounded-2xl bg-gradient-to-br from-[#8B6F47]/90 via-[#7A5F3C]/90 to-[#6B5335]/90 border border-[#c29f63]/30 backdrop-blur-2xl px-6 py-7 flex flex-col shadow-[0_18px_45px_rgba(0,0,0,0.7)]">
+        {/* TESTIMONIAL SLIDER */}
+        <div className="relative max-w-2xl mx-auto">
 
-  {/* WHATSAPP TESTIMONIAL */}
-  <img
-    src={testimonial.chatImage}
-    alt="Client WhatsApp testimonial"
-    className="w-full rounded-lg mb-5 shadow-md"
-  />
+          {/* SLIDER CONTAINER */}
+          <div
+            className="overflow-hidden"
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+          >
+            <div
+              className="flex transition-transform duration-500 ease-out"
+              style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+            >
+              {testimonials.map((testimonial) => (
+                <div key={testimonial.id} className="w-full flex-shrink-0">
+                  <article className="group relative h-full rounded-2xl bg-gradient-to-br from-[#8B6F47]/90 via-[#7A5F3C]/90 to-[#6B5335]/90 border border-[#c29f63]/30 backdrop-blur-2xl px-6 py-7 flex flex-col shadow-[0_18px_45px_rgba(0,0,0,0.7)]">
 
-  {/* CLIENT IDENTITY ROW */}
-  <div className="flex items-center gap-3 pt-4 border-t border-white/20">
+                    {/* WHATSAPP TESTIMONIAL */}
+                    <img
+                      src={testimonial.chatImage}
+                      alt="Client WhatsApp testimonial"
+                      className="w-full rounded-lg mb-5 shadow-md"
+                    />
 
-    <img
-      src={testimonial.coupleImage}
-      alt="Happy couple"
-      className="w-10 h-10 rounded-full object-cover"
-    />
+                    {/* CLIENT IDENTITY ROW */}
+                    <div className="flex items-center gap-3 pt-4 border-t border-white/20">
+                      <img
+                        src={testimonial.coupleImage}
+                        alt="Happy couple"
+                        className="w-10 h-10 rounded-full object-cover"
+                      />
+                      <div className="flex items-center gap-1">
+                        <Star size={14} fill="#F5E6C8" stroke="#F5E6C8" strokeWidth={1.5} />
+                        <span className="text-sm text-white font-medium">
+                          Ashiwaju Happy Couple
+                        </span>
+                      </div>
+                    </div>
 
-    <div className="flex items-center gap-1">
-      <Star size={14} fill="#F5E6C8" stroke="#F5E6C8" strokeWidth={1.5} />
-      <span className="text-sm text-white font-medium">
-        Ashiwaju Happy Couple
-      </span>
-    </div>
+                  </article>
+                </div>
+              ))}
+            </div>
+          </div>
 
-  </div>
+          {/* NAVIGATION ARROWS - Desktop */}
+          <button
+            onClick={handlePrevClick}
+            className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-16 items-center justify-center w-12 h-12 rounded-full bg-[#8B6F47]/90 border border-[#c29f63]/40 text-white hover:bg-[#7A5F3C] transition-all shadow-lg backdrop-blur-sm"
+            aria-label="Previous testimonial"
+          >
+            <ChevronLeft size={24} />
+          </button>
 
-</article>
-            </LuxFadeIn>
-          ))}
+          <button
+            onClick={handleNextClick}
+            className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-16 items-center justify-center w-12 h-12 rounded-full bg-[#8B6F47]/90 border border-[#c29f63]/40 text-white hover:bg-[#7A5F3C] transition-all shadow-lg backdrop-blur-sm"
+            aria-label="Next testimonial"
+          >
+            <ChevronRight size={24} />
+          </button>
+
+          {/* DOTS INDICATOR */}
+          <div className="flex justify-center gap-2 mt-6">
+            {testimonials.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => {
+                  if (!isTransitioning) {
+                    setIsTransitioning(true);
+                    setCurrentIndex(index);
+                    resetAutoSlide();
+                    setTimeout(() => setIsTransitioning(false), 500);
+                  }
+                }}
+                className={`w-2 h-2 rounded-full transition-all ${
+                  index === currentIndex
+                    ? 'bg-[#F5E6C8] w-8'
+                    : 'bg-white/40 hover:bg-white/60'
+                }`}
+                aria-label={`Go to testimonial ${index + 1}`}
+              />
+            ))}
+          </div>
+
         </div>
       </div>
     </section>
