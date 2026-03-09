@@ -2,13 +2,17 @@ import { LuxFadeIn } from "../ui/LuxFadeIn";
 import { Star } from 'lucide-react';
 
 const testimonials = [
-  {
-    id: 1,
-    name: "",
-    detail: "",
-    quote: "",
-  },
-];
+{
+coupleImage: "/images/testimonials/couple-1.jpg",
+chatImage: "/images/testimonials/whatsapp-1.jpg",
+badge: "Ashiwaju Happy Couple"
+},
+{
+coupleImage: "/images/testimonials/couple-2.jpg",
+chatImage: "/images/testimonials/whatsapp-2.jpg",
+badge: "Ashiwaju Happy Couple"
+}
+]
 
 export default function TestimonialsSection() {
   return (
