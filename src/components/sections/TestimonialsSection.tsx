@@ -137,7 +137,7 @@ export default function TestimonialsSection() {
                       <div className="flex items-center gap-1">
                         <Star size={14} fill="#F5E6C8" stroke="#F5E6C8" strokeWidth={1.5} />
                         <span className="text-sm text-white font-medium">
-                          Ashiwaju  Couple
+                         Happy Ashiwaju Couple
                         </span>
                       </div>
                     </div>
