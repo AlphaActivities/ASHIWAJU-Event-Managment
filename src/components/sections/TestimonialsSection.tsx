@@ -3,16 +3,16 @@ import { Star } from 'lucide-react';
 
 const testimonials = [
 {
-coupleImage: "/images/testimonials/couple-1.jpg",
+id: 1,
 chatImage: "/images/testimonials/whatsapp-1.jpg",
-badge: "Ashiwaju Couple"
+coupleImage: "/images/testimonials/couple-1.jpg"
 },
 {
-coupleImage: "/images/testimonials/couple-2.jpg",
+id: 2,
 chatImage: "/images/testimonials/whatsapp-2.jpg",
-badge: "Ashiwaju Couple"
+coupleImage: "/images/testimonials/couple-2.jpg"
 }
-]
+];
 
 export default function TestimonialsSection() {
   return (
