@@ -4,6 +4,7 @@ import { scrollToSection } from "../../utils/scrollToSection";
 
 export default function AboutSection() {
   const [currentImage, setCurrentImage] = useState(0);
+  const [isExpanded, setIsExpanded] = useState(false);
   const images = ["/images/fear.png", "/images/fear.png"];
 
   useEffect(() => {
@@ -38,29 +39,45 @@ export default function AboutSection() {
           </div>
 
           {/* RIGHT - Body Copy */}
-          <div className="h-full flex flex-col justify-center text-[0.98rem] sm:text-base leading-relaxed text-[#3b3b3b]/90 space-y-6">
-            <p>
-              With over 10 years of turning weddings into unforgettable celebrations, we've learned how to guide couples through planning without feeling overwhelmed.
-            </p>
+          <div className="h-full flex flex-col justify-center text-[0.98rem] sm:text-base leading-relaxed text-[#3b3b3b]/90">
+            <div className="space-y-6">
+              {/* Always visible intro paragraphs */}
+              <p>
+                With over 10 years of turning weddings into unforgettable celebrations, we've learned how to guide couples through planning without feeling overwhelmed.
+              </p>
 
-            <p>
-              We handle the hard parts, the decisions, and the details that truly matter, so you can enjoy the journey and show up calm on your wedding day, without unnecessary spending or regret.
-            </p>
+              <p>
+                We handle the hard parts, the decisions, and the details that truly matter, so you can enjoy the journey and show up calm on your wedding day, without unnecessary spending or regret.
+              </p>
 
-            <p>
-              From our very first meeting, we take time to understand you.
-              <br />
-              We listen to your ideas and help you visualize the full picture.
-            </p>
+              {/* Expandable extra paragraphs - hidden on mobile by default, always visible on desktop */}
+              <div className={`space-y-6 ${isExpanded ? 'block' : 'hidden lg:block'}`}>
+                <p>
+                  From our very first meeting, we take time to understand you.
+                  <br />
+                  We listen to your ideas and help you visualize the full picture.
+                </p>
 
-            <p>
-              Then we clearly communicate the steps, the process, and the cost involved, with no hidden fees or surprises.
-              <br />
-              Every detail of your event is designed to reflect your story.
-              <br />
-              Not just seen and felt on the day, but remembered long after.
-            </p>
+                <p>
+                  Then we clearly communicate the steps, the process, and the cost involved, with no hidden fees or surprises.
+                  <br />
+                  Every detail of your event is designed to reflect your story.
+                  <br />
+                  Not just seen and felt on the day, but remembered long after.
+                </p>
+              </div>
 
+              {/* Mobile-only toggle link */}
+              <button
+                type="button"
+                onClick={() => setIsExpanded(!isExpanded)}
+                className="lg:hidden text-sm text-[#8B6F47] hover:text-[#7A5F3C] transition-colors underline underline-offset-2"
+              >
+                {isExpanded ? 'See less' : 'See more'}
+              </button>
+            </div>
+
+            {/* CTA Button - always visible and stable */}
             <button
               type="button"
               onClick={() => scrollToSection("contact")}
