@@ -119,11 +119,13 @@ export default function TestimonialsSection() {
                   <article className="group relative h-full rounded-2xl bg-gradient-to-br from-[#8B6F47]/90 via-[#7A5F3C]/90 to-[#6B5335]/90 border border-[#c29f63]/30 backdrop-blur-2xl px-6 py-7 flex flex-col shadow-[0_18px_45px_rgba(0,0,0,0.7)]">
 
                     {/* WHATSAPP TESTIMONIAL */}
-                    <img
-                      src={testimonial.chatImage}
-                      alt="Client WhatsApp testimonial"
-                      className="w-full rounded-lg mb-5 shadow-md"
-                    />
+                    <div className="w-full aspect-[4/5] flex items-center justify-center bg-black/20 rounded-lg mb-5 overflow-hidden">
+  <img
+    src={testimonial.chatImage}
+    alt="Client WhatsApp testimonial"
+    className="max-h-full max-w-full object-contain"
+  />
+</div>
 
                     {/* CLIENT IDENTITY ROW */}
                     <div className="flex items-center gap-3 pt-4 border-t border-white/20">
