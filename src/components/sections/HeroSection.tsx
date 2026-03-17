@@ -45,13 +45,11 @@ export default function HeroSection() {
         <div className="lux-content max-w-7xl mx-auto px-6 md:px-10 lg:px-16 w-full pt-28 md:pt-32">
           <div className="text-center max-w-4xl mx-auto flex flex-col items-center">
             <LuxFadeIn delay={0.1}>
-  <h1
-  className="text-4xl md:text-6xl lg:text-7xl font-serif font-semibold tracking-[0.06em] leading-tight text-white drop-shadow-[0_6px_25px_rgba(0,0,0,0.7)]"
+<h1
+  className="max-w-2xl mx-auto text-4xl md:text-6xl lg:text-7xl font-serif font-semibold tracking-[0.06em] leading-tight text-white drop-shadow-[0_6px_25px_rgba(0,0,0,0.7)]"
   style={{ textRendering: "optimizeLegibility" }}
 >
-  Have the wedding you’ve always imagined
-  <br />
-  without overspending
+  Have the wedding you’ve always imagined without overspending
 </h1>
             </LuxFadeIn>
 
