@@ -37,7 +37,7 @@ export default function HeroSection() {
         ))}
       </div>
 
-      <div className="absolute inset-0 bg-black/45"></div>
+      <div className="absolute inset-0 bg-black/25"></div>
 
       <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-black/35 to-transparent" />
 
