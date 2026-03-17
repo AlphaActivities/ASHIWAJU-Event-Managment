@@ -45,7 +45,7 @@ export default function HeroSection() {
         <div className="lux-content max-w-7xl mx-auto px-6 md:px-10 lg:px-16 w-full pt-28 md:pt-32">
           <div className="text-center max-w-4xl mx-auto flex flex-col items-center">
             <LuxFadeIn delay={0.1}>
-             <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif tracking-[0.08em] leading-tight">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif tracking-[0.08em] leading-tight text-white drop-shadow-[0_4px_20px_rgba(0,0,0,0.6)]">
                 <span className="block text-white">Have the wedding you've always imagined without overspending</span>
               </h1>
             </LuxFadeIn>
