@@ -51,7 +51,7 @@ export default function HeroSection() {
             </LuxFadeIn>
 
             <LuxFadeIn delay={0.15}>
-              <p className="text-white text-lg md:text-xl leading-relaxed max-w-2xl mb-10">
+             <p className="text-lg md:text-xl text-white/90 mt-4">
                 Enjoy every single moment of your day stress free
               </p>
             </LuxFadeIn>
