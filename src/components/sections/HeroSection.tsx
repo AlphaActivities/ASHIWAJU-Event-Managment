@@ -51,13 +51,13 @@ export default function HeroSection() {
             </LuxFadeIn>
 
             <LuxFadeIn delay={0.15}>
-             <p className="text-lg md:text-xl text-white/90 mt-4">
+            <p className="text-lg md:text-xl text-white/90 mt-6 md:mt-8">
                 Enjoy every single moment of your day stress free
               </p>
             </LuxFadeIn>
 
             <LuxFadeIn delay={0.2}>
-              <div className="flex justify-center mb-8">
+            <div className="flex justify-center mt-8 md:mt-10 mb-8">
                 <button
                   type="button"
                   onClick={() => scrollToSection('contact')}
