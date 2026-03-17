@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 @layer base {
-  /* Hides the scrollbars */
+
   html {
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -13,17 +13,17 @@
     display: none;
   }
 
-  /* Base body styles */
   body {
-    @apply font-sans text-neutral-200 bg-black antialiased tracking-tight;
+    font-family: 'Libre Baskerville', serif;
+    @apply text-neutral-200 bg-black antialiased;
   }
 
-  /* Headings styling */
   h1, h2, h3, h4 {
-    @apply font-semibold tracking-tight;
+    font-family: 'Cormorant Garamond', serif;
+    letter-spacing: 0.02em;
+    @apply font-medium;
   }
 
-  /* Keyframe animation for blindsDown */
   @keyframes blindsDown {
     0% {
       max-height: 0;
@@ -41,4 +41,5 @@
       transform-origin: top;
     }
   }
+
 }
