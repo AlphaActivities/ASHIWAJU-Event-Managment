@@ -30,9 +30,9 @@ export default function HeroSection() {
             key={img}
             src={img}
             alt=""
-            className={`absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-[1500ms] ease-in-out ${
-              index === heroIndex ? "opacity-100" : "opacity-0"
-            }`}
+            className={`absolute inset-0 h-full w-full object-cover object-[center_30%] md:object-center scale-110 md:scale-105 transition-opacity duration-[1500ms] ease-in-out ${
+  index === heroIndex ? "opacity-100" : "opacity-0"
+}`}
           />
         ))}
       </div>
