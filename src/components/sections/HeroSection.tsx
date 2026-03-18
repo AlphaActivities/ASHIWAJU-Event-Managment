@@ -46,7 +46,7 @@ export default function HeroSection() {
           <div className="text-center max-w-4xl mx-auto flex flex-col items-center">
             <LuxFadeIn delay={0.1}>
 <h1
-  className="text-center text-[2.6rem] sm:text-[3rem] md:text-[4.5rem] lg:text-[5.2rem] font-serif font-semibold tracking-[0.02em] leading-[1.15] text-white drop-shadow-[0_6px_25px_rgba(0,0,0,0.7)]"
+  className="text-center text-[2.2rem] sm:text-[2.8rem] md:text-[3.5rem] lg:text-[4rem] font-serif font-semibold tracking-[0.02em] leading-[1.2] text-white drop-shadow-[0_6px_25px_rgba(0,0,0,0.7)]"
   style={{ textRendering: "optimizeLegibility" }}
 >
   <span className="block">
