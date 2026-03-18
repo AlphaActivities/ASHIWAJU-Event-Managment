@@ -50,7 +50,7 @@ export default function HeroSection() {
   style={{ textRendering: "optimizeLegibility" }}
 >
   <span className="block">
-    Have the wedding you've always Imagined
+    Have the wedding you've always imagined
   </span>
   <span className="block mt-2">
     Without overspending
