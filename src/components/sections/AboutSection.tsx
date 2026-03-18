@@ -43,37 +43,45 @@ export default function AboutSection() {
             <div className="space-y-6">
               {/* Always visible intro paragraphs */}
               <p>
-                With over 10 years of turning weddings into unforgettable celebrations, we've learned how to guide couples through planning without feeling overwhelmed.
+                With over 10 years of turning 50+ weddings into unforgettable celebrations, we've learned how to guide couples through planning that stays true to their vision and budget.
               </p>
 
               <p>
-                We handle the hard parts, the decisions, and the details that truly matter, so you can enjoy the journey and show up calm on your wedding day, without unnecessary spending or regret.
+                We take care of the hard decisions, the moving parts, and the details that truly matter, so you can enjoy the journey, show up confident, and fully present on your wedding day, without unnecessary spending or regret.
               </p>
 
-              {/* Expandable extra paragraphs - hidden on mobile by default, always visible on desktop */}
-              <div className={`space-y-6 ${isExpanded ? 'block' : 'hidden lg:block'}`}>
-                <p>
-                  From our very first meeting, we take time to understand you.
-                  <br />
-                  We listen to your ideas and help you visualize the full picture.
-                </p>
+              {/* Expandable extra paragraphs */}
+              <div
+                className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                  isExpanded ? 'max-h-[800px] opacity-100' : 'max-h-0 opacity-0'
+                }`}
+              >
+                <div className="space-y-6 pt-0">
+                  <p>
+                    From our very first meeting, we take time to understand you, your vision, your priorities, and what this day means to you.
+                  </p>
 
-                <p>
-                  Then we clearly communicate the steps, the process, and the cost involved, with no hidden fees or surprises.
-                  <br />
-                  Every detail of your event is designed to reflect your story.
-                  <br />
-                  Not just seen and felt on the day, but remembered long after.
-                </p>
+                  <p>
+                    Then we help you clearly see how everything comes together.
+                  </p>
+
+                  <p>
+                    Step by step, we guide you through the entire process with clarity on every decision and every cost, with no hidden fees and no surprises.
+                  </p>
+
+                  <p>
+                    Every detail is thoughtfully planned to reflect your vision, so when your guests walk in, everything feels intentional, elegant, and exactly how you imagined it.
+                  </p>
+                </div>
               </div>
 
-              {/* Mobile-only toggle link */}
+              {/* Toggle link - works on both desktop and mobile */}
               <button
                 type="button"
                 onClick={() => setIsExpanded(!isExpanded)}
-                className="lg:hidden text-sm text-[#8B6F47] hover:text-[#7A5F3C] transition-colors underline underline-offset-2"
+                className="text-sm text-[#8B6F47] hover:text-[#7A5F3C] transition-colors"
               >
-                {isExpanded ? 'See less' : 'See more'}
+                {isExpanded ? 'See less' : 'See more...'}
               </button>
             </div>
 
