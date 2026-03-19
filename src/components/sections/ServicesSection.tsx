@@ -58,8 +58,8 @@ export default function ServicesSection() {
             const Icon = item.icon;
             return (
               <LuxFadeIn key={index} delay={0.1 + index * 0.05}>
-                <div className="h-full flex flex-col rounded-[1.75rem] bg-[#fbfaf7] border border-[#e9ddc2] shadow-[0_18px_55px_rgba(15,23,42,0.10)] p-6 sm:p-7 lg:p-8">
-                  <div className="flex items-start gap-4">
+                <div className="h-full flex flex-col rounded-[1.75rem] bg-[#fbfaf7] border border-[#e9ddc2] shadow-[0_18px_55px_rgba(15,23,42,0.10)] p-5 sm:p-6 lg:p-7">
+                  <div className="flex items-start gap-3">
 
                     <div className="shrink-0 rounded-2xl bg-[#111111] text-[#f1d598] p-3">
                       <Icon size={22} strokeWidth={1.8} />
@@ -69,7 +69,7 @@ export default function ServicesSection() {
                       <h3 className="text-lg font-semibold text-[#111111]">
                         {item.title}
                       </h3>
-                      <p className="mt-3 text-[0.95rem] leading-relaxed text-[#3b3b3b]/90">
+                      <p className="mt-2 text-[15px] md:text-[16px] leading-[1.6] text-[#3b3b3b]/90">
                         {item.description}
                       </p>
                     </div>
