@@ -5,31 +5,31 @@ const services = [
     title: "Wedding Planning and Strategy",
     description:
       "We help you clarify your wedding vision from the start, so every decision, from decor to vendors, stays aligned and stress-free.",
-    image: "/images/service/service-01.jpg",
+    image: "/images/service/service01.jpeg",
   },
   {
     title: "Venue Guidance and Budget Control",
     description:
       "Using our local advantage, we guide you to choose a venue that fits your style, guest size, and budget, while helping you avoid unnecessary costs and last-minute surprises.",
-    image: "/images/service/service-02.jpg",
+    image: "/images/service/service02.jpeg",
   },
   {
     title: "Wedding Decor, Styling, and Production",
     description:
       "We design and execute your decor, stage, and lighting ourselves. Every design is intentional, personal, and never repeated",
-    image: "/images/service/service-03.jpg",
+    image: "/images/service/service03.jpeg",
   },
   {
     title: "Family and Decision Support",
     description:
       "We help you manage family opinions and expectations, so you can make decisions calmly without guilt, pressure, or unnecessary conflict.",
-    image: "/images/service/service-04.jpg",
+    image: "/images/service/service04.jpeg",
   },
   {
     title: "Wedding Day Coordination",
     description:
       "We manage timelines, decor setup, vendors, and on-the-day logistics, so you're not fixing problems or running around; you're fully present and enjoying your wedding.",
-    image: "/images/service/service-05.jpg",
+    image: "/images/service/service05.jpeg",
   },
 ];
 
