@@ -62,7 +62,7 @@ export default function ServicesSection() {
                       <img
                         src={item.image}
                         alt={item.title}
-                        className="w-full h-[220px] md:h-[260px] object-contain bg-[#f3eee4]"
+                        className="w-full h-[260px] md:h-[300px] object-cover object-center transition-transform duration-700 group-hover:scale-105"
                       />
                     </div>
 
