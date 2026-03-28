@@ -12,6 +12,21 @@ coupleImage: "/images/testimonials /couple-1.jpeg"
 id: 2,
 chatImage: "/images/testimonials /whatsapp-2.jpeg",
 coupleImage: "/images/testimonials /couple-2.jpeg"
+},
+{
+id: 3,
+chatImage: "/images/testimonials /whatsapp-3.jpeg",
+coupleImage: "/images/testimonials /couple-3.jpeg"
+},
+{
+id: 4,
+chatImage: "/images/testimonials /whatsapp-4.jpeg",
+coupleImage: "/images/testimonials /couple-4.jpeg"
+},
+{
+id: 5,
+chatImage: "/images/testimonials /whatsapp-5.jpeg",
+coupleImage: "/images/testimonials /couple-5.jpeg"
 }
 ];
 
