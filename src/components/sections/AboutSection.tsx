@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { LuxFadeIn } from "../ui/LuxFadeIn";
 import { scrollToSection } from "../../utils/scrollToSection";
+import { Check } from "lucide-react";
 
 export default function AboutSection() {
   const [currentImage, setCurrentImage] = useState(0);
@@ -57,18 +58,41 @@ export default function AboutSection() {
                 }`}
               >
                 <div className="space-y-6 pt-0">
-                  <p>
-                    From our very first meeting, we take time to understand you, your vision, your priorities, and what this day means to you.
-                  </p>
+  <h3 className="text-lg font-semibold text-[#111111]">
+    From our very first meeting:
+  </h3>
 
-                  <p>
-                    Then we help you clearly see how everything comes together.
-                  </p>
+  <div className="space-y-5">
 
-                  <p>
-                    Step by step, we guide you through the entire process with clarity on every decision and every cost, with no hidden fees and no surprises.
-                  </p>
+    <div className="flex items-start gap-4">
+      <div className="flex items-center justify-center w-6 h-6 rounded-full bg-black">
+        <Check className="w-4 h-4 text-white" />
+      </div>
+      <p>
+        We take time to understand you, your vision, your priorities, and what this day means to you
+      </p>
+    </div>
 
+    <div className="flex items-start gap-4">
+      <div className="flex items-center justify-center w-6 h-6 rounded-full bg-black">
+        <Check className="w-4 h-4 text-white" />
+      </div>
+      <p>
+        We help you clearly see how everything comes together
+      </p>
+    </div>
+
+    <div className="flex items-start gap-4">
+      <div className="flex items-center justify-center w-6 h-6 rounded-full bg-black">
+        <Check className="w-4 h-4 text-white" />
+      </div>
+      <p>
+        We guide you step by step through the entire process with clarity on every decision and every cost. No hidden fees. No surprises
+      </p>
+    </div>
+
+  </div>
+</div>
                   <p>
                     Every detail is thoughtfully planned to reflect your vision, so when your guests walk in, everything feels intentional, elegant, and exactly how you imagined it.
                   </p>
