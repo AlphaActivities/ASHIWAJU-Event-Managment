@@ -63,7 +63,7 @@ export default function AboutSection() {
     From our very first meeting:
   </h3>
 
-  <div className="space-y-6">
+  <div className="space-y-6 mb-6">
 
     <div className="flex items-start gap-4">
       <div className="h-7 w-7 shrink-0 rounded-full bg-black flex items-center justify-center">
