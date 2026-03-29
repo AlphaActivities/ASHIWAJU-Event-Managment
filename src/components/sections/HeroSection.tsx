@@ -37,9 +37,9 @@ export default function HeroSection() {
         ))}
       </div>
 
-      <div className="absolute inset-0 bg-black/25"></div>
+      <div className="absolute inset-0 bg-black/10"></div>
 
-      <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/50"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-black/15 via-transparent to-black/25"></div>
 
       <div className="relative z-10 min-h-screen flex items-center">
         <div className="lux-content max-w-7xl mx-auto px-6 md:px-10 lg:px-16 w-full pt-28 md:pt-32">
