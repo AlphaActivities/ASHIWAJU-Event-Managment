@@ -96,7 +96,6 @@ export default function AboutSection() {
                     Every detail is thoughtfully planned to reflect your vision, so when your guests walk in, everything feels intentional, elegant, and exactly how you imagined it.
                   </p>
                 </div>
-              </div>
 
               {/* Toggle link - works on both desktop and mobile */}
               <button
