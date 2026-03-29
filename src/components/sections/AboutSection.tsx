@@ -94,7 +94,7 @@ export default function AboutSection() {
 
   </div>
 </div>
-                  <p className="leading-[1.75]">
+                  <p className="leading-[1.75] mt-6">
                     Every detail is thoughtfully planned to reflect your vision, so when your guests walk in, everything feels intentional, elegant, and exactly how you imagined it.
                   </p>
                 </div>
