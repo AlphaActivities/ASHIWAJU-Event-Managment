@@ -11,7 +11,7 @@ const services = [
     title: "Venue Guidance and Budget Control",
     description:
       "Using our local advantage, we guide you to choose a venue that fits your style, guest size, and budget, while helping you avoid unnecessary costs and last-minute surprises.",
-    image: "/images/service/service02.jpeg",
+    image: "/images/service/services02.jpeg",
   },
   {
     title: "Wedding Decor, Styling, and Production",
