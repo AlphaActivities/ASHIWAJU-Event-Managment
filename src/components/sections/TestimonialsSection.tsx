@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { LuxFadeIn } from "../ui/LuxFadeIn";
 import { Star, ChevronLeft, ChevronRight } from 'lucide-react';
+import WaveText from "../ui/WaveText";
 
 const testimonials = [
 {
@@ -110,9 +111,12 @@ export default function TestimonialsSection() {
 
         {/* HEADER */}
         <LuxFadeIn delay={0.05}>
-          <h2 className="text-4xl md:text-5xl font-serif text-center mb-12">
-            Why Lagos couples trust us
-          </h2>
+          <WaveText
+            text="Why Lagos couples trust us"
+            as="h2"
+            className="text-4xl md:text-5xl font-serif text-center mb-12"
+            delayStep={30}
+          />
         </LuxFadeIn>
 
         {/* TESTIMONIAL SLIDER */}

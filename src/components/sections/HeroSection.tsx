@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { LuxFadeIn } from '../ui/LuxFadeIn';
 import { scrollToSection } from '../../utils/scrollToSection';
+import WaveText from '../ui/WaveText';
 
 const HERO_IMAGES = [
   "/images/hero/hero-01.jpg",
@@ -45,9 +46,12 @@ export default function HeroSection() {
         <div className="lux-content max-w-7xl mx-auto px-6 md:px-10 lg:px-16 w-full pt-28 md:pt-32">
           <div className="text-center max-w-4xl mx-auto flex flex-col items-center">
             <LuxFadeIn delay={0.1}>
-<h1 className="max-w-[600px] text-3xl md:text-5xl leading-tight text-center font-serif font-medium tracking-[0.02em] md:tracking-[0.03em] text-white drop-shadow-[0_6px_25px_rgba(0,0,0,0.7)]">
-  Have the wedding you've always imagined without overspending
-</h1>
+              <WaveText
+                text="Have the wedding you've always imagined without overspending"
+                as="h1"
+                className="max-w-[600px] text-3xl md:text-5xl leading-tight text-center font-serif font-medium tracking-[0.02em] md:tracking-[0.03em] text-white drop-shadow-[0_6px_25px_rgba(0,0,0,0.7)]"
+                delayStep={25}
+              />
             </LuxFadeIn>
 
             <LuxFadeIn delay={0.15}>

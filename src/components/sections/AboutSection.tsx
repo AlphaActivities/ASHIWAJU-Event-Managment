@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { scrollToSection } from "../../utils/scrollToSection";
 import { Check } from "lucide-react";
+import WaveText from "../ui/WaveText";
 
 export default function AboutSection() {
   const [currentImage, setCurrentImage] = useState(0);
@@ -21,11 +22,12 @@ export default function AboutSection() {
 
         {/* HEADLINE */}
         <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl lg:text-[2.8rem] font-serif font-medium tracking-tight text-[#111111]">
-            You need someone who understands your taste
-            <br />
-            and brings it to life.
-          </h2>
+          <WaveText
+            text="You need someone who understands your taste and brings it to life."
+            as="h2"
+            className="text-3xl sm:text-4xl lg:text-[2.8rem] font-serif font-medium tracking-tight text-[#111111]"
+            delayStep={30}
+          />
         </div>
 
         <div className="mt-10 grid gap-10 lg:gap-12 lg:grid-cols-2 items-stretch">
