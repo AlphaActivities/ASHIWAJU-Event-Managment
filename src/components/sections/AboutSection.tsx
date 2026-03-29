@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import { LuxFadeIn } from "../ui/LuxFadeIn";
+import { useState } from "react";
 import { scrollToSection } from "../../utils/scrollToSection";
 import { Check } from "lucide-react";
 
