@@ -13,8 +13,15 @@ import FAQSection from './components/sections/FAQSection';
 import GuideSection from './components/sections/GuideSection';
 import FooterSection from './components/sections/FooterSection';
 import FloatingCallButton from './components/ui/FloatingCallButton';
+import AdminDashboard from './pages/AdminDashboard';
 
 export default function App() {
+  const isAdminRoute = window.location.pathname === '/admin';
+
+  if (isAdminRoute) {
+    return <AdminDashboard />;
+  }
+
   return (
     <>
       <GlobalVideoBackground />
