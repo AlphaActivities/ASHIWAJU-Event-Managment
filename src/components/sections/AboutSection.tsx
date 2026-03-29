@@ -63,38 +63,38 @@ export default function AboutSection() {
     From our very first meeting:
   </h3>
 
-  <div className="space-y-5">
+  <div className="space-y-6">
 
     <div className="flex items-start gap-4">
-      <div className="flex items-center justify-center w-6 h-6 rounded-full bg-black">
-        <Check className="w-4 h-4 text-white" />
+      <div className="h-7 w-7 shrink-0 rounded-full bg-black flex items-center justify-center">
+        <Check className="h-4 w-4 text-white" />
       </div>
-      <p>
+      <p className="leading-[1.7] pt-[1px]">
         We take time to understand you, your vision, your priorities, and what this day means to you
       </p>
     </div>
 
     <div className="flex items-start gap-4">
-      <div className="flex items-center justify-center w-6 h-6 rounded-full bg-black">
-        <Check className="w-4 h-4 text-white" />
+      <div className="h-7 w-7 shrink-0 rounded-full bg-black flex items-center justify-center">
+        <Check className="h-4 w-4 text-white" />
       </div>
-      <p>
+      <p className="leading-[1.7] pt-[1px]">
         We help you clearly see how everything comes together
       </p>
     </div>
 
     <div className="flex items-start gap-4">
-      <div className="flex items-center justify-center w-6 h-6 rounded-full bg-black">
-        <Check className="w-4 h-4 text-white" />
+      <div className="h-7 w-7 shrink-0 rounded-full bg-black flex items-center justify-center">
+        <Check className="h-4 w-4 text-white" />
       </div>
-      <p>
+      <p className="leading-[1.7] pt-[1px]">
         We guide you step by step through the entire process with clarity on every decision and every cost. No hidden fees. No surprises
       </p>
     </div>
 
   </div>
 </div>
-                  <p>
+                  <p className="leading-[1.75]">
                     Every detail is thoughtfully planned to reflect your vision, so when your guests walk in, everything feels intentional, elegant, and exactly how you imagined it.
                   </p>
                 </div>
