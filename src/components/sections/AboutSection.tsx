@@ -113,7 +113,7 @@ export default function AboutSection() {
             <button
               type="button"
               onClick={() => scrollToSection("contact")}
-              className="mt-8 inline-flex items-center rounded-full bg-gradient-to-r from-[#f5e3b6] via-[#e7c78a] to-[#c89c4f] px-6 sm:px-8 py-3 text-[0.82rem] tracking-[0.22em] uppercase text-[#1b1b1b] shadow-[0_18px_45px_rgba(0,0,0,0.25)] hover:brightness-105 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f5e3b6]/80"
+              className="mt-8 inline-flex items-center rounded-full bg-gradient-to-r from-[#f5e3b6] via-[#e7c78a] to-[#c89c4f] px-6 sm:px-8 py-3 text-[0.9rem] font-semibold tracking-[0.18em] uppercase text-[#1b1b1b] shadow-[0_18px_45px_rgba(0,0,0,0.25)] hover:brightness-105 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f5e3b6]/80"
             >
               BOOK YOUR WEDDING CLARITY SESSION
             </button>
