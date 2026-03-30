@@ -1,6 +1,6 @@
 import { LuxFadeIn } from "../ui/LuxFadeIn";
 import { scrollToSection } from "../../utils/scrollToSection";
-import { Check } from "lucide-react";
+import { ChecklistCard } from "../ui/ChecklistCard";
 
 export default function ClaritySessionSection() {
   return (
@@ -13,95 +13,31 @@ export default function ClaritySessionSection() {
         </LuxFadeIn>
 
         <div className="space-y-6 mb-20">
-            <LuxFadeIn delay={0.15}>
-              <div className="p-6 rounded-2xl bg-white border border-neutral-200/60 shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300">
-                <div className="flex gap-4 items-start">
-                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-[#F5E6C8] to-[#E9C88A] flex items-center justify-center mt-1">
-                    <Check className="w-5 h-5 text-neutral-800" strokeWidth={2.5} />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="font-semibold text-lg mb-1">
-                      Get Clear On Your Vision
-                    </h3>
-                    <p className="text-neutral-600 leading-relaxed">
-                      Define what truly matters for your wedding so every decision becomes easier.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </LuxFadeIn>
-
-            <LuxFadeIn delay={0.2}>
-              <div className="p-6 rounded-2xl bg-white border border-neutral-200/60 shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300">
-                <div className="flex gap-4 items-start">
-                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-[#F5E6C8] to-[#E9C88A] flex items-center justify-center mt-1">
-                    <Check className="w-5 h-5 text-neutral-800" strokeWidth={2.5} />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="font-semibold text-lg mb-1">
-                      Avoid Expensive Mistakes
-                    </h3>
-                    <p className="text-neutral-600 leading-relaxed">
-                      Learn where couples usually overspend and how to protect your budget.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </LuxFadeIn>
-
-            <LuxFadeIn delay={0.25}>
-              <div className="p-6 rounded-2xl bg-white border border-neutral-200/60 shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300">
-                <div className="flex gap-4 items-start">
-                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-[#F5E6C8] to-[#E9C88A] flex items-center justify-center mt-1">
-                    <Check className="w-5 h-5 text-neutral-800" strokeWidth={2.5} />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="font-semibold text-lg mb-1">
-                      Choose The Right Vendors
-                    </h3>
-                    <p className="text-neutral-600 leading-relaxed">
-                      Identify trustworthy vendors and avoid the ones that cause stress on your wedding day.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </LuxFadeIn>
-
-            <LuxFadeIn delay={0.3}>
-              <div className="p-6 rounded-2xl bg-white border border-neutral-200/60 shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300">
-                <div className="flex gap-4 items-start">
-                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-[#F5E6C8] to-[#E9C88A] flex items-center justify-center mt-1">
-                    <Check className="w-5 h-5 text-neutral-800" strokeWidth={2.5} />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="font-semibold text-lg mb-1">
-                      Handle Family Pressure Calmly
-                    </h3>
-                    <p className="text-neutral-600 leading-relaxed">
-                      Set clear boundaries so opinions don't take over your wedding.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </LuxFadeIn>
-
-            <LuxFadeIn delay={0.35}>
-              <div className="p-6 rounded-2xl bg-white border border-neutral-200/60 shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300">
-                <div className="flex gap-4 items-start">
-                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-[#F5E6C8] to-[#E9C88A] flex items-center justify-center mt-1">
-                    <Check className="w-5 h-5 text-neutral-800" strokeWidth={2.5} />
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="font-semibold text-lg mb-1">
-                      Leave With A Clear Plan
-                    </h3>
-                    <p className="text-neutral-600 leading-relaxed">
-                      By the end of the session, you'll know exactly what to do next.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </LuxFadeIn>
+          <ChecklistCard
+            title="Get Clear On Your Vision"
+            description="Define what truly matters for your wedding so every decision becomes easier."
+            delay={0.15}
+          />
+          <ChecklistCard
+            title="Avoid Expensive Mistakes"
+            description="Learn where couples usually overspend and how to protect your budget."
+            delay={0.2}
+          />
+          <ChecklistCard
+            title="Choose The Right Vendors"
+            description="Identify trustworthy vendors and avoid the ones that cause stress on your wedding day."
+            delay={0.25}
+          />
+          <ChecklistCard
+            title="Handle Family Pressure Calmly"
+            description="Set clear boundaries so opinions don't take over your wedding."
+            delay={0.3}
+          />
+          <ChecklistCard
+            title="Leave With A Clear Plan"
+            description="By the end of the session, you'll know exactly what to do next."
+            delay={0.35}
+          />
         </div>
 
         <LuxFadeIn delay={0.4}>
