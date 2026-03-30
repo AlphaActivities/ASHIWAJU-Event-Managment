@@ -18,9 +18,8 @@ export default function GuideSection() {
             <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_top,rgba(199,155,75,0.18),transparent_55%)]" />
             <div className="relative p-10 sm:p-12 md:p-14 text-center">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif tracking-tight text-[#1b1b1b]">
-                Want to avoid wedding regrets you can't fix later?
+                Not sure if you need a planner yet?
               </h2>
-
               <p className="mt-5 text-[0.98rem] sm:text-base leading-relaxed text-[#2c2c2c]/90 max-w-3xl mx-auto">
                 Discover 18 things most couples overlook early, and how to protect your vision before opinions, pressure, and rushed decisions take over.
               </p>
