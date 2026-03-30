@@ -71,8 +71,13 @@ export default function GuideSection() {
 
                   setIsSubmitting(true);
 
+                  const link = document.createElement("a");
+                  link.href = "/guide/ashiwaju-wedding-guide.pdf";
+                  link.download = "Ashiwaju-Wedding-Guide.pdf";
+                  link.click();
+
                   try {
-                    const { error } = await supabase
+                    await supabase
                       .from('guide_downloads')
                       .insert([
                         {
@@ -81,29 +86,15 @@ export default function GuideSection() {
                           phone: guidePhone
                         }
                       ]);
-
-                    if (error) {
-                      console.error('Error saving lead:', error);
-                      setGuideError("An error occurred. Please try again.");
-                      setIsSubmitting(false);
-                      return;
-                    }
-
-                    const link = document.createElement("a");
-                    link.href = "/guide/ashiwaju-wedding-guide.pdf";
-                    link.download = "Ashiwaju-Wedding-Guide.pdf";
-                    link.click();
-
-                    setIsGuideOpen(false);
-                    setGuideName("");
-                    setGuideEmail("");
-                    setGuidePhone("");
                   } catch (err) {
-                    console.error('Unexpected error:', err);
-                    setGuideError("An unexpected error occurred. Please try again.");
-                  } finally {
-                    setIsSubmitting(false);
+                    console.error('Error saving lead (non-blocking):', err);
                   }
+
+                  setIsGuideOpen(false);
+                  setGuideName("");
+                  setGuideEmail("");
+                  setGuidePhone("");
+                  setIsSubmitting(false);
                 }}
                 className="space-y-4"
               >
