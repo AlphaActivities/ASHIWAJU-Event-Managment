@@ -30,8 +30,15 @@ export default function FooterSection() {
 
         <div className="space-y-2 text-sm tracking-wide">
           <p><span className="text-[#f6f1e6]/70">Location:</span> <span className="text-[#f6f1e6]">Lagos, Nigeria</span></p>
-          <p><span className="text-[#f6f1e6]/70">Email:</span> <span className="text-[#f6f1e6]">ashiwajueventmanagement@gmail.com</span></p>
           <p>
+  <span className="text-[#f6f1e6]/70">Email:</span>{" "}
+  <a
+    href="mailto:ashiwajueventmanagement@gmail.com?subject=Wedding Inquiry"
+    className="text-[#f6f1e6] underline underline-offset-4 hover:text-[#c89c4f] transition"
+  >
+    ashiwajueventmanagement@gmail.com
+  </a>
+</p>
             <span className="text-[#f6f1e6]/70">Phone:</span>{' '}
             <a href="tel:+2348028336686" className="text-[#f6f1e6] hover:text-[#d6b46a] transition-colors">
               +234 802 833 6686
