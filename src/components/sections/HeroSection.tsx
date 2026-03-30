@@ -38,24 +38,25 @@ export default function HeroSection() {
         ))}
       </div>
 
-      <div className="absolute inset-0 bg-black/10"></div>
+      <div className="absolute inset-0 bg-black/25"></div>
 
-      <div className="absolute inset-0 bg-gradient-to-b from-black/15 via-transparent to-black/25"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/10 to-black/30"></div>
 
       <div className="relative z-10 min-h-screen flex items-center">
         <div className="lux-content max-w-7xl mx-auto px-6 md:px-10 lg:px-16 w-full pt-28 md:pt-32">
-          <div className="text-center max-w-4xl mx-auto flex flex-col items-center">
+          <div className="text-center max-w-4xl mx-auto flex flex-col items-center relative">
+            <div className="absolute inset-0 bg-gradient-to-b from-black/15 via-black/10 to-transparent blur-3xl -z-10 scale-110"></div>
             <LuxFadeIn delay={0.1}>
               <WaveText
                 text="Have the wedding you've always imagined without overspending"
                 as="h1"
-                className="max-w-[600px] text-3xl md:text-5xl leading-tight text-center font-serif font-medium tracking-[0.02em] md:tracking-[0.03em] text-white drop-shadow-[0_6px_25px_rgba(0,0,0,0.7)]"
+                className="max-w-[600px] text-3xl md:text-5xl leading-tight text-center font-serif font-medium tracking-[0.02em] md:tracking-[0.03em] text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]"
                 delayStep={25}
               />
             </LuxFadeIn>
 
             <LuxFadeIn delay={0.15}>
-            <p className="text-lg md:text-xl text-white/90 mt-6 md:mt-8">
+            <p className="text-lg md:text-xl text-white/95 mt-6 md:mt-8 drop-shadow-[0_2px_6px_rgba(0,0,0,0.85)]">
                 Enjoy every single moment of your day stress free
               </p>
             </LuxFadeIn>
