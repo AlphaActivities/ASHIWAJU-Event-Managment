@@ -12,10 +12,9 @@ export default function ClaritySessionSection() {
           </h2>
         </LuxFadeIn>
 
-        <div className="rounded-[2rem] bg-[#fbfaf7] border border-[#e9ddc2] shadow-[0_18px_55px_rgba(15,23,42,0.08)] px-6 py-8 md:px-10 md:py-10 mb-20 hover:shadow-[0_24px_70px_rgba(15,23,42,0.12)] hover:-translate-y-1 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]">
-          <div className="space-y-5">
+        <div className="space-y-6 mb-20">
             <LuxFadeIn delay={0.15}>
-              <div className="p-4 rounded-xl bg-white/40 backdrop-blur-sm">
+              <div className="p-6 rounded-2xl bg-white border border-neutral-200/60 shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300">
                 <div className="flex gap-4 items-start">
                   <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-[#F5E6C8] to-[#E9C88A] flex items-center justify-center mt-1">
                     <Check className="w-5 h-5 text-neutral-800" strokeWidth={2.5} />
@@ -33,7 +32,7 @@ export default function ClaritySessionSection() {
             </LuxFadeIn>
 
             <LuxFadeIn delay={0.2}>
-              <div className="p-4 rounded-xl bg-white/40 backdrop-blur-sm">
+              <div className="p-6 rounded-2xl bg-white border border-neutral-200/60 shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300">
                 <div className="flex gap-4 items-start">
                   <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-[#F5E6C8] to-[#E9C88A] flex items-center justify-center mt-1">
                     <Check className="w-5 h-5 text-neutral-800" strokeWidth={2.5} />
@@ -51,7 +50,7 @@ export default function ClaritySessionSection() {
             </LuxFadeIn>
 
             <LuxFadeIn delay={0.25}>
-              <div className="p-4 rounded-xl bg-white/40 backdrop-blur-sm">
+              <div className="p-6 rounded-2xl bg-white border border-neutral-200/60 shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300">
                 <div className="flex gap-4 items-start">
                   <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-[#F5E6C8] to-[#E9C88A] flex items-center justify-center mt-1">
                     <Check className="w-5 h-5 text-neutral-800" strokeWidth={2.5} />
@@ -69,7 +68,7 @@ export default function ClaritySessionSection() {
             </LuxFadeIn>
 
             <LuxFadeIn delay={0.3}>
-              <div className="p-4 rounded-xl bg-white/40 backdrop-blur-sm">
+              <div className="p-6 rounded-2xl bg-white border border-neutral-200/60 shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300">
                 <div className="flex gap-4 items-start">
                   <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-[#F5E6C8] to-[#E9C88A] flex items-center justify-center mt-1">
                     <Check className="w-5 h-5 text-neutral-800" strokeWidth={2.5} />
@@ -87,7 +86,7 @@ export default function ClaritySessionSection() {
             </LuxFadeIn>
 
             <LuxFadeIn delay={0.35}>
-              <div className="p-4 rounded-xl bg-white/40 backdrop-blur-sm">
+              <div className="p-6 rounded-2xl bg-white border border-neutral-200/60 shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300">
                 <div className="flex gap-4 items-start">
                   <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-[#F5E6C8] to-[#E9C88A] flex items-center justify-center mt-1">
                     <Check className="w-5 h-5 text-neutral-800" strokeWidth={2.5} />
@@ -103,7 +102,6 @@ export default function ClaritySessionSection() {
                 </div>
               </div>
             </LuxFadeIn>
-          </div>
         </div>
 
         <LuxFadeIn delay={0.4}>
