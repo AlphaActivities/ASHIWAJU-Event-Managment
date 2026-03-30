@@ -10,7 +10,6 @@ const HERO_IMAGES = [
   "/images/hero/hero-02.jpg",
   "/images/hero/hero-05.jpg",
   "/images/hero/hero-06.jpg"
-  "/images/hero/hero-06.jpg"
 ];
 
 export default function HeroSection() {
