@@ -73,7 +73,7 @@ export default function GuideSection() {
 
                   const link = document.createElement("a");
                   link.href = "/guide/ashiwaju-wedding-guide.pdf";
-                  link.download = "Ashiwaju-Wedding-Guide.pdf";
+                  link.download = "ashiwaju-wedding-guide.pdf";
                   link.click();
 
                   try {
