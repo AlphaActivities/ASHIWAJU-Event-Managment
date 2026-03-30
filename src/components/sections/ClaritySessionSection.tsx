@@ -130,7 +130,7 @@ export default function ClaritySessionSection() {
               onClick={() => scrollToSection('contact')}
               className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-[#F5E6C8] via-[#F2D9A3] to-[#E9C88A] px-8 py-4 text-base md:text-lg font-semibold text-black shadow-lg hover:brightness-110 hover:scale-105 active:translate-y-px transition-all duration-300"
             >
-              Book your Planning Clarity Session
+              BOOK YOUR WEDDING CLARITY SESSION
             </button>
           </div>
         </LuxFadeIn>
