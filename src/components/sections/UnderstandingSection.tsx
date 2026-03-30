@@ -1,5 +1,6 @@
 import React from "react";
 import WaveText from "../ui/WaveText";
+import { LuxFadeIn } from "../ui/LuxFadeIn";
 
 export default function UnderstandingSection() {
   return (
@@ -21,14 +22,16 @@ export default function UnderstandingSection() {
           </p>
         </div>
 
-        <div className="w-full rounded-3xl border border-[#c9a961] bg-white shadow-[0_20px_60px_rgba(0,0,0,0.08)] p-8 md:p-12">
-          <div className="space-y-4 text-[15px] md:text-lg leading-relaxed text-[#2c2821]">
-            <p>You already know what you like.</p>
-            <p>You have ideas you've imagined and pictures you saved.</p>
-            <p>What makes planning hard isn't vision.</p>
-            <p>It's the pressure, the opinions, and the fear of getting it wrong.</p>
+        <LuxFadeIn delay={0.2}>
+          <div className="w-full rounded-3xl border border-[#c9a961] bg-white shadow-[0_20px_60px_rgba(0,0,0,0.08)] p-8 md:p-12 hover:shadow-[0_24px_70px_rgba(0,0,0,0.12)] hover:-translate-y-1 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]">
+            <div className="space-y-4 text-[15px] md:text-lg leading-relaxed text-[#2c2821]">
+              <p>You already know what you like.</p>
+              <p>You have ideas you've imagined and pictures you saved.</p>
+              <p>What makes planning hard isn't vision.</p>
+              <p>It's the pressure, the opinions, and the fear of getting it wrong.</p>
+            </div>
           </div>
-        </div>
+        </LuxFadeIn>
       </div>
     </section>
   );

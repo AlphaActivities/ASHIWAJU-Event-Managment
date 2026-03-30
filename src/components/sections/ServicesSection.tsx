@@ -56,13 +56,13 @@ export default function ServicesSection() {
           {services.map((item, index) => {
             return (
               <LuxFadeIn key={index} delay={0.1 + index * 0.05}>
-                <div className="h-full flex flex-col rounded-[1.75rem] bg-[#fbfaf7] border border-[#e9ddc2] shadow-[0_18px_55px_rgba(15,23,42,0.10)] p-4 sm:p-5 lg:p-6">
+                <div className="h-full flex flex-col rounded-[1.75rem] bg-[#fbfaf7] border border-[#e9ddc2] shadow-[0_18px_55px_rgba(15,23,42,0.10)] p-4 sm:p-5 lg:p-6 hover:shadow-[0_24px_70px_rgba(15,23,42,0.15)] hover:-translate-y-1 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] group">
                   <div className="flex flex-col gap-4">
                     <div className="overflow-hidden rounded-[1.25rem]">
                       <img
                         src={item.image}
                         alt={item.title}
-                        className="w-full h-[260px] md:h-[300px] object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                        className="w-full h-[260px] md:h-[300px] object-cover object-center transition-transform duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] group-hover:scale-105"
                       />
                     </div>
 

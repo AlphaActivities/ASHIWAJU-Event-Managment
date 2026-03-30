@@ -39,12 +39,12 @@ export default function WorksSection() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {WORK_IMAGES.map((img, index) => (
             <LuxFadeIn key={index} delay={0.1 + index * 0.05}>
-              <div className="rounded-2xl overflow-hidden border border-black/10 bg-white shadow-sm hover:scale-[1.01] transition-transform duration-300">
+              <div className="rounded-2xl overflow-hidden border border-black/10 bg-white shadow-sm hover:shadow-[0_18px_45px_rgba(0,0,0,0.20)] hover:-translate-y-1 hover:scale-[1.01] transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] group">
                 <div className="relative aspect-square overflow-hidden rounded-xl">
                   <img
                     src={img}
                     alt="Wedding past work"
-                    className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-700 ease-out hover:scale-105"
+                    className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] group-hover:scale-105"
                   />
                 </div>
               </div>

@@ -12,7 +12,7 @@ export default function ClaritySessionSection() {
           </h2>
         </LuxFadeIn>
 
-        <div className="rounded-[2rem] bg-[#fbfaf7] border border-[#e9ddc2] shadow-[0_18px_55px_rgba(15,23,42,0.08)] px-6 py-8 md:px-10 md:py-10 mb-20">
+        <div className="rounded-[2rem] bg-[#fbfaf7] border border-[#e9ddc2] shadow-[0_18px_55px_rgba(15,23,42,0.08)] px-6 py-8 md:px-10 md:py-10 mb-20 hover:shadow-[0_24px_70px_rgba(15,23,42,0.12)] hover:-translate-y-1 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]">
           <div className="space-y-6">
             <LuxFadeIn delay={0.15}>
               <div className="flex gap-4 items-start">
@@ -97,7 +97,7 @@ export default function ClaritySessionSection() {
         </div>
 
         <LuxFadeIn delay={0.4}>
-          <div className="bg-white rounded-2xl shadow-xl border border-neutral-200 p-10 text-center">
+          <div className="bg-white rounded-2xl shadow-xl border border-neutral-200 p-10 text-center hover:shadow-[0_24px_70px_rgba(0,0,0,0.15)] hover:-translate-y-1 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]">
             <p className="text-neutral-700 leading-relaxed mb-4">
               You can find wedding advice anywhere.
             </p>
@@ -128,7 +128,7 @@ export default function ClaritySessionSection() {
             </p>
             <button
               onClick={() => scrollToSection('contact')}
-              className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-[#F5E6C8] via-[#F2D9A3] to-[#E9C88A] px-8 py-4 text-base md:text-lg font-semibold text-black shadow-lg hover:brightness-110 hover:scale-105 active:translate-y-px transition-all duration-300"
+              className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-[#F5E6C8] via-[#F2D9A3] to-[#E9C88A] px-8 py-4 text-base md:text-lg font-semibold text-black shadow-lg hover:brightness-110 hover:shadow-[0_16px_45px_rgba(0,0,0,0.25)] hover:-translate-y-[2px] hover:scale-[1.01] active:translate-y-px transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]"
             >
               BOOK YOUR WEDDING CLARITY SESSION
             </button>

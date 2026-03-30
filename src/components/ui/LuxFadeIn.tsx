@@ -9,14 +9,14 @@ interface LuxFadeInProps {
 export const LuxFadeIn = ({ children, delay = 0 }: LuxFadeInProps) => {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{
-        duration: 0.9,
-        ease: "easeOut",
+        duration: 0.8,
+        ease: [0.4, 0, 0.2, 1],
         delay: delay,
       }}
-      viewport={{ once: true, margin: "-20% 0px" }}
+      viewport={{ once: true, margin: "-10% 0px" }}
     >
       {children}
     </motion.div>

@@ -14,7 +14,7 @@ export default function GuideSection() {
     <section id="guide" className="relative py-20 md:py-28 lg:py-32">
       <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-10">
         <LuxFadeIn>
-          <div className="relative rounded-[2rem] overflow-hidden border border-black/10 bg-white/75 backdrop-blur-md shadow-[0_28px_80px_rgba(0,0,0,0.10)]">
+          <div className="relative rounded-[2rem] overflow-hidden border border-black/10 bg-white/75 backdrop-blur-md shadow-[0_28px_80px_rgba(0,0,0,0.10)] hover:shadow-[0_32px_90px_rgba(0,0,0,0.15)] hover:-translate-y-1 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]">
             <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_top,rgba(199,155,75,0.18),transparent_55%)]" />
             <div className="relative p-10 sm:p-12 md:p-14 text-center">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif tracking-tight text-[#1b1b1b]">
@@ -28,7 +28,7 @@ export default function GuideSection() {
                 <button
                   type="button"
                   onClick={() => setIsGuideOpen(true)}
-                  className="inline-flex items-center rounded-full bg-gradient-to-r from-[#f5e3b6] via-[#e7c78a] to-[#c89c4f] px-6 sm:px-8 py-3 text-[0.9rem] font-semibold tracking-[0.18em] uppercase text-[#1b1b1b] shadow-[0_18px_45px_rgba(0,0,0,0.18)] hover:brightness-105 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f5e3b6]/80"
+                  className="inline-flex items-center rounded-full bg-gradient-to-r from-[#f5e3b6] via-[#e7c78a] to-[#c89c4f] px-6 sm:px-8 py-3 text-[0.9rem] font-semibold tracking-[0.18em] uppercase text-[#1b1b1b] shadow-[0_18px_45px_rgba(0,0,0,0.18)] hover:brightness-105 hover:shadow-[0_20px_55px_rgba(0,0,0,0.28)] hover:-translate-y-[2px] hover:scale-[1.01] transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f5e3b6]/80"
                 >
                   📘 Download the free wedding planning guide
                 </button>

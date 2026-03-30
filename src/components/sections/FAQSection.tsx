@@ -57,7 +57,7 @@ export default function FAQSection() {
         <div className="space-y-4">
           {faqs.map((faq, index) => (
             <LuxFadeIn key={faq.id} delay={0.1 + index * 0.05}>
-              <div className="rounded-2xl bg-white/60 border border-[#d4c5a0]/30 backdrop-blur-sm overflow-hidden shadow-sm">
+              <div className="rounded-2xl bg-white/60 border border-[#d4c5a0]/30 backdrop-blur-sm overflow-hidden shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]">
                 <button
                   onClick={() => toggleFAQ(faq.id)}
                   className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-white/30 transition-colors"
