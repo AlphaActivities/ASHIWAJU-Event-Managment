@@ -76,19 +76,19 @@ export default function GuideSection() {
                   link.download = "ashiwaju-wedding-guide.pdf";
                   link.click();
 
-                  try {
-                    await supabase
-                      .from('guide_downloads')
-                      .insert([
-                        {
-                          full_name: guideName,
-                          email: guideEmail,
-                          phone: guidePhone
-                        }
-                      ]);
-                  } catch (err) {
-                    console.error('Error saving lead (non-blocking):', err);
-                  }
+                  const { error } = await supabase
+  .from("guide_downloads")
+  .insert([
+    {
+      full_name: guideName,
+      email: guideEmail,
+      phone: guidePhone,
+    },
+  ]);
+
+if (error) {
+  console.error("Error saving lead:", error);
+}
 
                   setIsGuideOpen(false);
                   setGuideName("");
