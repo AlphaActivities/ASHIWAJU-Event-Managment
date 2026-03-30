@@ -11,15 +11,11 @@ export default function UnderstandingSection() {
       <div className="mx-auto w-full max-w-6xl px-6">
         <div className="mb-10 md:mb-14">
           <WaveText
-            text="You've got impeccable taste. You've got grand ideas."
+            text="You've got impeccable taste and grand ideas."
             as="h2"
             className="text-4xl md:text-6xl font-serif text-[#2c2821] leading-tight"
             delayStep={30}
           />
-
-          <p className="mt-6 text-lg md:text-xl text-[#4b463e] max-w-3xl">
-            You just need the right partner that puts it all together without pressure or confusion.
-          </p>
         </div>
 
         <LuxFadeIn delay={0.2}>
