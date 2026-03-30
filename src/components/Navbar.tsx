@@ -3,11 +3,16 @@ import { scrollToSection } from '../utils/scrollToSection';
 
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isInHero, setIsInHero] = useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      const scrollY = window.scrollY;
+      const heroHeight = window.innerHeight;
+
+      setIsScrolled(scrollY > 20);
+      setIsInHero(scrollY < heroHeight);
     };
 
     handleScroll();
@@ -26,7 +31,11 @@ const Navbar: React.FC = () => {
     };
   }, [isMobileMenuOpen]);
 
-  const shellClasses = 'bg-[#f9f7f3]/95 shadow-[0_0_40px_rgba(234,200,108,0.45)] backdrop-blur-2xl';
+  const shellClasses = isInHero && isScrolled
+    ? 'bg-[#f9f7f3]/95 shadow-[0_0_40px_rgba(234,200,108,0.45)] backdrop-blur-2xl'
+    : isInHero
+    ? 'bg-transparent'
+    : 'opacity-0 pointer-events-none';
 
   const textTone = 'text-slate-900';
 
@@ -42,47 +51,43 @@ const Navbar: React.FC = () => {
     <header
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${shellClasses}`}
     >
-      <div className="max-w-6xl mx-auto flex items-center justify-center md:justify-between pl-4 pr-4 sm:pl-6 sm:pr-6 md:pr-8 lg:pl-8 lg:pr-10 py-3 md:py-4 gap-3 min-w-0">
+      <div className="max-w-6xl mx-auto flex items-center justify-center md:justify-between px-4 sm:px-6 md:px-8 lg:px-10 py-3.5 md:py-4 gap-4">
         {/* Logo + Wordmark */}
         <button
           type="button"
           onClick={() => scrollToSection('home')}
-          className="group relative flex items-center gap-4 rounded-full bg-[#C4A46A]/70 px-3 sm:px-8 py-4 shadow-[0_10px_30px_rgba(15,23,42,0.18)] ring-1 ring-[#e3c58a]/40 transition-all duration-500 hover:shadow-[0_15px_50px_rgba(196,164,106,0.45),0_0_60px_rgba(227,197,138,0.3)] hover:ring-[#f5e3b6]/60 hover:bg-[#d4b47a]/75 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#e5c98f]/80 min-w-0 max-w-[calc(100vw-120px)] md:max-w-none shrink overflow-hidden"
+          className="group relative flex items-center gap-4 rounded-full bg-[#C4A46A]/70 px-6 md:px-8 py-4 shadow-[0_8px_24px_rgba(15,23,42,0.15)] ring-1 ring-[#e3c58a]/40 transition-all duration-500 hover:shadow-[0_15px_50px_rgba(196,164,106,0.45),0_0_60px_rgba(227,197,138,0.3)] hover:ring-[#f5e3b6]/60 hover:bg-[#d4b47a]/75 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#e5c98f]/80"
         >
-          <div className="flex items-center gap-4 min-w-0">
+          <img
+            src="/images/ashiwaju-logo.png"
+            alt="Ashiwaju"
+            className="h-12 md:h-14 w-auto object-contain drop-shadow-lg"
+          />
 
-            <img
-              src="/images/ashiwaju-logo.png"
-              alt="Ashiwaju"
-              className="h-14 md:h-16 w-auto object-contain drop-shadow-lg block"
-            />
-
-            <div className="leading-tight min-w-0">
-              <div className="font-serif text-xl md:text-2xl tracking-[0.25em] uppercase font-medium text-black whitespace-nowrap">
-                ASHIWAJU
-              </div>
-              <div className="text-[0.65rem] sm:text-xs tracking-[0.14em] sm:tracking-[0.18em] uppercase text-black/80 whitespace-nowrap md:whitespace-normal leading-[1.15]">
-                <span className="md:hidden">EVENTS</span>
-                <span className="hidden md:inline">Event Management <br className="sm:hidden" />& Consultant</span>
-              </div>
+          <div className="leading-tight">
+            <div className="font-serif text-lg md:text-2xl tracking-[0.25em] uppercase font-medium text-black whitespace-nowrap">
+              ASHIWAJU
             </div>
-
+            <div className="text-[0.65rem] md:text-xs tracking-[0.14em] md:tracking-[0.18em] uppercase text-black/80 whitespace-nowrap leading-tight">
+              <span className="md:hidden">EVENTS</span>
+              <span className="hidden md:inline">EVENT MANAGEMENT & CONSULTANT</span>
+            </div>
           </div>
         </button>
 
-        {/* Desktop nav (keep mobile untouched – this only affects md+ screens) */}
-        <div className="hidden md:flex items-center rounded-full bg-[#C4A46A]/70 backdrop-blur-[18px] shadow-[0_14px_40px_rgba(15,23,42,0.18)] ring-1 ring-[#e3c58a]/40 px-4 py-1.5">
-          <ul className="flex items-center gap-3 lg:gap-5 text-[0.76rem] md:text-[0.80rem] tracking-[0.24em] uppercase text-black/85 font-semibold">
+        {/* Desktop nav */}
+        <div className="hidden md:flex items-center rounded-full bg-[#C4A46A]/70 backdrop-blur-[18px] shadow-[0_8px_24px_rgba(15,23,42,0.15)] ring-1 ring-[#e3c58a]/40 px-6 py-2.5">
+          <ul className="flex items-center gap-6 lg:gap-8 text-[0.8rem] tracking-[0.24em] uppercase text-black/85 font-semibold">
             {navItems.map((item) => (
               <li key={item.label} className="group">
                 <button
                   type="button"
                   onClick={() => scrollToSection(item.target)}
-                  className="relative px-2 py-1 transition-colors duration-300 hover:text-black text-black/80 focus:outline-none focus-visible:ring-1 focus-visible:ring-[#e5c98f]/80"
+                  className="relative px-1 py-1.5 transition-colors duration-300 hover:text-black text-black/80 focus:outline-none focus-visible:ring-1 focus-visible:ring-[#e5c98f]/80"
                 >
                   <span>{item.label}</span>
                   <span
-                    className="pointer-events-none absolute left-0 -bottom-1 h-[2px] w-full origin-left scale-x-0 bg-gradient-to-r from-[#e2c88d] via-[#f6e6bf] to-[#c79c4d] transition-transform duration-300 group-hover:scale-x-100"
+                    className="pointer-events-none absolute left-0 -bottom-0.5 h-[2px] w-full origin-left scale-x-0 bg-gradient-to-r from-[#e2c88d] via-[#f6e6bf] to-[#c79c4d] transition-transform duration-300 group-hover:scale-x-100"
                   />
                 </button>
               </li>
