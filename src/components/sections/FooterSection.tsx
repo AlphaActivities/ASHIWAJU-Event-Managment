@@ -29,33 +29,37 @@ export default function FooterSection() {
         </div>
 
         <div className="space-y-2 text-sm tracking-wide">
-          <p><span className="text-[#f6f1e6]/70">Location:</span> <span className="text-[#f6f1e6]">Lagos, Nigeria</span></p>
-          <p>
-  <span className="text-[#f6f1e6]/70">Email:</span>{" "}
-  <a
-    href="mailto:ashiwajueventmanagement@gmail.com?subject=Wedding Inquiry"
-    className="text-[#f6f1e6] underline underline-offset-4 hover:text-[#c89c4f] transition"
-  >
-    ashiwajueventmanagement@gmail.com
-  </a>
-</p>
-            <span className="text-[#f6f1e6]/70">Phone:</span>{' '}
-            <a href="tel:+2348028336686" className="text-[#f6f1e6] hover:text-[#d6b46a] transition-colors">
-              +234 802 833 6686
-            </a>
-          </p>
-          <p>
-            <span className="text-[#f6f1e6]/70">Instagram:</span>{' '}
-            <a
-              href="https://instagram.com/ashiwaju_eventmanagement"
-              target="_blank"
-              className="text-[#d6b46a] hover:text-[#e7c983] underline underline-offset-4"
-            >
-              @ashiwaju_eventmanagement
-            </a>
-          </p>
-        </div>
-
+  <p><span className="text-[#f6f1e6]/70">Location:</span> <span className="text-[#f6f1e6]">Lagos, Nigeria</span></p>
+  <p>
+    <span className="text-[#f6f1e6]/70">Email:</span>{" "}
+    <a
+      href="mailto:ashiwajueventmanagement@gmail.com?subject=Wedding Inquiry"
+      className="text-[#f6f1e6] underline underline-offset-4 hover:text-[#c89c4f] transition"
+    >
+      ashiwajueventmanagement@gmail.com
+    </a>
+  </p>
+  <p>
+    <span className="text-[#f6f1e6]/70">Phone:</span>{" "}
+    <a
+      href="tel:+2348028336686"
+      className="text-[#f6f1e6] hover:text-[#d6b46a] transition-colors"
+    >
+      +234 802 833 6686
+    </a>
+  </p>
+  <p>
+    <span className="text-[#f6f1e6]/70">Instagram:</span>{" "}
+    <a
+      href="https://instagram.com/ashiwaju_eventmanagement"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-[#d6b46a] hover:text-[#e7c983] underline underline-offset-4"
+    >
+      @ashiwaju_eventmanagement
+    </a>
+  </p>
+</div>
         <div className="mt-10 text-[#f6f1e6]/60 text-xs">
           © {new Date().getFullYear()} Ashiwaju Event Management. All rights reserved.
         </div>
