@@ -13,83 +13,93 @@ export default function ClaritySessionSection() {
         </LuxFadeIn>
 
         <div className="rounded-[2rem] bg-[#fbfaf7] border border-[#e9ddc2] shadow-[0_18px_55px_rgba(15,23,42,0.08)] px-6 py-8 md:px-10 md:py-10 mb-20 hover:shadow-[0_24px_70px_rgba(15,23,42,0.12)] hover:-translate-y-1 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]">
-          <div className="space-y-6">
+          <div className="space-y-5">
             <LuxFadeIn delay={0.15}>
-              <div className="flex gap-4 items-start">
-                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-[#F5E6C8] to-[#E9C88A] flex items-center justify-center mt-1">
-                  <Check className="w-5 h-5 text-neutral-800" strokeWidth={2.5} />
-                </div>
-                <div className="flex-1">
-                  <h3 className="font-semibold text-lg mb-1">
-                    Get Clear On Your Vision
-                  </h3>
-                  <p className="text-neutral-600 leading-relaxed">
-                    Define what truly matters for your wedding so every decision becomes easier.
-                  </p>
+              <div className="p-4 rounded-xl bg-white/40 backdrop-blur-sm">
+                <div className="flex gap-4 items-start">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-[#F5E6C8] to-[#E9C88A] flex items-center justify-center mt-1">
+                    <Check className="w-5 h-5 text-neutral-800" strokeWidth={2.5} />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="font-semibold text-lg mb-1">
+                      Get Clear On Your Vision
+                    </h3>
+                    <p className="text-neutral-600 leading-relaxed">
+                      Define what truly matters for your wedding so every decision becomes easier.
+                    </p>
+                  </div>
                 </div>
               </div>
             </LuxFadeIn>
 
             <LuxFadeIn delay={0.2}>
-              <div className="flex gap-4 items-start">
-                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-[#F5E6C8] to-[#E9C88A] flex items-center justify-center mt-1">
-                  <Check className="w-5 h-5 text-neutral-800" strokeWidth={2.5} />
-                </div>
-                <div className="flex-1">
-                  <h3 className="font-semibold text-lg mb-1">
-                    Avoid Expensive Mistakes
-                  </h3>
-                  <p className="text-neutral-600 leading-relaxed">
-                    Learn where couples usually overspend and how to protect your budget.
-                  </p>
+              <div className="p-4 rounded-xl bg-white/40 backdrop-blur-sm">
+                <div className="flex gap-4 items-start">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-[#F5E6C8] to-[#E9C88A] flex items-center justify-center mt-1">
+                    <Check className="w-5 h-5 text-neutral-800" strokeWidth={2.5} />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="font-semibold text-lg mb-1">
+                      Avoid Expensive Mistakes
+                    </h3>
+                    <p className="text-neutral-600 leading-relaxed">
+                      Learn where couples usually overspend and how to protect your budget.
+                    </p>
+                  </div>
                 </div>
               </div>
             </LuxFadeIn>
 
             <LuxFadeIn delay={0.25}>
-              <div className="flex gap-4 items-start">
-                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-[#F5E6C8] to-[#E9C88A] flex items-center justify-center mt-1">
-                  <Check className="w-5 h-5 text-neutral-800" strokeWidth={2.5} />
-                </div>
-                <div className="flex-1">
-                  <h3 className="font-semibold text-lg mb-1">
-                    Choose The Right Vendors
-                  </h3>
-                  <p className="text-neutral-600 leading-relaxed">
-                    Identify trustworthy vendors and avoid the ones that cause stress on your wedding day.
-                  </p>
+              <div className="p-4 rounded-xl bg-white/40 backdrop-blur-sm">
+                <div className="flex gap-4 items-start">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-[#F5E6C8] to-[#E9C88A] flex items-center justify-center mt-1">
+                    <Check className="w-5 h-5 text-neutral-800" strokeWidth={2.5} />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="font-semibold text-lg mb-1">
+                      Choose The Right Vendors
+                    </h3>
+                    <p className="text-neutral-600 leading-relaxed">
+                      Identify trustworthy vendors and avoid the ones that cause stress on your wedding day.
+                    </p>
+                  </div>
                 </div>
               </div>
             </LuxFadeIn>
 
             <LuxFadeIn delay={0.3}>
-              <div className="flex gap-4 items-start">
-                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-[#F5E6C8] to-[#E9C88A] flex items-center justify-center mt-1">
-                  <Check className="w-5 h-5 text-neutral-800" strokeWidth={2.5} />
-                </div>
-                <div className="flex-1">
-                  <h3 className="font-semibold text-lg mb-1">
-                    Handle Family Pressure Calmly
-                  </h3>
-                  <p className="text-neutral-600 leading-relaxed">
-                    Set clear boundaries so opinions don't take over your wedding.
-                  </p>
+              <div className="p-4 rounded-xl bg-white/40 backdrop-blur-sm">
+                <div className="flex gap-4 items-start">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-[#F5E6C8] to-[#E9C88A] flex items-center justify-center mt-1">
+                    <Check className="w-5 h-5 text-neutral-800" strokeWidth={2.5} />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="font-semibold text-lg mb-1">
+                      Handle Family Pressure Calmly
+                    </h3>
+                    <p className="text-neutral-600 leading-relaxed">
+                      Set clear boundaries so opinions don't take over your wedding.
+                    </p>
+                  </div>
                 </div>
               </div>
             </LuxFadeIn>
 
             <LuxFadeIn delay={0.35}>
-              <div className="flex gap-4 items-start">
-                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-[#F5E6C8] to-[#E9C88A] flex items-center justify-center mt-1">
-                  <Check className="w-5 h-5 text-neutral-800" strokeWidth={2.5} />
-                </div>
-                <div className="flex-1">
-                  <h3 className="font-semibold text-lg mb-1">
-                    Leave With A Clear Plan
-                  </h3>
-                  <p className="text-neutral-600 leading-relaxed">
-                    By the end of the session, you'll know exactly what to do next.
-                  </p>
+              <div className="p-4 rounded-xl bg-white/40 backdrop-blur-sm">
+                <div className="flex gap-4 items-start">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-[#F5E6C8] to-[#E9C88A] flex items-center justify-center mt-1">
+                    <Check className="w-5 h-5 text-neutral-800" strokeWidth={2.5} />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="font-semibold text-lg mb-1">
+                      Leave With A Clear Plan
+                    </h3>
+                    <p className="text-neutral-600 leading-relaxed">
+                      By the end of the session, you'll know exactly what to do next.
+                    </p>
+                  </div>
                 </div>
               </div>
             </LuxFadeIn>
