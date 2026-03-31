@@ -76,7 +76,7 @@ export default function GuideSection() {
                   link.download = "ashiwaju-wedding-guide.pdf";
                   link.click();
 
-                  const { error } = await supabase
+        const { data, error } = await supabase
   .from("guide_downloads")
   .insert([
     {
@@ -84,12 +84,17 @@ export default function GuideSection() {
       email: guideEmail,
       phone: guidePhone,
     },
-  ]);
+  ])
+  .select();
+
+console.log("Guide insert data:", data);
+console.log("Guide insert error:", error);
 
 if (error) {
-  console.error("Error saving lead:", error);
+  setGuideError(error.message || "Failed to save your details.");
+  setIsSubmitting(false);
+  return;
 }
-
                   setIsGuideOpen(false);
                   setGuideName("");
                   setGuideEmail("");
