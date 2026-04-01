@@ -85,7 +85,6 @@ export default function GuideSection() {
       phone: guidePhone,
     },
   ])
-  .select();
 
 console.log("Guide insert data:", data);
 console.log("Guide insert error:", error);
