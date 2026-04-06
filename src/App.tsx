@@ -1,4 +1,3 @@
-import { GlobalVideoBackground } from './components/ui/GlobalVideoBackground';
 import Navbar from './components/Navbar';
 import HeroSection from './components/sections/HeroSection';
 import UnderstandingSection from './components/sections/UnderstandingSection';
@@ -26,7 +25,6 @@ export default function App() {
 
   return (
     <>
-      <GlobalVideoBackground />
       <Navbar />
       <HeroSection />
       <UnderstandingSection />
