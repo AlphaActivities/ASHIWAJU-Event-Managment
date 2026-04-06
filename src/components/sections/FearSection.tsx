@@ -12,7 +12,7 @@ export default function FearSection() {
         <div className="text-center mb-14 md:mb-20">
           <div className="h-[1px] w-16 mx-auto bg-gradient-to-r from-transparent via-[#f3d7a0] to-transparent mb-6"></div>
           <h2 className="text-3xl sm:text-4xl lg:text-[2.6rem] font-semibold tracking-tight text-[#111111]">
-            Mistakes most couples make and regret later
+            Mistakes most brides make and regret later
           </h2>
         </div>
         <div className="grid gap-12 lg:gap-16 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] items-center">
@@ -40,7 +40,7 @@ export default function FearSection() {
                 <p>Many think they can handle it all themselves with checklists, YouTube videos, and advice everywhere.</p>
 
                 <p>
-                  What they don't see is how small details get missed, problems show up at the last minute, and suddenly they're running around fixing issues, missing moments they'll never get back.
+                  What they don't see is how small details get missed, problems show up at the last minute, and suddenly they're running around, calling vendors,fixing issues, missing moments they'll never get back.
                 </p>
 
                 <p>Their makeup melts. Energy is gone. The day they should feel most confident becomes exhausting.</p>
