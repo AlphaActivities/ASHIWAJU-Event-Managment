@@ -42,27 +42,14 @@ export default function AboutSection() {
           {/* RIGHT - Body Copy */}
           <div className="h-full flex flex-col justify-center text-[0.98rem] sm:text-base leading-relaxed text-[#3b3b3b]/90">
             <div className="space-y-6">
-              {/* Always visible intro paragraphs */}
+              {/* Always visible paragraphs */}
               <p>
                 With over 10 years helping 50+ couples plan an unforgettable celebration that reflects their vision and stays on budget, we've learned our clients want a beautiful day, but don't know how to bring it all together without stress or overspending.
               </p>
 
-              {/* Expandable extra paragraphs */}
-              <div
-                className={`overflow-hidden transition-all duration-500 ease-in-out ${
-                  isExpanded ? 'max-h-[800px] opacity-100' : 'max-h-0 opacity-0'
-                }`}
-              >
-                <div className="space-y-6 pt-0">
-                  <p>
-                    That's why in the Wedding Clarity Session, we take the time to understand you, your vision, and what truly matters to you. Then we show you how it all comes together and guide you on how to achieve your dream wedding with no hidden fees, no surprises.
-                  </p>
-
-                  <p>
-                    We're with you every step of the way to make sure you have the wedding you deserve, without regrets. You deserve a day worth remembering for years.
-                  </p>
-                </div>
-              </div>
+              <p>
+                That's why in the Wedding Clarity Session, we take the time to understand you, your vision, and what truly matters to you. Then we show you how it all comes together and guide you on how to achieve your dream wedding with no hidden fees, no surprises.
+              </p>
 
               {/* Toggle link - works on both desktop and mobile */}
               <button
@@ -72,6 +59,19 @@ export default function AboutSection() {
               >
                 {isExpanded ? 'See less' : 'See more...'}
               </button>
+
+              {/* Expandable final paragraph */}
+              <div
+                className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                  isExpanded ? 'max-h-[800px] opacity-100' : 'max-h-0 opacity-0'
+                }`}
+              >
+                <div className="space-y-6 pt-0">
+                  <p>
+                    We're with you every step of the way to make sure you have the wedding you deserve, without regrets. You deserve a day worth remembering for years.
+                  </p>
+                </div>
+              </div>
             </div>
 
             {/* CTA Button - always visible and stable */}
