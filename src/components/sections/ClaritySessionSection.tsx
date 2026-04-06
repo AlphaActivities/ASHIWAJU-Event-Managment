@@ -15,27 +15,27 @@ export default function ClaritySessionSection() {
         <div className="space-y-6 mb-20">
           <ChecklistCard
             title="Get Clear On Your Vision"
-            description="Define what truly matters for your wedding so every decision becomes easier."
+            description="Know what truly matters so decisions become easy."
             delay={0.15}
           />
           <ChecklistCard
             title="Avoid Expensive Mistakes"
-            description="Learn where couples usually overspend and how to protect your budget."
+            description="Learn where couples overspend and how to protect your budget."
             delay={0.2}
           />
           <ChecklistCard
             title="Choose The Right Vendors"
-            description="Identify trustworthy vendors and avoid the ones that cause stress on your wedding day."
+            description="Identify trustworthy vendors and avoid the stressful ones."
             delay={0.25}
           />
           <ChecklistCard
             title="Handle Family Pressure Calmly"
-            description="Set clear boundaries so opinions don't take over your wedding."
+            description="Set clear boundaries without guilt or conflict."
             delay={0.3}
           />
           <ChecklistCard
             title="Leave With A Clear Plan"
-            description="By the end of the session, you'll know exactly what to do next."
+            description="Walk away knowing exactly what to do next."
             delay={0.35}
           />
         </div>
