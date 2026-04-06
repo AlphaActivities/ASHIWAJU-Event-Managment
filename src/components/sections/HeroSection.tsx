@@ -57,7 +57,7 @@ export default function HeroSection() {
 
             <LuxFadeIn delay={0.15}>
             <p className="text-lg md:text-xl text-white/95 mt-6 md:mt-8 drop-shadow-[0_2px_6px_rgba(0,0,0,0.85)]">
-                Enjoy every single moment of your day stress free
+              Get clear on your vision, and plan your day with confidence
               </p>
             </LuxFadeIn>
 

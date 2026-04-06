@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { scrollToSection } from "../../utils/scrollToSection";
-import { Check } from "lucide-react";
 import WaveText from "../ui/WaveText";
 
 export default function AboutSection() {
@@ -45,11 +44,7 @@ export default function AboutSection() {
             <div className="space-y-6">
               {/* Always visible intro paragraphs */}
               <p>
-                With over 10 years of turning 50+ weddings into unforgettable celebrations, we've learned how to guide couples through planning that stays true to their vision and budget.
-              </p>
-
-              <p>
-                We take care of the hard decisions, the moving parts, and the details that truly matter, so you can enjoy the journey, show up confident, and fully present on your wedding day, without unnecessary spending or regret.
+                With over 10 years helping 50+ couples plan an unforgettable celebration that reflects their vision and stays on budget, we've learned our clients want a beautiful day, but don't know how to bring it all together without stress or overspending.
               </p>
 
               {/* Expandable extra paragraphs */}
@@ -59,45 +54,15 @@ export default function AboutSection() {
                 }`}
               >
                 <div className="space-y-6 pt-0">
-  <h3 className="text-lg font-semibold text-[#111111]">
-    From our very first meeting:
-  </h3>
+                  <p>
+                    That's why in the Wedding Clarity Session, we take the time to understand you, your vision, and what truly matters to you. Then we show you how it all comes together and guide you on how to achieve your dream wedding with no hidden fees, no surprises.
+                  </p>
 
-  <div className="space-y-6 mb-6">
-
-    <div className="flex items-start gap-4">
-      <div className="h-7 w-7 shrink-0 rounded-full bg-black flex items-center justify-center">
-        <Check className="h-4 w-4 text-white" />
-      </div>
-      <p className="leading-[1.7] pt-[1px]">
-        We take time to understand you, your vision, your priorities, and what this day means to you
-      </p>
-    </div>
-
-    <div className="flex items-start gap-4">
-      <div className="h-7 w-7 shrink-0 rounded-full bg-black flex items-center justify-center">
-        <Check className="h-4 w-4 text-white" />
-      </div>
-      <p className="leading-[1.7] pt-[1px]">
-        We help you clearly see how everything comes together
-      </p>
-    </div>
-
-    <div className="flex items-start gap-4">
-      <div className="h-7 w-7 shrink-0 rounded-full bg-black flex items-center justify-center">
-        <Check className="h-4 w-4 text-white" />
-      </div>
-      <p className="leading-[1.7] pt-[1px]">
-        We guide you step by step through the entire process with clarity on every decision and every cost. No hidden fees. No surprises
-      </p>
-    </div>
-
-  </div>
-</div>
-                  <p className="leading-[1.75] mt-6">
-                    Every detail is thoughtfully planned to reflect your vision, so when your guests walk in, everything feels intentional, elegant, and exactly how you imagined it.
+                  <p>
+                    We're with you every step of the way to make sure you have the wedding you deserve, without regrets. You deserve a day worth remembering for years.
                   </p>
                 </div>
+              </div>
 
               {/* Toggle link - works on both desktop and mobile */}
               <button
