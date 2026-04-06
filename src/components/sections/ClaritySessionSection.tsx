@@ -42,9 +42,14 @@ export default function ClaritySessionSection() {
 
         <LuxFadeIn delay={0.4}>
           <div className="bg-white rounded-2xl shadow-xl border border-neutral-200 p-10 text-center hover:shadow-[0_24px_70px_rgba(0,0,0,0.15)] hover:-translate-y-1 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]">
-            <p className="text-neutral-700 leading-relaxed text-lg">
-              Get expert guidance, a clear plan, and stress-free decision-making all in one 60-minute session for just ₦60,000. If you work with us afterward, we deduct this from your package
-            </p>
+            <div className="text-neutral-700 leading-relaxed text-lg space-y-3">
+              <p>
+                Get expert guidance, a clear plan, and stress-free decision-making all in one 60-minute session for just <span className="text-[#d4a855] font-semibold">₦60,000</span>.
+              </p>
+              <p>
+                If you work with us afterward, we deduct this from your package
+              </p>
+            </div>
           </div>
         </LuxFadeIn>
 
