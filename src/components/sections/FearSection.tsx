@@ -37,28 +37,17 @@ export default function FearSection() {
 
               {/* COPY */}
               <div className="text-left text-[0.98rem] sm:text-base leading-relaxed text-[#3b3b3b]/90 space-y-5 max-w-prose">
-                <p>Many couples think they can handle everything themselves.</p>
-                <p>After all, there are checklists and YouTube videos everywhere.</p>
+                <p>Many think they can handle it all themselves with checklists, YouTube videos, and advice everywhere.</p>
+
                 <p>
-                  What they don't realize is that things can look fine on the surface and still fall apart behind the scenes.
+                  What they don't see is how small details get missed, problems show up at the last minute, and suddenly they're running around fixing issues, missing moments they'll never get back.
                 </p>
 
-                <div className="pt-2 space-y-2">
-                  <p>Small details get missed.</p>
-                  <p>Problems show up last minute.</p>
-                  <p>Suddenly, you're running around, calling vendors, fixing issues, and missing moments you'll never get back.</p>
-                </div>
-
-                <div className="pt-2 space-y-2">
-                  <p>Your makeup is melting.</p>
-                  <p>Your energy is gone.</p>
-                  <p>The one day you should feel your most confident becomes exhausting.</p>
-                  <p>It's a day you can't redo.</p>
-                </div>
+                <p>Their makeup melts. Energy is gone. The day they should feel most confident becomes exhausting.</p>
 
                 <div className="pt-3 mt-2 border-l-2 border-[#f1d598]/70 pl-4">
                   <p className="text-[#111111] font-semibold">
-                    The couples who stayed calm didn't get lucky. They got clear early.
+                    The brides who stayed calm didn't get lucky. They got clear early.
                   </p>
                 </div>
               </div>
@@ -74,6 +63,9 @@ export default function FearSection() {
                     BOOK YOUR WEDDING CLARITY SESSION
                   </button>
                 </div>
+                <p className="mt-4 text-sm text-[#3b3b3b]/75 leading-relaxed max-w-md">
+                  Most brides don't realize how easy planning their dream wedding can be till after this session
+                </p>
               </div>
 
             </div>
