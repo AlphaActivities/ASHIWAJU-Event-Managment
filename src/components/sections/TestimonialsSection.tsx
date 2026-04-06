@@ -112,7 +112,7 @@ export default function TestimonialsSection() {
         {/* HEADER */}
         <LuxFadeIn delay={0.05}>
           <WaveText
-            text="Why Lagos couples trust us"
+            text="Why lagos couples trust us"
             as="h2"
             className="text-4xl md:text-5xl font-serif text-center mb-12"
             delayStep={30}
