@@ -36,7 +36,7 @@ export default function FormSection() {
   return (
     <section
       id="contact"
-      className="relative bg-transparent text-white py-24 md:py-32 lg:py-40"
+      className="relative bg-transparent text-white py-24 md:py-32 lg:py-40 pb-32 md:pb-40"
     >
       <div className="max-w-7xl mx-auto px-6 md:px-10 lg:px-16">
         <div className="space-y-8">
@@ -126,14 +126,17 @@ export default function FormSection() {
                     >
                       Wedding Date (Optional)
                     </label>
-                    <input
-                      id="contact-wedding-date"
-                      name="weddingDate"
-                      type="date"
-                      value={weddingDate}
-                      onChange={(e) => setWeddingDate(e.target.value)}
-                      className="w-full rounded-xl bg-white/5 border border-white/18 px-4 py-3.5 text-sm md:text-[15px] text-neutral-50 placeholder:text-neutral-300/60 focus:outline-none focus:ring-2 focus:ring-[#F5E6C8] focus:border-transparent transition"
-                    />
+                    <div className="min-w-0 max-w-full overflow-hidden">
+                      <input
+                        id="contact-wedding-date"
+                        name="weddingDate"
+                        type="date"
+                        value={weddingDate}
+                        onChange={(e) => setWeddingDate(e.target.value)}
+                        className="w-full min-w-0 max-w-full rounded-xl bg-white/5 border border-white/18 px-4 py-3.5 text-sm md:text-[15px] text-neutral-50 placeholder:text-neutral-300/60 focus:outline-none focus:ring-2 focus:ring-[#F5E6C8] focus:border-transparent transition appearance-none"
+                        style={{ colorScheme: 'dark' }}
+                      />
+                    </div>
                   </div>
 
                   <div className="space-y-2">
