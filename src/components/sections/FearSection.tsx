@@ -64,7 +64,7 @@ export default function FearSection() {
                   </button>
                 </div>
                 <p className="mt-4 text-sm text-[#3b3b3b]/75 leading-relaxed max-w-md">
-                  Most brides don't realize how easy planning their dream wedding can be till after this session
+                  see how easy planning your dream wedding can be
                 </p>
               </div>
 
