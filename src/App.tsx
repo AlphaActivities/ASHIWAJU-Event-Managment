@@ -31,11 +31,10 @@ export default function App() {
       <HeroSection />
       <UnderstandingSection />
       <AboutSection />
-      <ServicesSection />
+      <ClaritySessionSection />
       <TestimonialsSection />
       <WorksSection />
       <FearSection />
-      <ClaritySessionSection />
       <FormSection />
       <FAQSection />
       <GuideSection />

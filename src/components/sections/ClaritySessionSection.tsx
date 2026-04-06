@@ -42,25 +42,8 @@ export default function ClaritySessionSection() {
 
         <LuxFadeIn delay={0.4}>
           <div className="bg-white rounded-2xl shadow-xl border border-neutral-200 p-10 text-center hover:shadow-[0_24px_70px_rgba(0,0,0,0.15)] hover:-translate-y-1 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]">
-            <p className="text-neutral-700 leading-relaxed mb-4">
-              You can find wedding advice anywhere.
-            </p>
-            <p className="text-neutral-700 leading-relaxed mb-4">
-              Applying it correctly to your wedding is where most couples struggle.
-            </p>
-            <p className="text-neutral-900 font-semibold mb-8">
-              That's what this session solves.
-            </p>
-
-            <p className="text-2xl font-semibold text-black my-8">
-              All of this for just ₦60,000.
-            </p>
-
-            <p className="text-neutral-600 mb-2">
-              If you work with us, the ₦60,000 is deducted.
-            </p>
-            <p className="text-neutral-600">
-              If not, you still leave with a clear plan for your wedding.
+            <p className="text-neutral-700 leading-relaxed text-lg">
+              Get expert guidance, a clear plan, and stress-free decision-making all in one 60-minute session for just ₦60,000. If you work with us afterward, we deduct this from your package
             </p>
           </div>
         </LuxFadeIn>
