@@ -62,6 +62,8 @@ export default function ServicesSection() {
                       <img
                         src={item.image}
                         alt={item.title}
+                        loading="lazy"
+                        decoding="async"
                         className="w-full h-[260px] md:h-[300px] object-cover object-center transition-transform duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] group-hover:scale-105"
                       />
                     </div>

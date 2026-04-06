@@ -31,6 +31,8 @@ export default function HeroSection() {
             key={img}
             src={img}
             alt=""
+            loading={index === 0 ? "eager" : "lazy"}
+            decoding="async"
             className={`absolute inset-0 h-full w-full object-cover object-[center_30%] md:object-center scale-110 md:scale-105 transition-opacity duration-[1500ms] ease-in-out ${
   index === heroIndex ? "opacity-100" : "opacity-0"
 }`}
@@ -79,16 +81,28 @@ export default function HeroSection() {
                   <img
                     src="/images/avatar/avatar-1.jpeg"
                     alt="Happy couple"
+                    width="40"
+                    height="40"
+                    loading="eager"
+                    decoding="async"
                     className="w-10 h-10 rounded-full border-2 border-white object-cover"
                   />
                   <img
                     src="/images/avatar/avatar-2.jpeg"
                     alt="Happy couple"
+                    width="40"
+                    height="40"
+                    loading="eager"
+                    decoding="async"
                     className="w-10 h-10 rounded-full border-2 border-white object-cover"
                   />
                   <img
                     src="/images/avatar/avatar-3.jpg"
                     alt="Happy couple"
+                    width="40"
+                    height="40"
+                    loading="eager"
+                    decoding="async"
                     className="w-10 h-10 rounded-full border-2 border-white object-cover"
                   />
                 </div>

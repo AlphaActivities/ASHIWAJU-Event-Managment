@@ -3,17 +3,7 @@ import { scrollToSection } from "../../utils/scrollToSection";
 import WaveText from "../ui/WaveText";
 
 export default function AboutSection() {
-  const [currentImage, setCurrentImage] = useState(0);
   const [isExpanded, setIsExpanded] = useState(false);
-  const images = ["/images/fear.png", "/images/fear.png"];
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentImage((prev) => (prev + 1) % images.length);
-    }, 8000);
-
-    return () => clearInterval(interval);
-  }, []);
 
   return (
     <section id="about" className="bg-[#f7f3ea] py-20 md:py-28 lg:py-32">
@@ -35,6 +25,8 @@ export default function AboutSection() {
             <img
               src="/images/About-photo.jpg"
               alt="Ashiwaju Event Planning Team"
+              loading="lazy"
+              decoding="async"
               className="w-full h-full object-cover"
             />
           </div>

@@ -44,6 +44,8 @@ export default function WorksSection() {
                   <img
                     src={img}
                     alt="Wedding past work"
+                    loading="lazy"
+                    decoding="async"
                     className="absolute inset-0 w-full h-full object-cover object-center transition-transform duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] group-hover:scale-105"
                   />
                 </div>

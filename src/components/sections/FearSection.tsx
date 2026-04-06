@@ -23,6 +23,8 @@ export default function FearSection() {
               <img
                 src="/images/fear.png"
                 alt="Bride feeling overwhelmed before wedding"
+                loading="lazy"
+                decoding="async"
                 className="w-full h-[420px] md:h-[520px] object-cover rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.25)]"
               />
             </div>

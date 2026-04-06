@@ -142,6 +142,8 @@ export default function TestimonialsSection() {
   <img
     src={testimonial.chatImage}
     alt="Client WhatsApp testimonial"
+    loading="lazy"
+    decoding="async"
     className="max-h-full max-w-full object-contain"
   />
 </div>
@@ -151,6 +153,10 @@ export default function TestimonialsSection() {
                       <img
                         src={testimonial.coupleImage}
                         alt="Happy couple"
+                        width="40"
+                        height="40"
+                        loading="lazy"
+                        decoding="async"
                         className="w-10 h-10 rounded-full object-cover"
                       />
                       <div className="flex items-center gap-1">

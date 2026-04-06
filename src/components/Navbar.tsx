@@ -61,6 +61,10 @@ const Navbar: React.FC = () => {
           <img
             src="/images/ashiwaju-logo.png"
             alt="Ashiwaju"
+            width="56"
+            height="56"
+            loading="eager"
+            decoding="async"
             className="h-12 md:h-14 w-auto object-contain drop-shadow-lg"
           />
 
