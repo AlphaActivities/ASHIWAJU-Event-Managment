@@ -12,7 +12,7 @@ const WORK_IMAGES = [
   "/images/work/work-08.jpg",
   "/images/work/work-16.jpg",
   "/images/work/work-10.jpg",
-  "/images/work/work-12.jpg",
+  "/images/work/work-17.jpg",
   "/images/work/work-15.jpg"
 ];
 
