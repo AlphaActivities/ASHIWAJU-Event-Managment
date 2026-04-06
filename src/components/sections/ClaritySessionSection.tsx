@@ -51,7 +51,7 @@ export default function ClaritySessionSection() {
         <LuxFadeIn delay={0.45}>
           <div className="text-center mt-16">
             <p className="text-neutral-800 text-lg md:text-xl mb-8 max-w-3xl mx-auto">
-              Want guests talking about the little details that made your wedding special?
+              Want guests talking about the little details that made your day special?
             </p>
             <button
               onClick={() => scrollToSection('contact')}
