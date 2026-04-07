@@ -107,7 +107,7 @@ export default function HeroSection() {
                   />
                 </div>
                 <p className="text-sm md:text-base text-white text-left leading-snug max-w-[220px]">
-                  50+ brides enjoyed their wedding stress free after one clarity session
+                 50+ brides enjoyed a stress-free wedding after one clarity session
                 </p>
               </div>
             </LuxFadeIn>
