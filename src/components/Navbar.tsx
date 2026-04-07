@@ -59,7 +59,7 @@ const Navbar: React.FC = () => {
           className="group relative flex items-center gap-4 rounded-full bg-[#C4A46A]/70 px-6 md:px-8 py-4 shadow-[0_8px_24px_rgba(15,23,42,0.15)] ring-1 ring-[#e3c58a]/40 transition-all duration-500 hover:shadow-[0_15px_50px_rgba(196,164,106,0.45),0_0_60px_rgba(227,197,138,0.3)] hover:ring-[#f5e3b6]/60 hover:bg-[#d4b47a]/75 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#e5c98f]/80"
         >
           <img
-            src="/images/ashiwaju-logo.png"
+            src="/images/ashiwaju-logo.webp"
             alt="Ashiwaju"
             width="56"
             height="56"
