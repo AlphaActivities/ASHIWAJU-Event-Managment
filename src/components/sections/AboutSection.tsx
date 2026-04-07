@@ -23,7 +23,7 @@ export default function AboutSection() {
           {/* LEFT - Profile Image */}
           <div className="relative overflow-hidden rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.25)] bg-neutral-200 w-full h-full min-h-[520px]">
             <img
-              src="/images/About-photo.jpg"
+              src="/images/About-photo.webp"
               alt="Ashiwaju Event Planning Team"
               loading="lazy"
               decoding="async"
