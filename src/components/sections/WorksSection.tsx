@@ -2,7 +2,7 @@ import { useState } from "react";
 import { LuxFadeIn } from "../ui/LuxFadeIn";
 
 const WORK_IMAGES = [
-  "/images/work/work-12.jpg",
+  "/images/work/work-01.jpg",
   "/images/work/work-02.jpg",
   "/images/work/work-13.jpg",
   "/images/work/work-04.jpg",
