@@ -6,7 +6,7 @@ import WaveText from '../ui/WaveText';
 const HERO_IMAGES = [
   "/images/hero/hero-07.webp",
   "/images/hero/hero-01.webp",
-  "/images/hero/hero-03.jpg",
+  "/images/hero/hero-03.webp",
   "/images/hero/hero-02.webp",
   "/images/hero/hero-05.jpg",
   "/images/hero/hero-06.jpg"
