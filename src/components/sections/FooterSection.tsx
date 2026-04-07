@@ -14,7 +14,7 @@ export default function FooterSection() {
       <div className="max-w-4xl mx-auto px-6 text-center">
 
         <img
-          src="/images/ashiwaju-logo.png"
+          src="/images/ashiwaju-logo.webp"
           alt="Ashiwaju Event Management"
           className="mx-auto mb-6 h-16 md:h-20 w-auto object-contain drop-shadow-md"
         />
