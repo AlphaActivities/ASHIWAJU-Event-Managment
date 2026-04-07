@@ -7,7 +7,7 @@ const WORK_IMAGES = [
   "/images/work/work-13.jpg",
   "/images/work/work-04.jpg",
   "/images/work/work-05.jpg",
-  "/images/work/work-06.jpg",
+  "/images/work/work-11.jpg",
   "/images/work/work-18.jpg",
   "/images/work/work-03.jpg",
   "/images/work/work-16.jpg",
