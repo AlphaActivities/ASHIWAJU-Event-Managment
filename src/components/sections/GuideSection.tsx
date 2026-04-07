@@ -70,6 +70,9 @@ export default function GuideSection() {
                   }
 
                   setIsSubmitting(true);
+                  if (typeof window.fbq !== "undefined") {
+  window.fbq("trackCustom", "GuideDownload");
+}
 
                   const link = document.createElement("a");
                   link.href = "/guide/ashiwaju-wedding-guide.pdf";
