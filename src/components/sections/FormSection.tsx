@@ -149,7 +149,10 @@ export default function FormSection() {
                         <button
                           key={option}
                           type="button"
-                          onClick={() => setPlannedBudget(option)}
+                          onClick={(e) => {
+                            setPlannedBudget(option);
+                            e.currentTarget.blur();
+                          }}
                           className={`px-3.5 py-3 rounded-lg text-xs md:text-sm font-medium transition-all ${
                             plannedBudget === option
                               ? 'bg-[#F5E6C8]/90 text-black ring-2 ring-[#F5E6C8]/50'
@@ -175,7 +178,10 @@ export default function FormSection() {
                         <button
                           key={option}
                           type="button"
-                          onClick={() => setGuestSize(option)}
+                          onClick={(e) => {
+                            setGuestSize(option);
+                            e.currentTarget.blur();
+                          }}
                           className={`px-3.5 py-3 rounded-lg text-xs md:text-sm font-medium transition-all ${
                             guestSize === option
                               ? 'bg-[#F5E6C8]/90 text-black ring-2 ring-[#F5E6C8]/50'
@@ -197,7 +203,7 @@ export default function FormSection() {
                       disabled={isSubmitting}
                       className="w-full inline-flex items-center justify-center rounded-full bg-gradient-to-r from-[#F5E6C8] via-[#F2D9A3] to-[#E9C88A] px-6 py-3.5 text-sm md:text-[15px] font-semibold text-black shadow-[0_14px_35px_rgba(0,0,0,0.65)] hover:brightness-110 hover:shadow-[0_16px_45px_rgba(0,0,0,0.75)] hover:-translate-y-[2px] hover:scale-[1.01] active:translate-y-px transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] disabled:opacity-60 disabled:cursor-not-allowed"
                     >
-                      {isSubmitting ? 'Submitting...' : 'Book my planning clarity session'}
+                      {isSubmitting ? 'Submitting...' : 'BOOK MY WEDDING CLARITY SESSION'}
                     </button>
                   </div>
                 </form>
