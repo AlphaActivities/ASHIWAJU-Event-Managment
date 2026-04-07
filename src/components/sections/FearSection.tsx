@@ -21,7 +21,7 @@ export default function FearSection() {
           <LuxFadeIn delay={0.1}>
             <div className="relative">
               <img
-                src="/images/fear.png"
+                src="/images/fear.webp"
                 alt="Bride feeling overwhelmed before wedding"
                 loading="lazy"
                 decoding="async"
