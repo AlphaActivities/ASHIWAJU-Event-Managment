@@ -49,7 +49,7 @@ export default function FearSection() {
 
                 <div className="pt-3 mt-2 border-l-2 border-[#f1d598]/70 pl-4">
                   <p className="text-[#111111] font-semibold">
-                    The brides who stayed calm didn't get lucky. They got clear early.
+                    The brides who stayed calm on their day didn’t get lucky. They got clear early and made the right decisions
                   </p>
                 </div>
               </div>
