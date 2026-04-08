@@ -45,7 +45,7 @@ export default function FearSection() {
                   What they don't see is how small details get missed, problems show up at the last minute, and suddenly they're running around, calling vendors,fixing issues, missing moments they'll never get back.
                 </p>
 
-                <p>Their makeup melts. Energy is gone. The day they should feel most confident becomes exhausting.</p>
+                <p>Their makeup fades. Energy is gone. The day they should feel most confident becomes exhausting.</p>
 
                 <div className="pt-3 mt-2 border-l-2 border-[#f1d598]/70 pl-4">
                   <p className="text-[#111111] font-semibold">
