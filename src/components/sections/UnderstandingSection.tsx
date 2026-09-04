@@ -43,9 +43,13 @@ export default function UnderstandingSection() {
             </div>
           </LuxFadeIn>
 
-          {/* LIST + PARAGRAPH — order-second on mobile, left column on desktop */}
+          {/* INTRO LINE + LIST + PARAGRAPH — order-second on mobile, left column on desktop */}
           <LuxFadeIn delay={0.2}>
             <div className="order-2 lg:order-1 w-full">
+              <p className="text-lg md:text-xl font-serif text-[#151515] leading-snug mb-8 md:mb-10">
+                Planning your wedding shouldn't feel like a full-time job.
+              </p>
+
               <ul className="space-y-6 md:space-y-7">
                 {statements.map((statement, index) => (
                   <li key={index} className="flex items-start gap-3">
