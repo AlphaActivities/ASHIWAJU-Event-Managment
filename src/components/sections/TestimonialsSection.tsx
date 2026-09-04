@@ -121,7 +121,7 @@ export default function TestimonialsSection() {
 
         <LuxFadeIn delay={0.1}>
           <p className="text-center text-base md:text-lg text-[#151515]/70 font-sans mb-12 max-w-2xl mx-auto">
-            Hear from Lagos couples who plan their wedding stress-free
+            Hear from Lagos couples who enjoy their wedding stress-free
           </p>
         </LuxFadeIn>
 
