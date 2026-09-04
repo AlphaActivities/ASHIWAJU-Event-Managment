@@ -28,7 +28,7 @@ export default function OfferSection() {
               You’ll never have to feel like you're planning a wedding 
             </h2>
             <p className="mt-4 text-[0.95rem] sm:text-base text-[#151515]/70 leading-relaxed">
-              A focused 60-minute session designed to give you clarity, confidence, and a clear path forward.
+              With 10+ years of experience, we’ve learned that couples just want everything to go as they imagined without sacrificing what matters to them; that's why we created the clarity session
             </p>
           </div>
         </LuxFadeIn>
