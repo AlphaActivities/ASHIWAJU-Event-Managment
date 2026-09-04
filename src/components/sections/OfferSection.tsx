@@ -1,19 +1,14 @@
 import { LuxFadeIn } from "../ui/LuxFadeIn";
 import { scrollToSection } from "../../utils/scrollToSection";
+import { Check } from "lucide-react";
 
-const offerCards = [
-  {
-    title: "Get Clear On Your Vision",
-    description: "Know what truly matters so decisions become easy.",
-  },
-  {
-    title: "Avoid Expensive Mistakes",
-    description: "Learn where couples overspend and how to protect your budget.",
-  },
-  {
-    title: "Choose The Right Vendors",
-    description: "Identify trustworthy vendors and avoid the stressful ones.",
-  },
+const card3Checklist = [
+  "A clear picture of your wedding vision in 3D",
+  "Top priorities mapped out to avoid confusion",
+  "Allocation of your budget to avoid unnecessary spending",
+  "Guidance on vendors and key decisions",
+  "A roadmap for the next steps",
+  "Clarity on how to bring your vision to reality without chaos",
 ];
 
 export default function OfferSection() {
@@ -35,18 +30,50 @@ export default function OfferSection() {
 
         {/* THREE OFFER CARDS */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
-          {offerCards.map((card, index) => (
-            <LuxFadeIn key={index} delay={0.1 + index * 0.05}>
-              <div className="h-full flex flex-col rounded-2xl bg-[#EFE8DA] border border-[#C99524]/15 p-8 md:p-10">
-                <h3 className="text-lg md:text-xl font-serif font-semibold tracking-tight text-[#151515] mb-3">
-                  {card.title}
-                </h3>
-                <p className="text-[15px] md:text-base leading-[1.6] text-[#151515]/75">
-                  {card.description}
-                </p>
-              </div>
-            </LuxFadeIn>
-          ))}
+          {/* CARD 1 */}
+          <LuxFadeIn delay={0.1}>
+            <div className="h-full flex flex-col rounded-2xl bg-[#EFE8DA] border border-[#C99524]/15 p-8 md:p-10">
+              <h3 className="text-lg md:text-xl font-serif font-semibold tracking-tight text-[#151515] mb-3">
+                For Bride who..
+              </h3>
+              <p className="text-[15px] md:text-base leading-[1.6] text-[#151515]/75">
+                Know what they want, and want to know what it takes to bring their vision to reality without losing sight of their relationship, values, or sanity.
+              </p>
+            </div>
+          </LuxFadeIn>
+
+          {/* CARD 2 */}
+          <LuxFadeIn delay={0.15}>
+            <div className="h-full flex flex-col rounded-2xl bg-[#EFE8DA] border border-[#C99524]/15 p-8 md:p-10">
+              <h3 className="text-lg md:text-xl font-serif font-semibold tracking-tight text-[#151515] mb-3">
+                During your Clarity session...
+              </h3>
+              <p className="text-[15px] md:text-base leading-[1.6] text-[#151515]/75">
+                we'll sit down one-on-one to understand your vision, budget, priorities, and challenges. We'll work through what's confusing you, help you make the important decisions, and map out what needs to happen next to achieve your dream wedding
+              </p>
+            </div>
+          </LuxFadeIn>
+
+          {/* CARD 3 */}
+          <LuxFadeIn delay={0.2}>
+            <div className="h-full flex flex-col rounded-2xl bg-[#EFE8DA] border border-[#C99524]/15 p-8 md:p-10">
+              <h3 className="text-lg md:text-xl font-serif font-semibold tracking-tight text-[#151515] mb-4">
+                You walk away with…
+              </h3>
+              <ul className="space-y-3">
+                {card3Checklist.map((item) => (
+                  <li key={item} className="flex items-start gap-3">
+                    <span className="flex-shrink-0 w-5 h-5 rounded-full bg-[#C99524]/15 flex items-center justify-center mt-0.5">
+                      <Check className="w-3.5 h-3.5 text-[#C99524]" strokeWidth={2.5} />
+                    </span>
+                    <span className="text-[14px] md:text-[15px] leading-[1.5] text-[#151515]/75">
+                      {item}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </LuxFadeIn>
         </div>
 
         {/* WIDE HIGHLIGHTED CARD */}
