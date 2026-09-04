@@ -6,7 +6,7 @@ export default function MobileCTABar() {
       <button
         type="button"
         onClick={() => scrollToSection('contact')}
-        className="w-full rounded-full bg-[#C99524] px-4 py-3.5 text-[11px] leading-tight font-bold text-[#151515] shadow-[0_8px_24px_rgba(201,149,36,0.25)] hover:bg-[#B07D1A] active:scale-[0.98] transition-all duration-200 tracking-wide"
+        className="w-full rounded-[18px] bg-[#C99524] px-8 py-4 min-h-[56px] text-[11px] leading-tight font-bold text-[#151515] shadow-[0_8px_24px_rgba(201,149,36,0.25)] hover:bg-[#B07D1A] active:scale-[0.98] transition-all duration-200 tracking-wide"
       >
         BOOK YOUR WEDDING CLARITY SESSION
       </button>

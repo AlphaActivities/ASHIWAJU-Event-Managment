@@ -60,7 +60,7 @@ export default function ClaritySessionSection() {
             </p>
             <button
               onClick={() => scrollToSection('contact')}
-              className="inline-flex items-center justify-center rounded-full bg-[#C99524] px-8 py-4 text-base md:text-lg font-semibold text-[#151515] shadow-[0_8px_30px_rgba(201,149,36,0.25)] hover:bg-[#B07D1A] hover:shadow-[0_12px_40px_rgba(201,149,36,0.35)] hover:-translate-y-[2px] active:translate-y-px transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]"
+              className="inline-flex items-center justify-center rounded-[18px] bg-[#C99524] px-8 py-4 min-h-[56px] text-base md:text-lg font-bold text-[#151515] shadow-[0_8px_30px_rgba(201,149,36,0.25)] hover:bg-[#B07D1A] hover:shadow-[0_12px_40px_rgba(201,149,36,0.35)] hover:-translate-y-[2px] active:translate-y-px transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]"
             >
               BOOK YOUR WEDDING CLARITY SESSION
             </button>

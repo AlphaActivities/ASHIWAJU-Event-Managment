@@ -28,7 +28,7 @@ export default function GuideSection() {
                 <button
                   type="button"
                   onClick={() => setIsGuideOpen(true)}
-                  className="inline-flex items-center rounded-full bg-[#C99524] px-6 sm:px-8 py-3 text-[0.9rem] font-semibold tracking-[0.18em] uppercase text-[#151515] shadow-[0_8px_30px_rgba(201,149,36,0.25)] hover:bg-[#B07D1A] hover:shadow-[0_12px_40px_rgba(201,149,36,0.35)] hover:-translate-y-[2px] transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C99524]/60"
+                  className="inline-flex items-center justify-center rounded-[18px] bg-[#C99524] px-8 py-4 min-h-[56px] text-[0.9rem] font-bold tracking-[0.18em] uppercase text-[#151515] shadow-[0_8px_30px_rgba(201,149,36,0.25)] hover:bg-[#B07D1A] hover:shadow-[0_12px_40px_rgba(201,149,36,0.35)] hover:-translate-y-[2px] transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C99524]/60"
                 >
                   📘 Download the free wedding planning guide
                 </button>
@@ -132,7 +132,7 @@ if (error) {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full rounded-full bg-[#C99524] py-3 font-semibold text-[#151515] shadow-[0_8px_24px_rgba(201,149,36,0.2)] hover:bg-[#B07D1A] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full rounded-[18px] bg-[#C99524] px-8 py-4 min-h-[56px] font-bold text-[#151515] shadow-[0_8px_24px_rgba(201,149,36,0.2)] hover:bg-[#B07D1A] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isSubmitting ? "Processing..." : "Download Guide"}
                 </button>

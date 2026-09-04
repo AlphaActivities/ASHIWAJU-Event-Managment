@@ -68,7 +68,7 @@ export default function HeroSection() {
                 <button
                   type="button"
                   onClick={() => scrollToSection('contact')}
-                  className="inline-block bg-[#C99524] text-[#151515] font-semibold px-7 py-3 rounded-full shadow-[0_8px_30px_rgba(201,149,36,0.4)] hover:bg-[#B07D1A] hover:shadow-[0_12px_40px_rgba(201,149,36,0.5)] transition-all duration-300"
+                  className="inline-flex items-center justify-center bg-[#C99524] text-[#151515] font-bold px-8 py-4 rounded-[18px] min-h-[56px] shadow-[0_8px_30px_rgba(201,149,36,0.4)] hover:bg-[#B07D1A] hover:shadow-[0_12px_40px_rgba(201,149,36,0.5)] transition-all duration-300"
                 >
                   BOOK YOUR WEDDING CLARITY SESSION
                 </button>
