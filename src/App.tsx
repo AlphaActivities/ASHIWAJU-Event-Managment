@@ -29,8 +29,8 @@ export default function App() {
       <HeroSection />
       <UnderstandingSection />
       <OfferSection />
+      <TestimonialsSection />
       <AboutSection />
-      <ClaritySessionSection />
       <TestimonialsSection />
       <WorksSection />
       <FearSection />
