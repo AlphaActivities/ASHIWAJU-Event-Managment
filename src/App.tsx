@@ -30,9 +30,8 @@ export default function App() {
       <UnderstandingSection />
       <OfferSection />
       <TestimonialsSection />
-      <AboutSection />
-      <TestimonialsSection />
       <WorksSection />
+      <AboutSection />
       <FearSection />
       <section className="featured-statement-section">
         <div className="featured-statement-card">

@@ -27,11 +27,8 @@ export default function WorksSection() {
       <div className="max-w-7xl mx-auto px-6 md:px-10 lg:px-16">
         <LuxFadeIn delay={0.05}>
           <div className="text-center mb-16">
-            <p className="text-xs md:text-sm tracking-[0.25em] uppercase text-[#C99524] mb-3">
-              Portfolio
-            </p>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-medium leading-tight text-[#151515]">
-              A look at what <span className="text-[#C99524]">we've created</span>
+              Curating unforgettable experiences since 2016
             </h2>
           </div>
         </LuxFadeIn>
