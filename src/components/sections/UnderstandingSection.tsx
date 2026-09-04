@@ -21,7 +21,7 @@ export default function UnderstandingSection() {
         {/* HEADLINE — full width at top */}
         <div className="mb-10 md:mb-14">
           <WaveText
-            text="You've got impeccable taste and grand ideas."
+            text="It's your wedding; you're the one getting married"
             as="h2"
             className="text-4xl md:text-6xl font-serif text-[#151515] leading-tight"
             delayStep={30}
