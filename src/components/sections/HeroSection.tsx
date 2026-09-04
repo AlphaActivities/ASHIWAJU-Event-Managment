@@ -50,7 +50,7 @@ export default function HeroSection() {
             <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/10 to-transparent blur-3xl -z-10 scale-110"></div>
             <LuxFadeIn delay={0.1}>
               <WaveText
-                text="Have the wedding you've always imagined without overspending"
+                text="Enjoy every moment of your day stress-free"
                 as="h1"
                 className="max-w-[600px] text-3xl md:text-5xl leading-tight text-center font-serif font-medium tracking-[0.02em] md:tracking-[0.03em] text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]"
                 delayStep={25}
