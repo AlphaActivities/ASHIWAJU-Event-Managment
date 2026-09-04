@@ -5,8 +5,6 @@ import AboutSection from './components/sections/AboutSection';
 import TestimonialsSection from './components/sections/TestimonialsSection';
 import WorksSection from './components/sections/WorksSection';
 import FearSection from './components/sections/FearSection';
-import FeaturedStatementSection from './components/sections/FeaturedStatementSection';
-import HighlightStatementSection from './components/sections/HighlightStatementSection';
 import ClaritySessionSection from './components/sections/ClaritySessionSection';
 import FormSection from './components/sections/FormSection';
 import FAQSection from './components/sections/FAQSection';
@@ -34,8 +32,13 @@ export default function App() {
       <TestimonialsSection />
       <WorksSection />
       <FearSection />
-      <FeaturedStatementSection />
-      <HighlightStatementSection />
+      <section className="featured-statement-section">
+        <div className="featured-statement-card">
+          <p>
+            Imagine being relaxed, going to bed knowing everything is handled perfectly; on that day, you just wake up, get dressed, show up, and enjoy every moment of your day without worry.
+          </p>
+        </div>
+      </section>
       <FormSection />
       <FAQSection />
       <GuideSection />
