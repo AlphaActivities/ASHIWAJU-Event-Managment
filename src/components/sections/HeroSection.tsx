@@ -59,7 +59,7 @@ export default function HeroSection() {
 
             <LuxFadeIn delay={0.15}>
             <p className="text-lg md:text-xl text-white/95 mt-6 md:mt-8 drop-shadow-[0_2px_6px_rgba(0,0,0,0.85)]">
-              Get clear on your vision, and plan your day stress-free
+              With our clarity session, you get clear on your vision and what matters most to you, so you plan your dream wedding without chaos or unnecessary spending.
               </p>
             </LuxFadeIn>
 
@@ -107,7 +107,7 @@ export default function HeroSection() {
                   />
                 </div>
                 <p className="text-sm md:text-base text-white text-left leading-snug max-w-[220px]">
-                 50+ brides enjoyed a stress-free wedding after one clarity session
+                 Trusted by 50+ happily married couples in Lagos
                 </p>
               </div>
             </LuxFadeIn>
