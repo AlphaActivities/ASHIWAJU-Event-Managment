@@ -25,7 +25,7 @@ export default function OfferSection() {
           <div className="text-center max-w-3xl mx-auto mb-10">
             <div className="mx-auto h-[1px] w-14 bg-[#C99524]/40 mb-5 opacity-90" />
             <h2 className="text-3xl sm:text-4xl lg:text-[2.6rem] font-serif font-medium tracking-tight text-[#151515]">
-              What to expect in your Clarity Session
+              You’ll never have to feel like you're planning a wedding 
             </h2>
             <p className="mt-4 text-[0.95rem] sm:text-base text-[#151515]/70 leading-relaxed">
               A focused 60-minute session designed to give you clarity, confidence, and a clear path forward.
