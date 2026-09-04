@@ -37,16 +37,16 @@ export default function ServicesSection() {
   return (
     <section
       id="services"
-      className="bg-[#f7f3ea] py-20 md:py-28 lg:py-32"
+      className="bg-[#EFE8DA] py-20 md:py-28 lg:py-32"
     >
       <div className="max-w-7xl mx-auto px-6 md:px-10 lg:px-16">
         <LuxFadeIn delay={0.05}>
           <div className="text-center max-w-3xl mx-auto mb-14">
-            <div className="mx-auto h-[1px] w-14 bg-gradient-to-r from-transparent via-[#f3d7a0] to-transparent mb-5 opacity-90" />
-            <h2 className="text-3xl sm:text-4xl lg:text-[2.6rem] font-serif font-medium tracking-tight text-[#111111]">
+            <div className="mx-auto h-[1px] w-14 bg-[#C99524]/40 mb-5 opacity-90" />
+            <h2 className="text-3xl sm:text-4xl lg:text-[2.6rem] font-serif font-medium tracking-tight text-[#151515]">
               How we help you say "I do" with peace of mind
             </h2>
-            <p className="mt-4 text-[0.95rem] sm:text-base text-[#3b3b3b]/90">
+            <p className="mt-4 text-[0.95rem] sm:text-base text-[#151515]/70">
               We carry the weight, so nothing falls on you.
             </p>
           </div>
@@ -56,9 +56,9 @@ export default function ServicesSection() {
           {services.map((item, index) => {
             return (
               <LuxFadeIn key={index} delay={0.1 + index * 0.05}>
-                <div className="h-full flex flex-col rounded-[1.75rem] bg-[#fbfaf7] border border-[#e9ddc2] shadow-[0_18px_55px_rgba(15,23,42,0.10)] p-4 sm:p-5 lg:p-6 hover:shadow-[0_24px_70px_rgba(15,23,42,0.15)] hover:-translate-y-1 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] group">
+                <div className="h-full flex flex-col rounded-2xl bg-[#F8F5EF] border border-[#C99524]/15 shadow-[0_4px_24px_rgba(0,0,0,0.04)] p-4 sm:p-5 lg:p-6 hover:shadow-[0_8px_40px_rgba(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] group">
                   <div className="flex flex-col gap-4">
-                    <div className="overflow-hidden rounded-[1.25rem]">
+                    <div className="overflow-hidden rounded-xl">
                       <img
                         src={item.image}
                         alt={item.title}
@@ -69,10 +69,10 @@ export default function ServicesSection() {
                     </div>
 
                     <div>
-                      <h3 className="text-lg md:text-[1.2rem] font-semibold tracking-tight text-[#111111] mb-2">
+                      <h3 className="text-lg md:text-[1.2rem] font-serif font-semibold tracking-tight text-[#151515] mb-2">
                         {item.title}
                       </h3>
-                      <p className="text-[15px] md:text-[16px] leading-[1.6] text-[#3b3b3b]/90">
+                      <p className="text-[15px] md:text-[16px] leading-[1.6] text-[#151515]/75">
                         {item.description}
                       </p>
                     </div>

@@ -6,7 +6,7 @@ export default function AboutSection() {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
-    <section id="about" className="bg-[#f7f3ea] py-20 md:py-28 lg:py-32">
+    <section id="about" className="bg-[#F8F5EF] py-20 md:py-28 lg:py-32">
       <div className="max-w-5xl mx-auto px-6 sm:px-8 lg:px-10">
 
         {/* HEADLINE */}
@@ -14,14 +14,14 @@ export default function AboutSection() {
           <WaveText
             text="You need someone who understands your taste and brings it to life."
             as="h2"
-            className="text-3xl sm:text-4xl lg:text-[2.8rem] font-serif font-medium tracking-tight text-[#111111]"
+            className="text-3xl sm:text-4xl lg:text-[2.8rem] font-serif font-medium tracking-tight text-[#151515]"
             delayStep={30}
           />
         </div>
 
         <div className="mt-10 grid gap-10 lg:gap-12 lg:grid-cols-2 items-stretch">
           {/* LEFT - Profile Image */}
-          <div className="relative overflow-hidden rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.25)] bg-neutral-200 w-full h-full min-h-[520px]">
+          <div className="relative overflow-hidden rounded-2xl shadow-[0_8px_40px_rgba(0,0,0,0.08)] bg-[#EFE8DA] w-full h-full min-h-[520px]">
             <img
               src="/images/About-photo.webp"
               alt="Ashiwaju Event Planning Team"
@@ -32,7 +32,7 @@ export default function AboutSection() {
           </div>
 
           {/* RIGHT - Body Copy */}
-          <div className="h-full flex flex-col justify-center text-[0.98rem] sm:text-base leading-relaxed text-[#3b3b3b]/90">
+          <div className="h-full flex flex-col justify-center text-[0.98rem] sm:text-base leading-relaxed text-[#151515]">
             <div className="space-y-6">
               {/* Always visible paragraphs */}
               <p>
@@ -47,7 +47,7 @@ export default function AboutSection() {
               <button
                 type="button"
                 onClick={() => setIsExpanded(!isExpanded)}
-                className="text-sm text-[#8B6F47] hover:text-[#7A5F3C] transition-colors"
+                className="text-sm text-[#C99524] hover:text-[#B07D1A] transition-colors"
               >
                 {isExpanded ? 'See less' : 'See more...'}
               </button>
@@ -70,7 +70,7 @@ export default function AboutSection() {
             <button
               type="button"
               onClick={() => scrollToSection("contact")}
-              className="mt-8 inline-flex items-center rounded-full bg-gradient-to-r from-[#f5e3b6] via-[#e7c78a] to-[#c89c4f] px-6 sm:px-8 py-3 text-[0.9rem] font-semibold tracking-[0.18em] uppercase text-[#1b1b1b] shadow-[0_18px_45px_rgba(0,0,0,0.25)] hover:brightness-105 hover:shadow-[0_20px_55px_rgba(0,0,0,0.35)] hover:-translate-y-[2px] hover:scale-[1.01] transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#f5e3b6]/80"
+              className="mt-8 inline-flex items-center rounded-full bg-[#C99524] px-6 sm:px-8 py-3 text-[0.9rem] font-semibold tracking-[0.18em] uppercase text-[#151515] shadow-[0_8px_30px_rgba(201,149,36,0.25)] hover:bg-[#B07D1A] hover:shadow-[0_12px_40px_rgba(201,149,36,0.35)] hover:-translate-y-[2px] transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C99524]/60"
             >
               BOOK YOUR WEDDING CLARITY SESSION
             </button>

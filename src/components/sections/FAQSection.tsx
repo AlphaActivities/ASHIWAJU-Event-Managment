@@ -40,15 +40,15 @@ export default function FAQSection() {
   return (
     <section
       id="faq"
-      className="bg-[#f7f3ea] py-20 md:py-28 lg:py-32"
+      className="bg-[#F8F5EF] py-20 md:py-28 lg:py-32"
     >
       <div className="max-w-4xl mx-auto px-6 md:px-10 lg:px-16">
         <LuxFadeIn delay={0.05}>
           <div className="text-center mb-12">
-            <p className="text-xs md:text-sm tracking-[0.25em] uppercase text-[#111111]/70 mb-3">
+            <p className="text-xs md:text-sm tracking-[0.25em] uppercase text-[#C99524] mb-3">
               Common Questions
             </p>
-            <h2 className="text-3xl sm:text-4xl lg:text-[2.6rem] font-semibold tracking-tight text-[#111111]">
+            <h2 className="text-3xl sm:text-4xl lg:text-[2.6rem] font-serif font-medium tracking-tight text-[#151515]">
               We've got your back
             </h2>
           </div>
@@ -57,16 +57,16 @@ export default function FAQSection() {
         <div className="space-y-4">
           {faqs.map((faq, index) => (
             <LuxFadeIn key={faq.id} delay={0.1 + index * 0.05}>
-              <div className="rounded-2xl bg-white/60 border border-[#d4c5a0]/30 backdrop-blur-sm overflow-hidden shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]">
+              <div className="rounded-2xl bg-[#EFE8DA]/70 border border-[#C99524]/20 overflow-hidden shadow-sm hover:shadow-[0_4px_20px_rgba(0,0,0,0.04)] hover:-translate-y-0.5 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]">
                 <button
                   onClick={() => toggleFAQ(faq.id)}
-                  className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-white/30 transition-colors"
+                  className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-[#EFE8DA] transition-colors"
                 >
-                  <span className="text-base md:text-lg font-semibold text-[#111111] pr-4">
+                  <span className="text-base md:text-lg font-serif font-semibold text-[#151515] pr-4">
                     {faq.question}
                   </span>
                   <ChevronDown
-                    className={`flex-shrink-0 text-[#111111]/70 transition-transform duration-300 ${
+                    className={`flex-shrink-0 text-[#C99524] transition-transform duration-300 ${
                       openId === faq.id ? 'rotate-180' : ''
                     }`}
                     size={20}
@@ -78,7 +78,7 @@ export default function FAQSection() {
                   }`}
                 >
                   <div className="px-6 pb-5 pt-1">
-                    <p className="text-[0.95rem] leading-relaxed text-[#3b3b3b]/90 whitespace-pre-line">
+                    <p className="text-[0.95rem] leading-relaxed text-[#151515]/80 whitespace-pre-line">
                       {faq.answer}
                     </p>
                   </div>

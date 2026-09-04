@@ -40,14 +40,14 @@ export default function HeroSection() {
         ))}
       </div>
 
-      <div className="absolute inset-0 bg-black/25"></div>
+      <div className="absolute inset-0 bg-black/30"></div>
 
-      <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/10 to-black/30"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-black/15 to-black/35"></div>
 
       <div className="relative z-10 min-h-screen flex items-center">
         <div className="lux-content max-w-7xl mx-auto px-6 md:px-10 lg:px-16 w-full pt-28 md:pt-32">
           <div className="text-center max-w-4xl mx-auto flex flex-col items-center relative">
-            <div className="absolute inset-0 bg-gradient-to-b from-black/15 via-black/10 to-transparent blur-3xl -z-10 scale-110"></div>
+            <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/10 to-transparent blur-3xl -z-10 scale-110"></div>
             <LuxFadeIn delay={0.1}>
               <WaveText
                 text="Have the wedding you've always imagined without overspending"
@@ -68,7 +68,7 @@ export default function HeroSection() {
                 <button
                   type="button"
                   onClick={() => scrollToSection('contact')}
-                  className="inline-block bg-[#C4A46A] text-black font-medium px-7 py-3 rounded-full shadow-[0_0_20px_rgba(196,164,106,0.4)] hover:shadow-[0_0_35px_rgba(196,164,106,0.7)] transition-all"
+                  className="inline-block bg-[#C99524] text-[#151515] font-semibold px-7 py-3 rounded-full shadow-[0_8px_30px_rgba(201,149,36,0.4)] hover:bg-[#B07D1A] hover:shadow-[0_12px_40px_rgba(201,149,36,0.5)] transition-all duration-300"
                 >
                   BOOK YOUR WEDDING CLARITY SESSION
                 </button>
@@ -85,7 +85,7 @@ export default function HeroSection() {
                     height="40"
                     loading="eager"
                     decoding="async"
-                    className="w-10 h-10 rounded-full border-2 border-white object-cover"
+                    className="w-10 h-10 rounded-full border-2 border-[#F8F5EF] object-cover"
                   />
                   <img
                     src="/images/avatar/avatar-2.jpeg"
@@ -94,7 +94,7 @@ export default function HeroSection() {
                     height="40"
                     loading="eager"
                     decoding="async"
-                    className="w-10 h-10 rounded-full border-2 border-white object-cover"
+                    className="w-10 h-10 rounded-full border-2 border-[#F8F5EF] object-cover"
                   />
                   <img
                     src="/images/avatar/avatar-3.jpg"
@@ -103,7 +103,7 @@ export default function HeroSection() {
                     height="40"
                     loading="eager"
                     decoding="async"
-                    className="w-10 h-10 rounded-full border-2 border-white object-cover"
+                    className="w-10 h-10 rounded-full border-2 border-[#F8F5EF] object-cover"
                   />
                 </div>
                 <p className="text-sm md:text-base text-white text-left leading-snug max-w-[220px]">

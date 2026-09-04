@@ -105,7 +105,7 @@ export default function TestimonialsSection() {
   return (
     <section
       id="reviews"
-      className="lux-section bg-transparent text-white py-24 md:py-32 lg:py-40"
+      className="lux-section bg-[#F8F5EF] text-[#151515] py-24 md:py-32 lg:py-40"
     >
       <div className="max-w-7xl mx-auto px-6 md:px-10 lg:px-16 space-y-10">
 
@@ -114,7 +114,7 @@ export default function TestimonialsSection() {
           <WaveText
             text="Why lagos couples trust us"
             as="h2"
-            className="text-4xl md:text-5xl font-serif text-center mb-12"
+            className="text-4xl md:text-5xl font-serif text-center mb-12 text-[#151515]"
             delayStep={30}
           />
         </LuxFadeIn>
@@ -135,10 +135,10 @@ export default function TestimonialsSection() {
             >
               {testimonials.map((testimonial) => (
                 <div key={testimonial.id} className="w-full flex-shrink-0">
-                  <article className="group relative h-full rounded-2xl bg-gradient-to-br from-[#8B6F47]/90 via-[#7A5F3C]/90 to-[#6B5335]/90 border border-[#c29f63]/30 backdrop-blur-2xl px-6 py-7 flex flex-col shadow-[0_18px_45px_rgba(0,0,0,0.7)]">
+                  <article className="group relative h-full rounded-2xl bg-[#EFE8DA] border border-[#C99524]/25 px-6 py-7 flex flex-col shadow-[0_4px_24px_rgba(0,0,0,0.04)]">
 
                     {/* WHATSAPP TESTIMONIAL */}
-                    <div className="w-full aspect-[4/5] flex items-center justify-center bg-black/20 rounded-lg mb-5 overflow-hidden">
+                    <div className="w-full aspect-[4/5] flex items-center justify-center bg-[#F8F5EF] rounded-lg mb-5 overflow-hidden">
   <img
     src={testimonial.chatImage}
     alt="Client WhatsApp testimonial"
@@ -149,7 +149,7 @@ export default function TestimonialsSection() {
 </div>
 
                     {/* CLIENT IDENTITY ROW */}
-                    <div className="flex items-center gap-3 pt-4 border-t border-white/20">
+                    <div className="flex items-center gap-3 pt-4 border-t border-[#C99524]/20">
                       <img
                         src={testimonial.coupleImage}
                         alt="Happy couple"
@@ -160,8 +160,8 @@ export default function TestimonialsSection() {
                         className="w-10 h-10 rounded-full object-cover"
                       />
                       <div className="flex items-center gap-1">
-                        <Star size={14} fill="#F5E6C8" stroke="#F5E6C8" strokeWidth={1.5} />
-                        <span className="text-sm text-white font-medium">
+                        <Star size={14} fill="#C99524" stroke="#C99524" strokeWidth={1.5} />
+                        <span className="text-sm text-[#151515] font-medium">
                          Happy Ashiwaju Couple
                         </span>
                       </div>
@@ -176,7 +176,7 @@ export default function TestimonialsSection() {
           {/* NAVIGATION ARROWS - Desktop */}
           <button
             onClick={handlePrevClick}
-            className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-16 items-center justify-center w-12 h-12 rounded-full bg-[#8B6F47]/90 border border-[#c29f63]/40 text-white hover:bg-[#7A5F3C] transition-all shadow-lg backdrop-blur-sm"
+            className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-16 items-center justify-center w-12 h-12 rounded-full bg-[#EFE8DA] border border-[#C99524]/30 text-[#C99524] hover:bg-[#C99524] hover:text-[#151515] transition-all duration-300 shadow-sm"
             aria-label="Previous testimonial"
           >
             <ChevronLeft size={24} />
@@ -184,7 +184,7 @@ export default function TestimonialsSection() {
 
           <button
             onClick={handleNextClick}
-            className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-16 items-center justify-center w-12 h-12 rounded-full bg-[#8B6F47]/90 border border-[#c29f63]/40 text-white hover:bg-[#7A5F3C] transition-all shadow-lg backdrop-blur-sm"
+            className="hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-16 items-center justify-center w-12 h-12 rounded-full bg-[#EFE8DA] border border-[#C99524]/30 text-[#C99524] hover:bg-[#C99524] hover:text-[#151515] transition-all duration-300 shadow-sm"
             aria-label="Next testimonial"
           >
             <ChevronRight size={24} />
@@ -205,8 +205,8 @@ export default function TestimonialsSection() {
                 }}
                 className={`w-2 h-2 rounded-full transition-all ${
                   index === currentIndex
-                    ? 'bg-[#F5E6C8] w-8'
-                    : 'bg-white/40 hover:bg-white/60'
+                    ? 'bg-[#C99524] w-8'
+                    : 'bg-[#151515]/20 hover:bg-[#151515]/40'
                 }`}
                 aria-label={`Go to testimonial ${index + 1}`}
               />

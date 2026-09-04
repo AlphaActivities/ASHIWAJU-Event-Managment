@@ -14,13 +14,13 @@
   }
 
   body {
-    font-family: 'Libre Baskerville', serif;
-    @apply text-neutral-200 bg-black antialiased;
+    font-family: 'Manrope', sans-serif;
+    @apply text-[#151515] bg-[#F8F5EF] antialiased;
   }
 
   h1, h2, h3, h4 {
-    font-family: 'Cormorant Garamond', serif;
-    letter-spacing: 0.02em;
+    font-family: 'Playfair Display', serif;
+    letter-spacing: 0.01em;
     @apply font-medium;
   }
 

@@ -42,12 +42,12 @@ export function ChecklistCard({ title, description, delay = 0 }: ChecklistCardPr
       ref={cardRef}
       className={`
         relative overflow-hidden
-        p-6 rounded-2xl bg-white border transition-all duration-500
+        p-6 rounded-2xl bg-[#F8F5EF] border transition-all duration-500
         ${isActive
-          ? 'border-[#D4AF37]/40 shadow-[0_8px_30px_rgba(0,0,0,0.08),0_0_0_1px_rgba(212,175,55,0.1)]'
-          : 'border-neutral-200/60 shadow-[0_4px_20px_rgba(0,0,0,0.04)]'
+          ? 'border-[#C99524]/30 shadow-[0_4px_24px_rgba(0,0,0,0.04)]'
+          : 'border-[#C99524]/15 shadow-[0_2px_12px_rgba(0,0,0,0.02)]'
         }
-        hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)]
+        hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)]
         group
       `}
       style={{
@@ -56,25 +56,25 @@ export function ChecklistCard({ title, description, delay = 0 }: ChecklistCardPr
     >
       <div
         className={`
-          absolute top-0 left-0 h-1 rounded-tl-2xl transition-all duration-500
-          bg-gradient-to-r from-[#D4AF37] via-[#F5E6C8] to-[#E9C88A]
+          absolute top-0 left-0 h-[2px] rounded-tl-2xl transition-all duration-500
+          bg-[#C99524]
           ${isActive
-            ? 'w-24 opacity-100 shadow-[0_2px_12px_rgba(212,175,55,0.4)]'
-            : 'w-16 opacity-60'
+            ? 'w-24 opacity-100'
+            : 'w-16 opacity-50'
           }
-          group-hover:w-32 group-hover:opacity-90 group-hover:shadow-[0_2px_12px_rgba(212,175,55,0.3)]
+          group-hover:w-32 group-hover:opacity-80
         `}
       />
 
       <div className="flex gap-4 items-start">
-        <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-[#F5E6C8] to-[#E9C88A] flex items-center justify-center mt-1">
-          <Check className="w-5 h-5 text-neutral-800" strokeWidth={2.5} />
+        <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[#C99524]/15 flex items-center justify-center mt-1">
+          <Check className="w-5 h-5 text-[#C99524]" strokeWidth={2.5} />
         </div>
         <div className="flex-1">
-          <h3 className="font-semibold text-lg mb-1">
+          <h3 className="font-serif font-semibold text-lg mb-1 text-[#151515]">
             {title}
           </h3>
-          <p className="text-neutral-600 leading-relaxed">
+          <p className="text-[#151515]/70 leading-relaxed">
             {description}
           </p>
         </div>

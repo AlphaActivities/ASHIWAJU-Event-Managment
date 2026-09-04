@@ -4,10 +4,10 @@ import { ChecklistCard } from "../ui/ChecklistCard";
 
 export default function ClaritySessionSection() {
   return (
-    <section className="relative bg-[#f7f3ea] text-neutral-900 py-24">
+    <section className="relative bg-[#EFE8DA] text-[#151515] py-24">
       <div className="max-w-4xl mx-auto px-6">
         <LuxFadeIn delay={0.1}>
-          <h2 className="text-3xl md:text-4xl font-semibold text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-serif font-medium text-center mb-16 text-[#151515]">
             What to expect in your Clarity Session
           </h2>
         </LuxFadeIn>
@@ -41,10 +41,10 @@ export default function ClaritySessionSection() {
         </div>
 
         <LuxFadeIn delay={0.4}>
-          <div className="bg-white rounded-2xl shadow-xl border border-neutral-200 p-10 text-center hover:shadow-[0_24px_70px_rgba(0,0,0,0.15)] hover:-translate-y-1 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]">
-            <div className="text-neutral-700 leading-relaxed text-lg space-y-3">
+          <div className="bg-[#F8F5EF] rounded-2xl shadow-[0_4px_24px_rgba(0,0,0,0.04)] border border-[#C99524]/25 p-10 text-center hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]">
+            <div className="text-[#151515] leading-relaxed text-lg space-y-3">
               <p>
-                Get expert guidance, a clear plan, and stress-free decision-making all in one 60-minute session for just <span className="text-[#d4a855] font-semibold">₦60,000</span>.
+                Get expert guidance, a clear plan, and stress-free decision-making all in one 60-minute session for just <span className="text-[#C99524] font-semibold">₦60,000</span>.
               </p>
               <p>
                 If you work with us afterward, we deduct this from your package
@@ -55,12 +55,12 @@ export default function ClaritySessionSection() {
 
         <LuxFadeIn delay={0.45}>
           <div className="text-center mt-16">
-            <p className="text-neutral-800 text-lg md:text-xl mb-8 max-w-3xl mx-auto">
+            <p className="text-[#151515] text-lg md:text-xl mb-8 max-w-3xl mx-auto">
               Want guests talking about the little details that made your day special?
             </p>
             <button
               onClick={() => scrollToSection('contact')}
-              className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-[#F5E6C8] via-[#F2D9A3] to-[#E9C88A] px-8 py-4 text-base md:text-lg font-semibold text-black shadow-lg hover:brightness-110 hover:shadow-[0_16px_45px_rgba(0,0,0,0.25)] hover:-translate-y-[2px] hover:scale-[1.01] active:translate-y-px transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]"
+              className="inline-flex items-center justify-center rounded-full bg-[#C99524] px-8 py-4 text-base md:text-lg font-semibold text-[#151515] shadow-[0_8px_30px_rgba(201,149,36,0.25)] hover:bg-[#B07D1A] hover:shadow-[0_12px_40px_rgba(201,149,36,0.35)] hover:-translate-y-[2px] active:translate-y-px transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]"
             >
               BOOK YOUR WEDDING CLARITY SESSION
             </button>
