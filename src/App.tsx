@@ -28,6 +28,7 @@ export default function App() {
       <Navbar />
       <HeroSection />
       <UnderstandingSection />
+      <OfferSection />
       <AboutSection />
       <ClaritySessionSection />
       <TestimonialsSection />
@@ -40,7 +41,6 @@ export default function App() {
           </p>
         </div>
       </section>
-      <OfferSection />
       <FormSection />
       <FAQSection />
       <GuideSection />
