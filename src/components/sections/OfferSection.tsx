@@ -6,7 +6,7 @@ const card3Checklist = [
   "A clear picture of your wedding vision in 3D",
   "Top priorities mapped out to avoid confusion",
   "Allocation of your budget to avoid unnecessary spending",
-  "Guidance on vendors and key decisions",
+  "Guidance on trusted vendors and key decisions",
   "A roadmap for the next steps",
   "Clarity on how to bring your vision to reality without chaos",
 ];
