@@ -37,13 +37,13 @@ export default function ServicesSection() {
   return (
     <section
       id="services"
-      className="bg-[#EFE8DA] py-20 md:py-28 lg:py-32"
+      className="bg-[#EFE8DA] py-20 md:py-24 lg:py-20"
     >
       <div className="max-w-7xl mx-auto px-6 md:px-10 lg:px-16">
         <LuxFadeIn delay={0.05}>
-          <div className="text-center max-w-3xl mx-auto mb-14">
+          <div className="text-center max-w-3xl mx-auto mb-10 lg:mb-8">
             <div className="mx-auto h-[1px] w-14 bg-[#C99524]/40 mb-5 opacity-90" />
-            <h2 className="text-3xl sm:text-4xl lg:text-[2.6rem] font-serif font-medium tracking-tight text-[#151515]">
+            <h2 className="text-3xl sm:text-4xl lg:text-[2.3rem] font-serif font-medium tracking-tight text-[#151515]">
               How we help you say "I do" with peace of mind
             </h2>
             <p className="mt-4 text-[0.95rem] sm:text-base text-[#151515]/70">
@@ -52,7 +52,7 @@ export default function ServicesSection() {
           </div>
         </LuxFadeIn>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6 items-stretch">
           {services.map((item, index) => {
             return (
               <LuxFadeIn key={index} delay={0.1 + index * 0.05}>
@@ -64,7 +64,7 @@ export default function ServicesSection() {
                         alt={item.title}
                         loading="lazy"
                         decoding="async"
-                        className="w-full h-[260px] md:h-[300px] object-cover object-center transition-transform duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] group-hover:scale-105"
+                        className="w-full h-[240px] md:h-[260px] lg:h-[240px] object-cover object-center transition-transform duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] group-hover:scale-105"
                       />
                     </div>
 

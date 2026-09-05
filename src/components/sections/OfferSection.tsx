@@ -13,13 +13,13 @@ const card3Checklist = [
 
 export default function OfferSection() {
   return (
-    <section className="bg-[#F8F5EF] py-20 md:py-28 lg:py-32">
+    <section className="bg-[#F8F5EF] py-20 md:py-24 lg:py-20">
       <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-10">
         {/* HEADLINE */}
         <LuxFadeIn delay={0.05}>
-          <div className="text-center max-w-3xl mx-auto mb-10">
+          <div className="text-center max-w-3xl mx-auto mb-8 lg:mb-6">
             <div className="mx-auto h-[1px] w-14 bg-[#C99524]/40 mb-5 opacity-90" />
-            <h2 className="text-3xl sm:text-4xl lg:text-[2.6rem] font-serif font-medium tracking-tight text-[#151515]">
+            <h2 className="text-3xl sm:text-4xl lg:text-[2.3rem] font-serif font-medium tracking-tight text-[#151515]">
               You’ll never have to feel like you're planning a wedding 
             </h2>
             <p className="mt-4 text-[0.95rem] sm:text-base text-[#151515]/70 leading-relaxed">
@@ -29,10 +29,10 @@ export default function OfferSection() {
         </LuxFadeIn>
 
         {/* THREE OFFER CARDS */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-6 mt-8 lg:mt-6">
           {/* CARD 1 */}
           <LuxFadeIn delay={0.1}>
-            <div className="h-full flex flex-col rounded-2xl bg-[#EFE8DA] border border-[#C99524]/15 p-8 md:p-10">
+            <div className="h-full flex flex-col rounded-2xl bg-[#EFE8DA] border border-[#C99524]/15 p-6 md:p-8 lg:p-8">
               <h3 className="text-lg md:text-xl font-serif font-semibold tracking-tight text-[#151515] mb-3">
                 For Bride who..
               </h3>
@@ -44,7 +44,7 @@ export default function OfferSection() {
 
           {/* CARD 2 */}
           <LuxFadeIn delay={0.15}>
-            <div className="h-full flex flex-col rounded-2xl bg-[#EFE8DA] border border-[#C99524]/15 p-8 md:p-10">
+            <div className="h-full flex flex-col rounded-2xl bg-[#EFE8DA] border border-[#C99524]/15 p-6 md:p-8 lg:p-8">
               <h3 className="text-lg md:text-xl font-serif font-semibold tracking-tight text-[#151515] mb-3">
                 During your Clarity session...
               </h3>
@@ -56,11 +56,11 @@ export default function OfferSection() {
 
           {/* CARD 3 */}
           <LuxFadeIn delay={0.2}>
-            <div className="h-full flex flex-col rounded-2xl bg-[#EFE8DA] border border-[#C99524]/15 p-8 md:p-10">
-              <h3 className="text-lg md:text-xl font-serif font-semibold tracking-tight text-[#151515] mb-4">
+            <div className="h-full flex flex-col rounded-2xl bg-[#EFE8DA] border border-[#C99524]/15 p-6 md:p-8 lg:p-8">
+              <h3 className="text-lg md:text-xl font-serif font-semibold tracking-tight text-[#151515] mb-3">
                 You walk away with…
               </h3>
-              <ul className="space-y-3">
+              <ul className="space-y-2.5">
                 {card3Checklist.map((item) => (
                   <li key={item} className="flex items-start gap-3">
                     <span className="flex-shrink-0 w-5 h-5 rounded-full bg-[#C99524]/15 flex items-center justify-center mt-0.5">
@@ -78,7 +78,7 @@ export default function OfferSection() {
 
         {/* WIDE HIGHLIGHTED CARD */}
         <LuxFadeIn delay={0.3}>
-          <div className="mt-8 w-full bg-[#EFE8DA] rounded-2xl border border-[#C99524]/25 p-10 md:p-14 text-center">
+          <div className="mt-6 lg:mt-5 w-full bg-[#EFE8DA] rounded-2xl border border-[#C99524]/25 p-8 md:p-10 lg:p-10 text-center">
             <div className="text-[#151515] leading-relaxed text-lg space-y-3 max-w-2xl mx-auto">
               <p>
                 Get expert guidance, a clear plan, and stress-free decision-making all in one 60-minute session for just{" "}
@@ -93,7 +93,7 @@ export default function OfferSection() {
 
         {/* CTA BUTTON */}
         <LuxFadeIn delay={0.4}>
-          <div className="text-center mt-12">
+          <div className="text-center mt-8 lg:mt-6">
             <button
               onClick={() => scrollToSection("contact")}
               className="inline-flex items-center justify-center rounded-[18px] bg-[#C99524] px-8 py-4 min-h-[56px] text-base md:text-lg font-bold text-[#151515] shadow-[0_8px_30px_rgba(201,149,36,0.25)] hover:bg-[#B07D1A] hover:shadow-[0_12px_40px_rgba(201,149,36,0.35)] hover:-translate-y-[2px] active:translate-y-px transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]"

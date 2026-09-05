@@ -37,12 +37,12 @@ export default function FormSection() {
   return (
     <section
       id="contact"
-      className="relative bg-[#EFE8DA] text-[#151515] py-24 md:py-32 lg:py-40 pb-32 md:pb-40"
+      className="relative bg-[#EFE8DA] text-[#151515] py-20 md:py-24 lg:py-20 pb-24 md:pb-28 lg:pb-24"
     >
       <div className="max-w-7xl mx-auto px-6 md:px-10 lg:px-16">
         <div className="space-y-8">
           <div className="text-center space-y-4">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-medium leading-tight text-[#151515]">
+            <h2 className="text-3xl md:text-4xl lg:text-[2.4rem] font-serif font-medium leading-tight text-[#151515]">
               BOOK YOUR WEDDING CLARITY SESSION
             </h2>
             <p className="max-w-xl mx-auto text-sm md:text-base text-[#151515]/70">
@@ -53,14 +53,14 @@ export default function FormSection() {
           {/* LUXURY FORM CARD */}
           <LuxFadeIn delay={0.12}>
             <div className="relative max-w-2xl mx-auto">
-              <div className="relative rounded-3xl bg-[#F8F5EF] border border-[#C99524]/25 shadow-[0_8px_40px_rgba(0,0,0,0.06)] px-6 py-7 md:px-8 md:py-9 lg:px-10 lg:py-10">
+              <div className="relative rounded-3xl bg-[#F8F5EF] border border-[#C99524]/25 shadow-[0_8px_40px_rgba(0,0,0,0.06)] px-6 py-7 md:px-8 md:py-8 lg:px-10 lg:py-8">
 
 <form
   name="contact"
   method="POST"
   data-netlify="true"
   onSubmit={handleSubmit}
-  className="space-y-5"
+  className="space-y-4"
 >
                   <input type="hidden" name="form-name" value="contact" />
                   <input type="text" name="bot-field" style={{ display: 'none' }} />

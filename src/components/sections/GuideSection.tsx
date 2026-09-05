@@ -11,20 +11,20 @@ export default function GuideSection() {
   const [guideError, setGuideError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   return (
-    <section id="guide" className="relative py-20 md:py-28 lg:py-32 bg-[#EFE8DA]">
+    <section id="guide" className="relative py-20 md:py-24 lg:py-20 bg-[#EFE8DA]">
       <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-10">
         <LuxFadeIn>
           <div className="relative rounded-[2rem] overflow-hidden border border-[#C99524]/20 bg-[#F8F5EF] shadow-[0_8px_40px_rgba(0,0,0,0.06)] hover:shadow-[0_12px_50px_rgba(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]">
             <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_top,rgba(201,149,36,0.08),transparent_55%)]" />
-            <div className="relative p-10 sm:p-12 md:p-14 text-center">
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif tracking-tight text-[#151515]">
+            <div className="relative p-8 sm:p-10 md:p-12 lg:p-10 text-center">
+              <h2 className="text-3xl sm:text-4xl lg:text-[2.4rem] font-serif tracking-tight text-[#151515]">
                 Not sure if this is right for you?
               </h2>
-              <p className="mt-5 text-[0.98rem] sm:text-base leading-relaxed text-[#151515]/80 max-w-3xl mx-auto">
+              <p className="mt-4 lg:mt-3 text-[0.98rem] sm:text-base leading-relaxed text-[#151515]/80 max-w-3xl mx-auto">
                 Discover 18 things most couples overlook early, and how to protect your vision before opinions, pressure, and rushed decisions take over.
               </p>
 
-              <div className="mt-8">
+              <div className="mt-6 lg:mt-5">
                 <button
                   type="button"
                   onClick={() => setIsGuideOpen(true)}

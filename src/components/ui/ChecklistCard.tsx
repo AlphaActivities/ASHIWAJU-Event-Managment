@@ -42,7 +42,7 @@ export function ChecklistCard({ title, description, delay = 0 }: ChecklistCardPr
       ref={cardRef}
       className={`
         relative overflow-hidden
-        p-6 rounded-2xl bg-[#F8F5EF] border transition-all duration-500
+        p-5 lg:p-5 rounded-2xl bg-[#F8F5EF] border transition-all duration-500
         ${isActive
           ? 'border-[#C99524]/30 shadow-[0_4px_24px_rgba(0,0,0,0.04)]'
           : 'border-[#C99524]/15 shadow-[0_2px_12px_rgba(0,0,0,0.02)]'

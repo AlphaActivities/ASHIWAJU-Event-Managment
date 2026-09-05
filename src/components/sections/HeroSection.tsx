@@ -24,7 +24,7 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section id="home" className="lux-section bg-transparent relative min-h-screen overflow-hidden">
+    <section id="home" className="lux-section bg-transparent relative min-h-[100svh] lg:min-h-0 lg:h-[88vh] overflow-hidden">
       <div className="absolute inset-0">
         {HERO_IMAGES.map((img, index) => (
           <img
@@ -44,27 +44,27 @@ export default function HeroSection() {
 
       <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-black/15 to-black/35"></div>
 
-      <div className="relative z-10 min-h-screen flex items-center">
-        <div className="lux-content max-w-7xl mx-auto px-6 md:px-10 lg:px-16 w-full pt-28 md:pt-32">
+      <div className="relative z-10 min-h-[100svh] lg:min-h-0 lg:h-[88vh] flex items-center">
+        <div className="lux-content max-w-7xl mx-auto px-6 md:px-10 lg:px-16 w-full pt-28 md:pt-32 lg:pt-24">
           <div className="text-center max-w-4xl mx-auto flex flex-col items-center relative">
             <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/10 to-transparent blur-3xl -z-10 scale-110"></div>
             <LuxFadeIn delay={0.1}>
               <WaveText
                 text="Enjoy every moment of your day stress-free"
                 as="h1"
-                className="max-w-[600px] text-3xl md:text-5xl leading-tight text-center font-serif font-medium tracking-[0.02em] md:tracking-[0.03em] text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]"
+                className="max-w-[600px] text-3xl md:text-4xl lg:text-[2.75rem] leading-tight text-center font-serif font-medium tracking-[0.02em] md:tracking-[0.03em] text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]"
                 delayStep={25}
               />
             </LuxFadeIn>
 
             <LuxFadeIn delay={0.15}>
-            <p className="text-lg md:text-xl text-white/95 mt-6 md:mt-8 drop-shadow-[0_2px_6px_rgba(0,0,0,0.85)]">
+            <p className="text-lg md:text-xl text-white/95 mt-6 md:mt-8 lg:mt-6 drop-shadow-[0_2px_6px_rgba(0,0,0,0.85)]">
               With our clarity session, you get clear on your vision and what matters most to you, so you plan your dream wedding without chaos or unnecessary spending.
               </p>
             </LuxFadeIn>
 
             <LuxFadeIn delay={0.2}>
-            <div className="flex justify-center mt-8 md:mt-10 mb-8">
+            <div className="flex justify-center mt-8 md:mt-10 lg:mt-8 mb-8 lg:mb-6">
                 <button
                   type="button"
                   onClick={() => scrollToSection('contact')}

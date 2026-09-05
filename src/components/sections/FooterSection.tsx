@@ -10,16 +10,16 @@ export default function FooterSection() {
   ];
 
   return (
-    <footer className="bg-[#151515] text-[#F8F5EF] py-16">
+    <footer className="bg-[#151515] text-[#F8F5EF] py-12 lg:py-10">
       <div className="max-w-4xl mx-auto px-6 text-center">
 
         <img
           src="/images/ashiwaju-logo.webp"
           alt="Ashiwaju Event Management"
-          className="mx-auto mb-6 h-16 md:h-20 w-auto object-contain"
+          className="mx-auto mb-5 h-16 md:h-20 lg:h-16 w-auto object-contain"
         />
 
-        <div className="mb-8">
+        <div className="mb-6">
           <div className="font-serif tracking-[0.25em] uppercase text-[#C99524] text-lg md:text-xl">
             ASHIWAJU
           </div>
@@ -60,7 +60,7 @@ export default function FooterSection() {
     </a>
   </p>
 </div>
-        <div className="mt-10 text-[#F8F5EF]/50 text-xs">
+        <div className="mt-8 lg:mt-6 text-[#F8F5EF]/50 text-xs">
           © {new Date().getFullYear()} Ashiwaju Event Management. All rights reserved.
         </div>
 

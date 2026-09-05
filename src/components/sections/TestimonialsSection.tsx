@@ -105,22 +105,22 @@ export default function TestimonialsSection() {
   return (
     <section
       id="reviews"
-      className="lux-section bg-[#F8F5EF] text-[#151515] py-24 md:py-32 lg:py-40"
+      className="lux-section bg-[#F8F5EF] text-[#151515] py-20 md:py-24 lg:py-20"
     >
-      <div className="max-w-7xl mx-auto px-6 md:px-10 lg:px-16 space-y-10">
+      <div className="max-w-7xl mx-auto px-6 md:px-10 lg:px-16 space-y-8 lg:space-y-6">
 
         {/* HEADER */}
         <LuxFadeIn delay={0.05}>
           <WaveText
             text="Don’t take our word for it"
             as="h2"
-            className="text-4xl md:text-5xl font-serif text-center mb-4 text-[#151515]"
+            className="text-4xl md:text-5xl lg:text-[2.75rem] font-serif text-center mb-3 lg:mb-2 text-[#151515]"
             delayStep={30}
           />
         </LuxFadeIn>
 
         <LuxFadeIn delay={0.1}>
-          <p className="text-center text-base md:text-lg text-[#151515]/70 font-sans mb-12 max-w-2xl mx-auto">
+          <p className="text-center text-base md:text-lg text-[#151515]/70 font-sans mb-8 lg:mb-6 max-w-2xl mx-auto">
             Hear from Lagos couples who enjoy their wedding stress-free
           </p>
         </LuxFadeIn>
@@ -141,10 +141,10 @@ export default function TestimonialsSection() {
             >
               {testimonials.map((testimonial) => (
                 <div key={testimonial.id} className="w-full flex-shrink-0">
-                  <article className="group relative h-full rounded-2xl bg-[#EFE8DA] border border-[#C99524]/25 px-6 py-7 flex flex-col shadow-[0_4px_24px_rgba(0,0,0,0.04)]">
+                  <article className="group relative h-full rounded-2xl bg-[#EFE8DA] border border-[#C99524]/25 px-6 py-6 lg:py-5 flex flex-col shadow-[0_4px_24px_rgba(0,0,0,0.04)]">
 
                     {/* WHATSAPP TESTIMONIAL */}
-                    <div className="w-full aspect-[4/5] flex items-center justify-center bg-[#F8F5EF] rounded-lg mb-5 overflow-hidden">
+                    <div className="w-full aspect-[4/5] lg:aspect-[5/4] flex items-center justify-center bg-[#F8F5EF] rounded-lg mb-4 lg:mb-3 overflow-hidden">
   <img
     src={testimonial.chatImage}
     alt="Client WhatsApp testimonial"
@@ -155,7 +155,7 @@ export default function TestimonialsSection() {
 </div>
 
                     {/* CLIENT IDENTITY ROW */}
-                    <div className="flex items-center gap-3 pt-4 border-t border-[#C99524]/20">
+                    <div className="flex items-center gap-3 pt-3 lg:pt-2 border-t border-[#C99524]/20">
                       <img
                         src={testimonial.coupleImage}
                         alt="Happy couple"
@@ -197,7 +197,7 @@ export default function TestimonialsSection() {
           </button>
 
           {/* DOTS INDICATOR */}
-          <div className="flex justify-center gap-2 mt-6">
+          <div className="flex justify-center gap-2 mt-4 lg:mt-3">
             {testimonials.map((_, index) => (
               <button
                 key={index}

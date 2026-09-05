@@ -4,15 +4,15 @@ import { ChecklistCard } from "../ui/ChecklistCard";
 
 export default function ClaritySessionSection() {
   return (
-    <section className="relative bg-[#EFE8DA] text-[#151515] py-24">
+    <section className="relative bg-[#EFE8DA] text-[#151515] py-20 md:py-24 lg:py-20">
       <div className="max-w-4xl mx-auto px-6">
         <LuxFadeIn delay={0.1}>
-          <h2 className="text-3xl md:text-4xl font-serif font-medium text-center mb-16 text-[#151515]">
+          <h2 className="text-3xl md:text-4xl lg:text-[2.4rem] font-serif font-medium text-center mb-10 lg:mb-8 text-[#151515]">
             What to expect in your Clarity Session
           </h2>
         </LuxFadeIn>
 
-        <div className="space-y-6 mb-20">
+        <div className="space-y-4 lg:space-y-5 mb-10 lg:mb-8">
           <ChecklistCard
             title="Get Clear On Your Vision"
             description="Know what truly matters so decisions become easy."
@@ -41,7 +41,7 @@ export default function ClaritySessionSection() {
         </div>
 
         <LuxFadeIn delay={0.4}>
-          <div className="bg-[#F8F5EF] rounded-2xl shadow-[0_4px_24px_rgba(0,0,0,0.04)] border border-[#C99524]/25 p-10 text-center hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]">
+          <div className="bg-[#F8F5EF] rounded-2xl shadow-[0_4px_24px_rgba(0,0,0,0.04)] border border-[#C99524]/25 p-6 md:p-8 lg:p-8 text-center hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]">
             <div className="text-[#151515] leading-relaxed text-lg space-y-3">
               <p>
                 Get expert guidance, a clear plan, and stress-free decision-making all in one 60-minute session for just <span className="text-[#C99524] font-semibold">₦60,000</span>.
@@ -54,8 +54,8 @@ export default function ClaritySessionSection() {
         </LuxFadeIn>
 
         <LuxFadeIn delay={0.45}>
-          <div className="text-center mt-16">
-            <p className="text-[#151515] text-lg md:text-xl mb-8 max-w-3xl mx-auto">
+          <div className="text-center mt-10 lg:mt-8">
+            <p className="text-[#151515] text-lg md:text-xl mb-6 lg:mb-5 max-w-3xl mx-auto">
               Want guests talking about the little details that made your day special?
             </p>
             <button
