@@ -5,28 +5,33 @@ import { ChevronDown } from "lucide-react";
 const faqs = [
   {
     id: 1,
-    question: "Is a wedding planner really necessary?",
-    answer: "If you want peace of mind, clear decisions, and a wedding day you can actually enjoy, yes.",
+    question: "Where will I pay for the session?",
+    answer: "Payment is made in person at your face-to-face Clarity Session, so you know exactly who you\u2019re paying and who you\u2019re working with.",
   },
   {
     id: 2,
-    question: "Will this make my wedding more expensive?",
-    answer: "No. Our planning helps you avoid overspending by making smarter decisions early.",
+    question: "What happens after I fill out the form?",
+    answer: "The owner will call or text you within 24 hours to schedule your Clarity Session.",
   },
   {
     id: 3,
-    question: "What happens during the planning clarity session?",
-    answer: "We talk through your vision, challenges, priorities, and next steps, so everything feels clear instead of overwhelming.",
+    question: "Is the Planning Clarity Session free?",
+    answer: "No. The session costs \u20a660,000.\nIf you choose to work with us, your \u20a660,000 is deducted from your package.\nIf we don\u2019t work together, you still leave with a clear vision for your wedding, practical next steps, and guidance you can use moving forward.",
   },
   {
     id: 4,
-    question: "What if I'm still early in planning?",
-    answer: "That's the best time. Most stress starts when clarity comes too late, and decisions are rushed.",
+    question: "What other wedding services do you offer?",
+    answer: "We also offer full wedding coordination, decoration, venue selection, and stage setup.",
   },
   {
     id: 5,
-    question: "Is the planning clarity session free?",
-    answer: "No. The session costs ₦60,000.\nIf you choose to work with us, this amount is deducted from your package.\nIf we don't work together, you still leave with a clear vision for your wedding, practical next steps, and guidance you can use moving forward.",
+    question: "What happens during the Planning Clarity Session?",
+    answer: "We\u2019ll talk through your vision, challenges, priorities, and next steps, so you know what matters most and what to do next.",
+  },
+  {
+    id: 6,
+    question: "What if I\u2019m still early in planning?",
+    answer: "That\u2019s actually the best time to have your Clarity Session. Getting clear early helps you avoid rushed decisions, unnecessary spending, and stress later.",
   },
 ];
 
@@ -74,7 +79,7 @@ export default function FAQSection() {
                 </button>
                 <div
                   className={`overflow-hidden transition-all duration-300 ${
-                    openId === faq.id ? 'max-h-96' : 'max-h-0'
+                    openId === faq.id ? 'max-h-[500px]' : 'max-h-0'
                   }`}
                 >
                   <div className="px-6 pb-5 pt-1">

@@ -42,7 +42,7 @@ export default function App() {
       </section>
       <FormSection />
       <FAQSection />
-      <GuideSection />
+      {/* <GuideSection /> */}
       <FooterSection />
       <FloatingCallButton />
       <MobileCTABar />
