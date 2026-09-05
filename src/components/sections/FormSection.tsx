@@ -5,6 +5,7 @@ export default function FormSection() {
   const [weddingDate, setWeddingDate] = useState("");
   const [plannedBudget, setPlannedBudget] = useState("");
   const [guestSize, setGuestSize] = useState("");
+  const [contactMethod, setContactMethod] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -116,6 +117,36 @@ export default function FormSection() {
                       placeholder="(555) 123-4567"
                       className="w-full rounded-xl bg-[#EFE8DA]/60 border border-[#C99524]/20 px-4 py-3.5 text-sm md:text-[15px] text-[#151515] placeholder:text-[#151515]/40 focus:outline-none focus:ring-2 focus:ring-[#C99524]/50 focus:border-transparent transition"
                     />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="text-xs md:text-sm font-medium tracking-wide text-[#151515]">
+                      Preferred contact method
+                    </label>
+                    <input type="hidden" name="preferredContactMethod" value={contactMethod} />
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                      {['WhatsApp', 'Text message', 'Phone call'].map((option) => (
+                        <label
+                          key={option}
+                          className={`flex items-center gap-2.5 px-4 py-3 rounded-lg cursor-pointer transition-all ${
+                            contactMethod === option
+                              ? 'bg-[#C99524] text-[#151515] ring-2 ring-[#C99524]/50'
+                              : 'bg-[#EFE8DA]/60 text-[#151515]/80 border border-[#C99524]/20 hover:bg-[#EFE8DA]'
+                          }`}
+                        >
+                          <input
+                            type="radio"
+                            name="contactMethodRadio"
+                            value={option}
+                            checked={contactMethod === option}
+                            onChange={() => setContactMethod(option)}
+                            required
+                            className="accent-[#C99524] w-4 h-4 flex-shrink-0"
+                          />
+                          <span className="text-xs md:text-sm font-medium">{option}</span>
+                        </label>
+                      ))}
+                    </div>
                   </div>
 
                   <div className="space-y-2">
