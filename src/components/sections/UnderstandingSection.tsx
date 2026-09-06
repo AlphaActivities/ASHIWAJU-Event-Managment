@@ -2,11 +2,11 @@ import WaveText from "../ui/WaveText";
 import { LuxFadeIn } from "../ui/LuxFadeIn";
 
 const statements = [
-  { text: "Is your family constantly weighing in with their opinions and ideas?", bold: false },
-  { text: "Are you struggling to get clear, transparent prices from vendors?", bold: true },
-  { text: "Do you feel like no one is really listening to you or understanding what you want?", bold: true },
-  { text: "Does every single decision you make get questioned?", bold: true },
-  { text: "Do you have the vision, but just don\u2019t know how to bring it all together within your budget?", bold: true },
+  "Is your family constantly weighing in with their opinions and ideas?",
+  "Are you struggling to get clear, transparent prices from vendors?",
+  "Do you feel like no one is really listening to you or understanding what you want?",
+  "Does every single decision you make get questioned?",
+  "Do you have the vision, but just don\u2019t know how to bring it all together within your budget?",
 ];
 
 export default function UnderstandingSection() {
@@ -53,12 +53,12 @@ export default function UnderstandingSection() {
               </p>
 
               <ul className="space-y-4 md:space-y-5 lg:space-y-4 list-disc pl-6">
-                {statements.map((item, index) => (
+                {statements.map((statement, index) => (
                   <li
                     key={index}
-                    className={`text-[15px] md:text-lg leading-relaxed text-[#151515] font-sans text-left ${item.bold ? "font-bold" : ""}`}
+                    className="text-[15px] md:text-lg leading-relaxed text-[#151515] font-sans text-left"
                   >
-                    {item.text}
+                    {statement}
                   </li>
                 ))}
               </ul>
