@@ -1,14 +1,12 @@
-import React from "react";
-import { Check } from "lucide-react";
 import WaveText from "../ui/WaveText";
 import { LuxFadeIn } from "../ui/LuxFadeIn";
 
 const statements = [
-  "Family chiming in with their opinion and ideas",
-  "Vendors not being transparent with their prices",
-  "No one listens to you or understands what you want",
-  "Every single decision you make is questioned.",
-  "You've got the vision; you just don't know how to bring it together within your budget",
+  { text: "Is your family constantly weighing in with their opinions and ideas?", bold: false },
+  { text: "Are you struggling to get clear, transparent prices from vendors?", bold: true },
+  { text: "Do you feel like no one is really listening to you or understanding what you want?", bold: true },
+  { text: "Does every single decision you make get questioned?", bold: true },
+  { text: "Do you have the vision, but just don\u2019t know how to bring it all together within your budget?", bold: true },
 ];
 
 export default function UnderstandingSection() {
@@ -46,22 +44,21 @@ export default function UnderstandingSection() {
           {/* INTRO LINE + LIST + PARAGRAPH — order-second on mobile, left column on desktop */}
           <LuxFadeIn delay={0.2}>
             <div className="order-2 lg:order-1 w-full">
-              <p className="text-lg md:text-xl lg:text-[1.15rem] font-serif text-[#151515] leading-snug mb-6 lg:mb-6">
+              <p className="text-lg md:text-xl lg:text-[1.15rem] font-serif text-[#151515] leading-snug mb-4 lg:mb-4">
                 Planning your wedding shouldn't feel like a full-time job.
               </p>
 
-              <ul className="space-y-4 md:space-y-5 lg:space-y-4">
-                {statements.map((statement, index) => (
-                  <li key={index} className="flex items-start gap-3">
-                    <span className="flex-shrink-0 mt-1">
-                      <Check
-                        className="w-5 h-5 text-[#C99524]"
-                        strokeWidth={2.5}
-                      />
-                    </span>
-                    <span className="text-[15px] md:text-lg leading-relaxed text-[#151515] font-sans">
-                      {statement}
-                    </span>
+              <p className="text-[15px] md:text-lg lg:text-[1.05rem] font-serif text-[#151515] leading-snug mb-5 lg:mb-5">
+                Do these sound familiar?
+              </p>
+
+              <ul className="space-y-4 md:space-y-5 lg:space-y-4 list-disc pl-6">
+                {statements.map((item, index) => (
+                  <li
+                    key={index}
+                    className={`text-[15px] md:text-lg leading-relaxed text-[#151515] font-sans text-left ${item.bold ? "font-bold" : ""}`}
+                  >
+                    {item.text}
                   </li>
                 ))}
               </ul>
