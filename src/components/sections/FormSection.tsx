@@ -11,6 +11,12 @@ export default function FormSection() {
 
   const todayStr = new Date().toISOString().split('T')[0];
 
+  const formatDate = (dateStr: string) => {
+    if (!dateStr) return "";
+    const date = new Date(dateStr + "T00:00:00");
+    return date.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -159,7 +165,7 @@ export default function FormSection() {
                     >
                       Preferred Clarity Session date
                     </label>
-                    <input type="hidden" name="preferredSessionDate" value={preferredSessionDate} />
+                    <input type="hidden" name="preferredSessionDate" value={formatDate(preferredSessionDate)} />
                     <div className="min-w-0 max-w-full overflow-hidden">
                       <input
                         id="contact-preferred-session-date"
