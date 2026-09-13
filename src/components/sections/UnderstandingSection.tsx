@@ -49,7 +49,7 @@ export default function UnderstandingSection() {
               </p>
 
               <p className="text-[15px] md:text-lg lg:text-[1.05rem] font-serif text-[#151515] leading-snug mb-5 lg:mb-5">
-                Do these sound familiar?
+                sound familiar?
               </p>
 
               <ul className="space-y-4 md:space-y-5 lg:space-y-4 list-disc pl-6">
