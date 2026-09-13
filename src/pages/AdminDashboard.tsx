@@ -12,7 +12,7 @@ import {
   Plus,
   ChevronRight,
 } from 'lucide-react';
-import type { Session, User } from '@supabase/supabase-js';
+import type { Session, User as SupabaseUser } from '@supabase/supabase-js';
 import { supabase } from '../utils/supabase';
 
 interface GuideDownload {
