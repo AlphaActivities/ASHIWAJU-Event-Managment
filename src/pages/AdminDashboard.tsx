@@ -69,7 +69,7 @@ const STATUS_LABELS: Record<string, string> = {
 
 export default function AdminDashboard() {
   const [session, setSession] = useState<Session | null>(null);
-  const [user, setUser] = useState<User | null>(null);
+ const [user, setUser] = useState<SupabaseUser | null>(null);
   const [authChecked, setAuthChecked] = useState(false);
   const [loginEmail, setLoginEmail] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
