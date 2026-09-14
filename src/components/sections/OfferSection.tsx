@@ -3,7 +3,7 @@ import { scrollToSection } from "../../utils/scrollToSection";
 import { Check } from "lucide-react";
 
 const card3Checklist = [
-  "A clear picture of your wedding vision in 3D",
+  "A clear mood board that brings your wedding vision to life",
   "Top priorities mapped out to avoid confusion",
   "Allocation of your budget to avoid unnecessary spending",
   "Guidance on trusted vendors and key decisions",
