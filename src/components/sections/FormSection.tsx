@@ -72,7 +72,7 @@ export default function FormSection() {
         <div className="space-y-8">
           <div className="text-center space-y-4">
             <h2 className="text-3xl md:text-4xl lg:text-[2.4rem] font-serif font-medium leading-tight text-[#151515]">
-              BOOK YOUR WEDDING CLARITY SESSION
+              BOOK YOUR CLARITY SESSION
             </h2>
             <p className="max-w-xl mx-auto text-sm md:text-base text-[#151515]/70">
               Share a few details with us, and we'll reach out to you in less than 24 hours to schedule your personalized session. Your information is kept private and secure.
