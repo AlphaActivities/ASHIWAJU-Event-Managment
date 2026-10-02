@@ -58,10 +58,7 @@ export default function ClarityExpectationsSection() {
         </div>
 
         <LuxFadeIn delay={0.35}>
-          <div className="mt-10 lg:mt-8 text-center max-w-2xl mx-auto">
-            <p className="font-serif text-lg lg:text-xl leading-[1.6] text-[#151515]/80">
-              "If we can help bring your vision to life, we'll move forward. If we're not the right fit, we'll let you know. Either way, you'll leave with a clear plan for your wedding."
-            </p>
+          <div className="mt-10 lg:mt-8 text-center">
             <button
               type="button"
               onClick={() => scrollToSection("contact")}
