@@ -1,104 +1,121 @@
 import { LuxFadeIn } from "../ui/LuxFadeIn";
 import { scrollToSection } from "../../utils/scrollToSection";
-import { Check } from "lucide-react";
 
-const card3Checklist = [
-  "A clear mood board that brings your wedding vision to life",
-  "Top priorities mapped out to avoid confusion",
-  "Allocation of your budget to avoid unnecessary spending",
-  "Guidance on trusted vendors and key decisions",
-  "A roadmap for the next steps",
-  "Clarity on how to bring your vision to reality without chaos",
+const processCards = [
+  {
+    number: "01",
+    title: "Finding Your Perfect Venue",
+    description:
+      "We help you find a venue that fits your vision, guest list, and budget, then arrange the visits so you can confidently choose the right setting for your day.",
+  },
+  {
+    number: "02",
+    title: "Bringing Your Vision to Life",
+    description:
+      "From colours and décor to the smallest details, your vision guides the design, supplier selection, and coordination, bringing everything together beautifully.",
+  },
+  {
+    number: "03",
+    title: "Making Your Budget Work for You",
+    description:
+      "A detailed budget is created around your priorities, with recommended allocations for each supplier. Quotes are reviewed and adjusted to help you stay within budget without compromising what matters most.",
+  },
+  {
+    number: "04",
+    title: "Creating Your Guest Experience",
+    description:
+      "From menu, cake, and drink tastings to DJs, live entertainment, and special touches, every element is selected and coordinated around the atmosphere you want, creating an unforgettable experience your guests will enjoy.",
+  },
+  {
+    number: "05",
+    title: "Making Your Day Feel Effortless",
+    description:
+      "We create and manage a detailed timeline so vendors, bridal party, and MC know exactly what to do, allowing you to stay fully present and enjoy your special day without worry.",
+  },
 ];
 
 export default function OfferSection() {
   return (
     <section className="bg-[#F8F5EF] py-20 md:py-24 lg:py-20">
       <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-10">
-        {/* HEADLINE */}
+        {/* HEADLINE — preserved exactly */}
         <LuxFadeIn delay={0.05}>
           <div className="text-center max-w-3xl mx-auto mb-8 lg:mb-6">
             <div className="mx-auto h-[1px] w-14 bg-[#C99524]/40 mb-5 opacity-90" />
             <h2 className="text-3xl sm:text-4xl lg:text-[2.3rem] font-serif font-medium tracking-tight text-[#151515]">
-              You’ll never have to feel like you're planning a wedding 
+              You'll never have to feel like you're planning a wedding
             </h2>
             <p className="mt-4 text-[0.95rem] sm:text-base text-[#151515]/70 leading-relaxed">
-              With 10+ years of experience, we’ve learned that couples just want everything to go as they imagined without sacrificing what matters to them; that's why we created the clarity session
+              For 10 years, we've refined our approach to wedding planning, handling everything from planning to execution with you in mind, so you can stay relaxed and enjoy every moment of your special day.
             </p>
           </div>
         </LuxFadeIn>
+      </div>
 
-        {/* THREE OFFER CARDS */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 lg:gap-6 mt-8 lg:mt-6">
-          {/* CARD 1 */}
-          <LuxFadeIn delay={0.1}>
-            <div className="h-full flex flex-col rounded-2xl bg-[#EFE8DA] border border-[#C99524]/15 p-6 md:p-8 lg:p-8">
-              <h3 className="text-lg md:text-xl font-serif font-semibold tracking-tight text-[#151515] mb-3">
-                For Bride who..
-              </h3>
-              <p className="text-[15px] md:text-base leading-[1.6] text-[#151515]/75">
-                Know what they want, and want to know what it takes to bring their vision to reality without losing sight of their relationship, values, or sanity.
-              </p>
+      {/* STACKING PROCESS CARDS — desktop */}
+      <div className="hidden md:block">
+        <div className="max-w-4xl mx-auto px-6 sm:px-8 lg:px-10">
+          {processCards.map((card, index) => (
+            <div
+              key={card.number}
+              className="sticky"
+              style={{ top: `${80 + index * 24}px`, marginTop: index === 0 ? "0" : "-1px" }}
+            >
+              <div className="rounded-2xl bg-[#EFE8DA] border border-[#C99524]/15 px-8 py-8 lg:px-10 lg:py-10 shadow-[0_8px_40px_rgba(0,0,0,0.06)]">
+                <div className="flex items-start gap-6">
+                  <span className="text-2xl lg:text-3xl font-serif font-semibold text-[#C99524] flex-shrink-0">
+                    {card.number}
+                  </span>
+                  <div>
+                    <h3 className="text-lg lg:text-xl font-serif font-semibold tracking-tight text-[#151515] mb-2">
+                      {card.title}
+                    </h3>
+                    <p className="text-[15px] lg:text-base leading-[1.6] text-[#151515]/75">
+                      {card.description}
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
-          </LuxFadeIn>
-
-          {/* CARD 2 */}
-          <LuxFadeIn delay={0.15}>
-            <div className="h-full flex flex-col rounded-2xl bg-[#EFE8DA] border border-[#C99524]/15 p-6 md:p-8 lg:p-8">
-              <h3 className="text-lg md:text-xl font-serif font-semibold tracking-tight text-[#151515] mb-3">
-                During your Clarity session...
-              </h3>
-              <p className="text-[15px] md:text-base leading-[1.6] text-[#151515]/75">
-                we'll sit down one-on-one to understand your vision, budget, priorities, and challenges. We'll work through what's confusing you, help you make the important decisions, and map out what needs to happen next to achieve your dream wedding
-              </p>
-            </div>
-          </LuxFadeIn>
-
-          {/* CARD 3 */}
-          <LuxFadeIn delay={0.2}>
-            <div className="h-full flex flex-col rounded-2xl bg-[#EFE8DA] border border-[#C99524]/15 p-6 md:p-8 lg:p-8">
-              <h3 className="text-lg md:text-xl font-serif font-semibold tracking-tight text-[#151515] mb-3">
-                You walk away with…
-              </h3>
-              <ul className="space-y-2.5">
-                {card3Checklist.map((item) => (
-                  <li key={item} className="flex items-start gap-3">
-                    <span className="flex-shrink-0 w-5 h-5 rounded-full bg-[#C99524]/15 flex items-center justify-center mt-0.5">
-                      <Check className="w-3.5 h-3.5 text-[#C99524]" strokeWidth={2.5} />
-                    </span>
-                    <span className="text-[14px] md:text-[15px] leading-[1.5] text-[#151515]/75">
-                      {item}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </LuxFadeIn>
+          ))}
         </div>
+      </div>
 
-        {/* WIDE HIGHLIGHTED CARD */}
-        <LuxFadeIn delay={0.3}>
-          <div className="mt-6 lg:mt-5 w-full bg-[#EFE8DA] rounded-2xl border border-[#C99524]/25 p-8 md:p-10 lg:p-10 text-center">
-            <div className="text-[#151515] leading-relaxed text-lg space-y-3 max-w-2xl mx-auto">
-              <p>
-                Get expert guidance, a clear plan, and stress-free decision-making all in one 60-minute session for just{" "}
-                <span className="text-[#C99524] font-semibold">₦60,000</span>.
-              </p>
-              <p>
-                If you work with us afterward, we deduct this from your package
-              </p>
+      {/* PROCESS CARDS — mobile/tablet (simple stacked, no sticky) */}
+      <div className="md:hidden">
+        <div className="max-w-4xl mx-auto px-6 space-y-5">
+          {processCards.map((card) => (
+            <div
+              key={card.number}
+              className="rounded-2xl bg-[#EFE8DA] border border-[#C99524]/15 px-6 py-6 shadow-[0_8px_40px_rgba(0,0,0,0.06)]"
+            >
+              <div className="flex items-start gap-4">
+                <span className="text-xl font-serif font-semibold text-[#C99524] flex-shrink-0">
+                  {card.number}
+                </span>
+                <div>
+                  <h3 className="text-base font-serif font-semibold tracking-tight text-[#151515] mb-1.5">
+                    {card.title}
+                  </h3>
+                  <p className="text-sm leading-[1.6] text-[#151515]/75">
+                    {card.description}
+                  </p>
+                </div>
+              </div>
             </div>
-          </div>
-        </LuxFadeIn>
+          ))}
+        </div>
+      </div>
 
-        {/* CTA BUTTON */}
+      {/* CTA BUTTON */}
+      <div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-10">
         <LuxFadeIn delay={0.4}>
           <div className="text-center mt-8 lg:mt-6">
             <button
               onClick={() => scrollToSection("contact")}
               className="inline-flex items-center justify-center rounded-[18px] bg-[#C99524] px-8 py-4 min-h-[56px] text-base md:text-lg font-bold text-[#151515] shadow-[0_8px_30px_rgba(201,149,36,0.25)] hover:bg-[#B07D1A] hover:shadow-[0_12px_40px_rgba(201,149,36,0.35)] hover:-translate-y-[2px] active:translate-y-px transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]"
             >
-              BOOK YOUR CLARITY SESSION
+              Book Your Free Clarity Session
             </button>
           </div>
         </LuxFadeIn>

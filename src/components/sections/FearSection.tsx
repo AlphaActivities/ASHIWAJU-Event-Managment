@@ -27,7 +27,7 @@ export default function FearSection() {
               onClick={() => scrollToSection('contact')}
               className="mt-8 lg:mt-10 inline-flex items-center justify-center rounded-[18px] bg-[#C99524] px-8 py-4 min-h-[56px] text-sm sm:text-[0.95rem] font-bold tracking-[0.16em] uppercase text-[#151515] shadow-[0_8px_30px_rgba(201,149,36,0.25)] hover:bg-[#B07D1A] hover:-translate-y-[2px] hover:shadow-[0_12px_40px_rgba(201,149,36,0.35)] transition-all duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C99524]/60"
             >
-              Book your clarity session
+              Book Your Free Clarity Session
             </button>
           </div>
         </LuxFadeIn>

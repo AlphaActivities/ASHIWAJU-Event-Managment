@@ -7,16 +7,7 @@ export default function FormSection() {
   const [plannedBudget, setPlannedBudget] = useState("");
   const [guestSize, setGuestSize] = useState("");
   const [contactMethod, setContactMethod] = useState("");
-  const [preferredSessionDate, setPreferredSessionDate] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const todayStr = new Date().toISOString().split('T')[0];
-
-  const formatDate = (dateStr: string) => {
-    if (!dateStr) return "";
-    const date = new Date(dateStr + "T00:00:00");
-    return date.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
-  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -40,7 +31,6 @@ export default function FormSection() {
               email: (formData.get('email') as string) || '',
               phone: (formData.get('phone') as string) || '',
               preferred_contact_method: contactMethod || '',
-              preferred_session_date: preferredSessionDate || null,
               wedding_date: weddingDate || null,
               planned_budget: plannedBudget || null,
               guest_size: guestSize || null,
@@ -176,31 +166,6 @@ export default function FormSection() {
                         </label>
                       ))}
                     </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <label
-                      htmlFor="contact-preferred-session-date"
-                      className="text-xs md:text-sm font-medium tracking-wide text-[#151515]"
-                    >
-                      Preferred Clarity Session date
-                    </label>
-                    <input type="hidden" name="preferredSessionDate" value={formatDate(preferredSessionDate)} />
-                    <div className="min-w-0 max-w-full overflow-hidden">
-                      <input
-                        id="contact-preferred-session-date"
-                        name="preferredSessionDateInput"
-                        type="date"
-                        min={todayStr}
-                        value={preferredSessionDate}
-                        onChange={(e) => setPreferredSessionDate(e.target.value)}
-                        className="w-full min-w-0 max-w-full rounded-xl bg-[#EFE8DA]/60 border border-[#C99524]/20 px-4 py-3.5 text-sm md:text-[15px] text-[#151515] placeholder:text-[#151515]/40 focus:outline-none focus:ring-2 focus:ring-[#C99524]/50 focus:border-transparent transition appearance-none"
-                        style={{ colorScheme: 'light' }}
-                      />
-                    </div>
-                    <p className="text-[11px] md:text-xs text-[#151515]/50 mt-1.5">
-                      Choose the date that works best for you. We&rsquo;ll confirm availability when we contact you.
-                    </p>
                   </div>
 
                   <div className="space-y-2">

@@ -5,6 +5,7 @@ import AboutSection from './components/sections/AboutSection';
 import TestimonialsSection from './components/sections/TestimonialsSection';
 import WorksSection from './components/sections/WorksSection';
 import FearSection from './components/sections/FearSection';
+import ClarityExpectationsSection from './components/sections/ClarityExpectationsSection';
 import OfferSection from './components/sections/OfferSection';
 import ClaritySessionSection from './components/sections/ClaritySessionSection';
 import FormSection from './components/sections/FormSection';
@@ -40,6 +41,7 @@ export default function App() {
       <TestimonialsSection />
       <WorksSection />
       <AboutSection />
+      <ClarityExpectationsSection />
       <FearSection />
       <FormSection />
       <FAQSection />
