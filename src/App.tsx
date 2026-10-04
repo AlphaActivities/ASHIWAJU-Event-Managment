@@ -29,14 +29,6 @@ export default function App() {
       <Navbar />
       <HeroSection />
       <UnderstandingSection />
-      <section className="featured-statement-section">
-        <div className="featured-statement-card">
-          <span className="featured-quote-mark" aria-hidden="true">&ldquo;</span>
-          <p>
-            Imagine being relaxed, going to bed knowing everything is handled perfectly; on that day, you just wake up, get dressed, show up, and enjoy every moment of your day without worry.
-          </p>
-        </div>
-      </section>
       <OfferSection />
       <TestimonialsSection />
       <WorksSection />
