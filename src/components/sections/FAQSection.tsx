@@ -5,33 +5,28 @@ import { ChevronDown } from "lucide-react";
 const faqs = [
   {
     id: 1,
-    question: "Where will I pay for the session?",
-    answer: "Payment is made in person at your face-to-face Clarity Session, so you know exactly who you\u2019re paying and who you\u2019re working with.",
+    question: "Will I pay for the Clarity Session?",
+    answer: "No. It normally costs \u20a6100,000, but I decided to make it free for brides who have the vision but don\u2019t know how to bring it all together while staying within their budget, managing family expectations, and dealing with overpriced vendors.",
   },
   {
     id: 2,
-    question: "What happens after I fill out the form?",
-    answer: "The owner will call or text you within 24 hours to schedule your Clarity Session.",
+    question: "What happens after the session?",
+    answer: "There\u2019s no pressure to work with us. You decide whether you want to handle the planning yourself or have us take care of everything from planning to execution, while you stay relaxed and enjoy the process.",
   },
   {
     id: 3,
-    question: "Is the Planning Clarity Session free?",
-    answer: "No. The session costs \u20a660,000.\nIf you choose to work with us, your \u20a660,000 is deducted from your package.\nIf we don\u2019t work together, you still leave with a clear vision for your wedding, practical next steps, and guidance you can use moving forward.",
+    question: "What if I\u2019m still early in planning?",
+    answer: "That\u2019s actually the best time to have your Clarity Session. Getting clear early helps you avoid rushed decisions, unnecessary spending, and stress later.",
   },
   {
     id: 4,
-    question: "What other wedding services do you offer?",
-    answer: "We also offer full wedding coordination, decoration, venue selection, and stage setup.",
+    question: "Who is the Clarity Session for?",
+    answer: "For brides who have started planning or are about to start, but aren\u2019t sure how to bring their vision to reality without unnecessary spending or chaos, especially with the current economy, family expectations, and unreliable vendors.",
   },
   {
     id: 5,
-    question: "What happens during the Planning Clarity Session?",
-    answer: "We\u2019ll talk through your vision, challenges, priorities, and next steps, so you know what matters most and what to do next.",
-  },
-  {
-    id: 6,
-    question: "What if I\u2019m still early in planning?",
-    answer: "That\u2019s actually the best time to have your Clarity Session. Getting clear early helps you avoid rushed decisions, unnecessary spending, and stress later.",
+    question: "What other wedding services do you offer?",
+    answer: "We also offer full wedding planning and coordination, on-the-day coordination, d\u00e9cor and stage setup, and venue and vendor sourcing.",
   },
 ];
 

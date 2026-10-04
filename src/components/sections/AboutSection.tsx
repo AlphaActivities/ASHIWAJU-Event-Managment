@@ -18,7 +18,7 @@ export default function AboutSection() {
         {/* HEADLINE */}
         <div className="text-center mb-10 lg:mb-8">
           <WaveText
-            text="We are not just good planners; we are better humans"
+            text="YOUR WEDDING, OUR REPUTATION ON THE LINE"
             as="h2"
             className="text-3xl sm:text-4xl lg:text-[2.4rem] font-serif font-medium tracking-tight text-[#151515]"
             delayStep={30}
@@ -40,17 +40,20 @@ export default function AboutSection() {
           {/* RIGHT - Body Copy */}
           <div className="h-full flex flex-col justify-center text-[0.98rem] sm:text-base leading-relaxed text-[#151515]">
             <div className="space-y-4 lg:space-y-5">
-              <p>
-                We work tirelessly to give you the day you envisioned
+              <p className="text-lg sm:text-xl font-serif font-medium text-[#151515]">
+                We work tirelessly to give you the day you envisioned.
               </p>
               <p>
-                Every wedding we take on is our reputation on the line; we can't afford to compromise, even when doing what's right for you doesn't make us a profit.
+                Every wedding we take on puts our reputation on the line. We can't afford to compromise, even when doing what's right for you means sacrificing our profit.
+              </p>
+              <p className="font-bold text-[#151515]">
+                Our reputation is what keeps us in business, not any single wedding.
               </p>
               <p>
-                What matters to us is seeing our clients happy, confident, and fully present on their wedding day.
+                With clear communication, transparency, attention to detail, and a personal touch, we work closely with you from planning through execution to make sure you get the wedding you imagined.
               </p>
               <p>
-                When we receive their thank-you messages after a peaceful, unforgettable celebration, it reminds us why we do what we do.
+                What matters to us is seeing you happy, confident, and fully present on your wedding day.
               </p>
               <p>
                 But the best part?
@@ -59,7 +62,7 @@ export default function AboutSection() {
                 When your guests ask, &ldquo;Who planned this wedding?&rdquo;
               </p>
               <p>
-                That's the standard you should expect from us.
+                That's the standard we hold ourselves to.
               </p>
 
               {/* CHECKLIST */}
