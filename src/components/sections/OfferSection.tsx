@@ -43,7 +43,7 @@ export default function OfferSection() {
           <div className="text-center max-w-3xl mx-auto mb-8 lg:mb-6">
             <div className="mx-auto h-[1px] w-14 bg-[#C99524]/40 mb-5 opacity-90" />
             <h2 className="text-3xl sm:text-4xl lg:text-[2.3rem] font-serif font-medium tracking-tight text-[#151515]">
-              You'll never have to feel like you're planning a wedding
+              You'll never feel like you're planning a wedding
             </h2>
             <p className="mt-4 text-[0.95rem] sm:text-base text-[#151515]/70 leading-relaxed">
               For 10 years, we've refined our approach to wedding planning, handling everything from planning to execution with you in mind, so you can stay relaxed and enjoy every moment of your special day.
