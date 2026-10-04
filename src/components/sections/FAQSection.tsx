@@ -28,6 +28,11 @@ const faqs = [
     question: "What other wedding services do you offer?",
     answer: "We also offer full wedding planning and coordination, on-the-day coordination, d\u00e9cor and stage setup, and venue and vendor sourcing.",
   },
+  {
+    id: 6,
+    question: "What makes you different?",
+    answer: "We don't take on every wedding. If we see that your expectations don't match your budget, we'll tell you rather than promise that everything will work and create problems later.\nOur reputation is as important to us as your wedding, so we'll always be honest about what we believe is possible.",
+  },
 ];
 
 export default function FAQSection() {
