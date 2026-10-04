@@ -15,60 +15,53 @@ export default function UnderstandingSection() {
       id="understanding"
       className="relative w-full py-20 md:py-24 lg:py-20 bg-[#EFE8DA]"
     >
-      <div className="mx-auto w-full max-w-6xl px-6">
-        {/* HEADLINE — full width at top */}
-        <div className="mb-8 lg:mb-6">
+      <div className="mx-auto w-full max-w-3xl px-6">
+        {/* 1. HEADLINE */}
+        <div className="mb-8 lg:mb-10">
           <WaveText
-            text="It's your wedding; you're the one getting married"
+            text="Planning your wedding shouldn't feel like a full-time job."
             as="h2"
-            className="text-4xl md:text-6xl lg:text-[2.75rem] font-serif text-[#151515] leading-tight"
+            className="text-3xl md:text-4xl lg:text-[2.5rem] font-serif text-[#151515] leading-tight"
             delayStep={30}
           />
         </div>
 
-        {/* 2-COLUMN LAYOUT — desktop: list+paragraph left, image right; mobile: image then list then paragraph */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
-          {/* IMAGE — order-first on mobile, right column on desktop */}
-          <LuxFadeIn delay={0.1}>
-            <div className="order-1 lg:order-2 relative overflow-hidden rounded-2xl shadow-[0_4px_24px_rgba(0,0,0,0.06)] w-full min-h-[360px] md:min-h-[420px] lg:min-h-[400px] lg:max-h-[460px]">
-              <img
-                src="/images/hero/hero-05.webp"
-                alt="Elegant wedding celebration"
-                loading="lazy"
-                decoding="async"
-                className="absolute inset-0 w-full h-full object-cover object-center"
-              />
-            </div>
-          </LuxFadeIn>
+        {/* 2. EXISTING PICTURE */}
+        <LuxFadeIn delay={0.1}>
+          <div className="relative overflow-hidden rounded-2xl shadow-[0_4px_24px_rgba(0,0,0,0.06)] w-full min-h-[360px] md:min-h-[420px] lg:min-h-[400px] lg:max-h-[460px] mb-8 lg:mb-10">
+            <img
+              src="/images/hero/hero-05.webp"
+              alt="Elegant wedding celebration"
+              loading="lazy"
+              decoding="async"
+              className="absolute inset-0 w-full h-full object-cover object-center"
+            />
+          </div>
+        </LuxFadeIn>
 
-          {/* INTRO LINE + LIST + PARAGRAPH — order-second on mobile, left column on desktop */}
-          <LuxFadeIn delay={0.2}>
-            <div className="order-2 lg:order-1 w-full">
-              <p className="text-lg md:text-xl lg:text-[1.15rem] font-serif text-[#151515] leading-snug mb-4 lg:mb-4">
-                Planning your wedding shouldn't feel like a full-time job.
-              </p>
+        {/* 3. SUBHEADLINE + 4. PROBLEM POINTS + 5. CLOSING STATEMENT */}
+        <LuxFadeIn delay={0.2}>
+          <div className="w-full">
+            <p className="text-lg md:text-xl lg:text-[1.15rem] font-serif text-[#151515] leading-snug mb-5 lg:mb-6">
+              Do any of these sound familiar?
+            </p>
 
-              <p className="text-[15px] md:text-lg lg:text-[1.05rem] font-serif text-[#151515] leading-snug mb-5 lg:mb-5">
-                Sound familiar?
-              </p>
+            <ul className="space-y-4 md:space-y-5 lg:space-y-4 list-disc pl-6">
+              {statements.map((statement, index) => (
+                <li
+                  key={index}
+                  className="text-[15px] md:text-lg leading-relaxed text-[#151515] font-sans text-left"
+                >
+                  {statement}
+                </li>
+              ))}
+            </ul>
 
-              <ul className="space-y-4 md:space-y-5 lg:space-y-4 list-disc pl-6">
-                {statements.map((statement, index) => (
-                  <li
-                    key={index}
-                    className="text-[15px] md:text-lg leading-relaxed text-[#151515] font-sans text-left"
-                  >
-                    {statement}
-                  </li>
-                ))}
-              </ul>
-
-              <p className="mt-6 lg:mt-7 text-[15px] md:text-lg lg:text-[1.05rem] leading-relaxed text-[#151515] font-sans">
-                You're not alone. It's time you take control of your special day and make decisions that align with your vision.
-              </p>
-            </div>
-          </LuxFadeIn>
-        </div>
+            <p className="mt-6 lg:mt-7 text-[15px] md:text-lg lg:text-[1.05rem] leading-relaxed text-[#151515] font-sans">
+              It's your wedding; you're the one getting married. It's time to take control and make decisions that align with your vision.
+            </p>
+          </div>
+        </LuxFadeIn>
       </div>
     </section>
   );
