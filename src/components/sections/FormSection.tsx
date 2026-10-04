@@ -194,7 +194,7 @@ export default function FormSection() {
                     </label>
                     <input type="hidden" name="plannedBudget" value={plannedBudget} />
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-2.5">
-                      {['Under ₦3M', '₦3M – ₦5M', '₦5M – ₦10M', '₦10M – ₦20M', 'Above ₦20M'].map((option) => (
+                      {['₦3M – ₦5M', '₦5M – ₦10M', '₦10M – ₦20M', 'Above ₦20M'].map((option) => (
                         <button
                           key={option}
                           type="button"
