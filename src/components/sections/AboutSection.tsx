@@ -1,14 +1,5 @@
 import { scrollToSection } from "../../utils/scrollToSection";
-import { Check } from "lucide-react";
 import WaveText from "../ui/WaveText";
-
-const checklistItems = [
-  "100% Client satisfaction",
-  "Attention to details",
-  "Commitment to your Goals",
-  "On-the-day support",
-  "Personal touch",
-];
 
 export default function AboutSection() {
   return (
@@ -64,20 +55,6 @@ export default function AboutSection() {
               <p>
                 That's the standard we hold ourselves to.
               </p>
-
-              {/* CHECKLIST */}
-              <ul className="space-y-3 pt-3">
-                {checklistItems.map((item) => (
-                  <li key={item} className="flex items-center gap-3">
-                    <span className="flex-shrink-0 w-6 h-6 rounded-full bg-[#C99524]/15 flex items-center justify-center">
-                      <Check className="w-4 h-4 text-[#C99524]" strokeWidth={2.5} />
-                    </span>
-                    <span className="text-[0.95rem] sm:text-base text-[#151515]">
-                      {item}
-                    </span>
-                  </li>
-                ))}
-              </ul>
             </div>
 
             {/* CTA Button */}
