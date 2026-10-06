@@ -53,13 +53,17 @@ export default function OfferSection() {
       </div>
 
       {/* STACKING PROCESS CARDS — desktop */}
-      <div className="hidden md:block">
+      <div className="hidden md:block motion-reduce:static">
         <div className="max-w-4xl mx-auto px-6 sm:px-8 lg:px-10">
           {processCards.map((card, index) => (
             <div
               key={card.number}
-              className="sticky"
-              style={{ top: `${80 + index * 24}px`, marginTop: index === 0 ? "0" : "-1px" }}
+              className="sticky motion-reduce:static"
+              style={{
+                top: `${80 + index * 28}px`,
+                marginTop: index === 0 ? "0" : "35vh",
+                zIndex: index + 1,
+              }}
             >
               <div className="rounded-2xl bg-[#EFE8DA] border border-[#C99524]/15 px-8 py-8 lg:px-10 lg:py-10 shadow-[0_8px_40px_rgba(0,0,0,0.06)]">
                 <div className="flex items-start gap-6">
