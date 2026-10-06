@@ -12,19 +12,19 @@ const processCards = [
     number: "02",
     title: "Bringing Your Vision to Life",
     description:
-      "From colours and décor to the smallest details, your vision guides the design, supplier selection, and coordination, bringing everything together beautifully.",
+      "From colours and décor to the smallest details, your vision guides the design, supplier selection, and coordination, bringing everything together beautifully just as you imagined.",
   },
   {
     number: "03",
     title: "Making Your Budget Work for You",
     description:
-      "A detailed budget is created around your priorities, with recommended allocations for each supplier. Quotes are reviewed and adjusted to help you stay within budget without compromising what matters most.",
+      "We create a detailed budget around your priorities, with recommended allocations for each supplier. We review and adjust quotes to help you stay within budget without compromising what matters most.",
   },
   {
     number: "04",
     title: "Creating Your Guest Experience",
     description:
-      "From menu, cake, and drink tastings to DJs, live entertainment, and special touches, every element is selected and coordinated around the atmosphere you want, creating an unforgettable experience your guests will enjoy.",
+      "From menu, cake, and drink tastings to music and entertainment with personal touches, we select and coordinate each element around the atmosphere you want, creating moments your guests will remember.",
   },
   {
     number: "05",

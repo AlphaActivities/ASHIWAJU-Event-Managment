@@ -4,9 +4,8 @@ import { LuxFadeIn } from "../ui/LuxFadeIn";
 const statements = [
   "Is your family constantly weighing in with their opinions and ideas?",
   "Are you struggling to get clear, transparent prices from vendors?",
-  "Do you feel like no one is really listening to you or understanding what you want?",
+  "Do you feel like no one listens to what you want?",
   "Does every single decision you make get questioned?",
-  "Do you have the vision, but just don\u2019t know how to bring it all together within your budget?",
 ];
 
 export default function UnderstandingSection() {
