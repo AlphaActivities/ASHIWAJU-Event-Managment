@@ -22,7 +22,7 @@ const processCards = [
   },
   {
     number: "04",
-    title: "Creating Your Guest Experience",
+    title: "Creating an Unforgettable Experience",
     description:
       "From menu, cake, and drink tastings to music and entertainment with personal touches, we select and coordinate each element around the atmosphere you want, creating moments your guests will remember.",
   },
