@@ -18,7 +18,7 @@ const steps = [
     number: "03",
     title: "Leave With Clear Direction",
     description:
-      "You’ll have a clearer idea of what matters most, where to focus your budget, what decisions need to be made, and the next steps for bringing your wedding vision together.",
+      "You’ll have a clearer idea of what matters most, where to focus your budget, what decisions need to be made, and the next steps for bringing your wedding vision together without unnecessary spending.",
   },
 ];
 
