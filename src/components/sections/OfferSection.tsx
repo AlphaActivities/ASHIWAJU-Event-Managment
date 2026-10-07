@@ -46,7 +46,7 @@ export default function OfferSection() {
               You'll never feel like you're planning a wedding
             </h2>
             <p className="mt-4 text-[0.95rem] sm:text-base text-[#151515]/70 leading-relaxed">
-              For 10 years, we've refined our approach to wedding planning, handling everything from planning to execution with you in mind, so you can stay relaxed and enjoy every moment of your special day.
+              For 10 years, we’ve refined our approach to wedding planning, handling everything from planning to execution with you in mind, so you can relax and enjoy every moment of your special day.
             </p>
           </div>
         </LuxFadeIn>

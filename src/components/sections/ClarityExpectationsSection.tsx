@@ -10,15 +10,15 @@ const steps = [
   },
   {
     number: "02",
-    title: "We Talk It Through",
+    title: "We Work Through Your Challenges",
     description:
       "We'll discuss your ideas, concerns, family expectations, and anything you're currently unsure about.",
   },
   {
     number: "03",
-    title: "Clear Guidance for Your Dream Wedding",
+    title: "Leave With Clear Direction",
     description:
-      "We'll give our recommendations, answer your questions, and help you identify the next steps for bringing your vision together.",
+      "You’ll have a clearer idea of what matters most, where to focus your budget, what decisions need to be made, and the next steps for bringing your wedding vision together.",
   },
 ];
 

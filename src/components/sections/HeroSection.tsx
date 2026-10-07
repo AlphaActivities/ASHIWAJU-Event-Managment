@@ -59,12 +59,12 @@ export default function HeroSection() {
 
             <LuxFadeIn delay={0.15}>
             <p className="text-lg md:text-xl text-white/95 mt-6 md:mt-8 lg:mt-6 drop-shadow-[0_2px_6px_rgba(0,0,0,0.85)]">
-               Get clear on your vision and what matters most to you. Plan your dream wedding without chaos or unnecessary spending.
+               Get clear on your vision and what matters most to you, so you plan your dream wedding without chaos or unnecessary spending.
               </p>
             </LuxFadeIn>
 
             <LuxFadeIn delay={0.2}>
-            <div className="flex justify-center mt-8 md:mt-10 lg:mt-8 mb-8 lg:mb-6">
+            <div className="flex justify-center mt-8 md:mt-10 lg:mt-8 mb-16 lg:mb-14">
                 <button
                   type="button"
                   onClick={() => scrollToSection('contact')}
@@ -75,42 +75,7 @@ export default function HeroSection() {
               </div>
             </LuxFadeIn>
 
-            <LuxFadeIn delay={0.25}>
-              <div className="flex flex-row items-center justify-center gap-3 flex-nowrap">
-                <div className="flex -space-x-2 shrink-0">
-                  <img
-                    src="/images/avatar/avatar-1.jpeg"
-                    alt="Happy couple"
-                    width="40"
-                    height="40"
-                    loading="eager"
-                    decoding="async"
-                    className="w-10 h-10 rounded-full border-2 border-[#F8F5EF] object-cover"
-                  />
-                  <img
-                    src="/images/avatar/avatar-2.jpeg"
-                    alt="Happy couple"
-                    width="40"
-                    height="40"
-                    loading="eager"
-                    decoding="async"
-                    className="w-10 h-10 rounded-full border-2 border-[#F8F5EF] object-cover"
-                  />
-                  <img
-                    src="/images/avatar/avatar-3.jpg"
-                    alt="Happy couple"
-                    width="40"
-                    height="40"
-                    loading="eager"
-                    decoding="async"
-                    className="w-10 h-10 rounded-full border-2 border-[#F8F5EF] object-cover"
-                  />
-                </div>
-                <p className="text-sm md:text-base text-white text-left leading-snug max-w-[220px]">
-                 Trusted by 50+ happily married couples in Lagos
-                </p>
-              </div>
-            </LuxFadeIn>
+
           </div>
         </div>
       </div>

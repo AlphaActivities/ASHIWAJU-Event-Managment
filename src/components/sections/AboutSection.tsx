@@ -9,7 +9,7 @@ export default function AboutSection() {
         {/* HEADLINE */}
         <div className="text-center mb-10 lg:mb-8">
           <WaveText
-            text="YOUR WEDDING, OUR REPUTATION ON THE LINE"
+            text="Your wedding. Our reputation."
             as="h2"
             className="text-3xl sm:text-4xl lg:text-[2.4rem] font-serif font-medium tracking-tight text-[#151515]"
             delayStep={30}
