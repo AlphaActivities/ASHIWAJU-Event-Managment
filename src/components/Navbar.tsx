@@ -45,6 +45,8 @@ const Navbar: React.FC = () => {
     { label: 'Book', target: 'contact' },
   ];
 
+  const desktopNavItems = navItems.filter((item) => item.label !== 'Services');
+
   return (
     <header
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${shellClasses}`}
@@ -80,7 +82,7 @@ const Navbar: React.FC = () => {
         {/* Desktop nav */}
         <div className="hidden md:flex items-center rounded-full bg-[#EFE8DA] shadow-[0_4px_20px_rgba(0,0,0,0.06)] ring-1 ring-[#C99524]/20 px-6 py-2.5">
           <ul className="flex items-center gap-6 lg:gap-8 text-[0.8rem] tracking-[0.24em] uppercase text-[#151515]/80 font-semibold">
-            {navItems.map((item) => (
+            {desktopNavItems.map((item) => (
               <li key={item.label} className="group">
                 <button
                   type="button"
