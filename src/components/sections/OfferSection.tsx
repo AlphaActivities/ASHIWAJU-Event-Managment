@@ -85,25 +85,32 @@ export default function OfferSection() {
         </div>
       </div>
 
-      {/* PROCESS CARDS — mobile/tablet (simple stacked, no sticky) */}
-      <div className="md:hidden">
-        <div className="max-w-4xl mx-auto px-6 space-y-5">
-          {processCards.map((card) => (
+      {/* STACKING PROCESS CARDS — mobile/tablet */}
+      <div className="md:hidden motion-reduce:static">
+        <div className="max-w-4xl mx-auto px-6">
+          {processCards.map((card, index) => (
             <div
               key={card.number}
-              className="rounded-2xl bg-[#EFE8DA] border border-[#C99524]/15 px-6 py-6 shadow-[0_8px_40px_rgba(0,0,0,0.06)]"
+              className="sticky motion-reduce:static"
+              style={{
+                top: `${72 + index * 20}px`,
+                marginTop: index === 0 ? "0" : "22vh",
+                zIndex: index + 1,
+              }}
             >
-              <div className="flex items-start gap-4">
-                <span className="text-xl font-serif font-semibold text-[#C99524] flex-shrink-0">
-                  {card.number}
-                </span>
-                <div>
-                  <h3 className="text-base font-serif font-semibold tracking-tight text-[#151515] mb-1.5">
-                    {card.title}
-                  </h3>
-                  <p className="text-sm leading-[1.6] text-[#151515]/75">
-                    {card.description}
-                  </p>
+              <div className="rounded-2xl bg-[#EFE8DA] border border-[#C99524]/15 px-6 py-6 shadow-[0_8px_40px_rgba(0,0,0,0.06)]">
+                <div className="flex items-start gap-4">
+                  <span className="text-xl font-serif font-semibold text-[#C99524] flex-shrink-0">
+                    {card.number}
+                  </span>
+                  <div>
+                    <h3 className="text-base font-serif font-semibold tracking-tight text-[#151515] mb-1.5">
+                      {card.title}
+                    </h3>
+                    <p className="text-sm leading-[1.6] text-[#151515]/75">
+                      {card.description}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
