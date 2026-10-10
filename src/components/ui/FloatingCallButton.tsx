@@ -1,7 +1,7 @@
 export default function FloatingCallButton() {
   return (
     <a
-      href="https://wa.me/2348028336686"
+      href="https://wa.me/2349011640963?text=Hello%2C%20I'm%20interested%20in%20booking%20a%20Free%20Wedding%20Clarity%20Session.%20I'd%20like%20to%20know%20how%20it%20works."
       target="_blank"
       rel="noreferrer"
       aria-label="Chat on WhatsApp"
