@@ -13,7 +13,7 @@ import {
   ChevronRight,
 } from 'lucide-react';
 import type { Session, User as SupabaseUser } from '@supabase/supabase-js';
-import { supabase } from '../utils/supabase';
+import { supabaseAdmin as supabase } from '../utils/supabaseAdmin';
 
 interface GuideDownload {
   id: string;
