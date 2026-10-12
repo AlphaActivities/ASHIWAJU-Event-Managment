@@ -24,8 +24,22 @@ interface GuideDownload {
   created_at: string;
 }
 
-interface ClaritySessionLead {
+interface Bride {
   id: string;
+  bride_code: string | null;
+  first_name: string | null;
+  last_name: string | null;
+  email: string | null;
+  phone: string | null;
+  wedding_date: string | null;
+  current_status: string;
+  created_at: string;
+  updated_at: string | null;
+}
+
+interface FormSubmission {
+  id: string;
+  bride_id: string | null;
   name: string;
   email: string;
   phone: string;
@@ -34,15 +48,28 @@ interface ClaritySessionLead {
   wedding_date: string | null;
   planned_budget: string | null;
   guest_size: string | null;
-  status: string | null;
-  source: string | null;
+  source: string;
+  source_id: string | null;
+  original_submitted_at: string;
   created_at: string;
-  updated_at: string | null;
+}
+
+interface LeadRow extends Bride {
+  submission_name: string;
+  submission_email: string;
+  submission_phone: string;
+  preferred_contact_method: string | null;
+  preferred_session_date: string | null;
+  submission_wedding_date: string | null;
+  planned_budget: string | null;
+  guest_size: string | null;
+  source: string | null;
+  submitted_at: string;
 }
 
 interface LeadNote {
   id: string;
-  lead_id: string;
+  bride_id: string;
   note: string;
   created_by: string | null;
   created_at: string;
@@ -50,26 +77,37 @@ interface LeadNote {
 
 type TabKey = 'clarity' | 'guide';
 
-const STATUS_OPTIONS = ['new', 'contacted', 'booked', 'lost'] as const;
+const STATUS_OPTIONS = [
+  'new',
+  'contacted',
+  'session_booked',
+  'session_completed',
+  'converted_to_client',
+  'closed_not_proceeding',
+] as const;
 type LeadStatus = (typeof STATUS_OPTIONS)[number];
 
 const STATUS_STYLES: Record<string, string> = {
   new: 'bg-blue-100 text-blue-700 border-blue-200',
   contacted: 'bg-amber-100 text-amber-700 border-amber-200',
-  booked: 'bg-green-100 text-green-700 border-green-200',
-  lost: 'bg-gray-200 text-gray-600 border-gray-300',
+  session_booked: 'bg-purple-100 text-purple-700 border-purple-200',
+  session_completed: 'bg-cyan-100 text-cyan-700 border-cyan-200',
+  converted_to_client: 'bg-green-100 text-green-700 border-green-200',
+  closed_not_proceeding: 'bg-gray-200 text-gray-600 border-gray-300',
 };
 
 const STATUS_LABELS: Record<string, string> = {
   new: 'New',
   contacted: 'Contacted',
-  booked: 'Booked',
-  lost: 'Lost',
+  session_booked: 'Session Booked',
+  session_completed: 'Session Completed',
+  converted_to_client: 'Converted to Client',
+  closed_not_proceeding: 'Closed — Not Proceeding',
 };
 
 export default function AdminDashboard() {
   const [session, setSession] = useState<Session | null>(null);
- const [user, setUser] = useState<SupabaseUser | null>(null);
+  const [user, setUser] = useState<SupabaseUser | null>(null);
   const [authChecked, setAuthChecked] = useState(false);
   const [loginEmail, setLoginEmail] = useState('');
   const [loginPassword, setLoginPassword] = useState('');
@@ -77,14 +115,14 @@ export default function AdminDashboard() {
   const [loginLoading, setLoginLoading] = useState(false);
 
   const [activeTab, setActiveTab] = useState<TabKey>('clarity');
-  const [clarityLeads, setClarityLeads] = useState<ClaritySessionLead[]>([]);
+  const [leads, setLeads] = useState<LeadRow[]>([]);
   const [guideDownloads, setGuideDownloads] = useState<GuideDownload[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState<string>('all');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const [selectedLead, setSelectedLead] = useState<ClaritySessionLead | null>(null);
+  const [selectedLead, setSelectedLead] = useState<LeadRow | null>(null);
   const [notes, setNotes] = useState<LeadNote[]>([]);
   const [notesLoading, setNotesLoading] = useState(false);
   const [noteText, setNoteText] = useState('');
@@ -104,7 +142,7 @@ export default function AdminDashboard() {
       setSession(newSession);
       setUser(newSession?.user ?? null);
       if (!newSession) {
-        setClarityLeads([]);
+        setLeads([]);
         setGuideDownloads([]);
         setSelectedLead(null);
         setNotes([]);
@@ -119,7 +157,7 @@ export default function AdminDashboard() {
   // ── Load data when session becomes available ──
   useEffect(() => {
     if (session) {
-      loadClarityLeads();
+      loadLeads();
       loadGuideDownloads();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -147,19 +185,61 @@ export default function AdminDashboard() {
   };
 
   // ── Data loaders ──
-  const loadClarityLeads = async () => {
+  const loadLeads = async () => {
     setLoading(true);
     setError('');
     try {
-      const { data, error: queryError } = await supabase
-        .from('clarity_session_leads')
+      const { data: bridesData, error: bridesError } = await supabase
+        .from('brides')
         .select('*')
+        .is('deleted_at', null)
         .order('created_at', { ascending: false });
-      if (queryError) throw queryError;
-      setClarityLeads((data as ClaritySessionLead[]) || []);
+      if (bridesError) throw bridesError;
+      const brides = (bridesData as Bride[]) || [];
+
+      if (brides.length === 0) {
+        setLeads([]);
+        return;
+      }
+
+      const brideIds = brides.map((b) => b.id);
+      const { data: submissionsData, error: submissionsError } = await supabase
+        .from('form_submissions')
+        .select('*')
+        .in('bride_id', brideIds)
+        .order('created_at', { ascending: false });
+      if (submissionsError) throw submissionsError;
+      const submissions = (submissionsData as FormSubmission[]) || [];
+
+      const latestSubmissionByBride = new Map<string, FormSubmission>();
+      for (const sub of submissions) {
+        if (sub.bride_id && !latestSubmissionByBride.has(sub.bride_id)) {
+          latestSubmissionByBride.set(sub.bride_id, sub);
+        }
+      }
+
+      const rows: LeadRow[] = brides.map((bride) => {
+        const sub = latestSubmissionByBride.get(bride.id);
+        return {
+          ...bride,
+          submission_name: sub?.name || [bride.first_name, bride.last_name].filter(Boolean).join(' ') || 'Unknown',
+          submission_email: sub?.email || bride.email || '',
+          submission_phone: sub?.phone || bride.phone || '',
+          preferred_contact_method: sub?.preferred_contact_method ?? null,
+          preferred_session_date: sub?.preferred_session_date ?? null,
+          submission_wedding_date: sub?.wedding_date ?? bride.wedding_date ?? null,
+          planned_budget: sub?.planned_budget ?? null,
+          guest_size: sub?.guest_size ?? null,
+          source: sub?.source ?? null,
+          submitted_at: sub?.original_submitted_at ?? sub?.created_at ?? bride.created_at,
+        };
+      });
+
+      setLeads(rows);
     } catch (err) {
-      console.error('Error loading clarity leads:', err);
+      console.error('Error loading leads:', err);
       setError('Failed to load leads');
+      setLeads([]);
     } finally {
       setLoading(false);
     }
@@ -178,28 +258,28 @@ export default function AdminDashboard() {
     }
   };
 
-  // ── Status update ──
-  const updateLeadStatus = async (leadId: string, newStatus: string) => {
-    setUpdatingStatusId(leadId);
-    const prevLeads = clarityLeads;
-    setClarityLeads((prev) =>
-      prev.map((l) => (l.id === leadId ? { ...l, status: newStatus } : l)),
+  // ── Status update via update_bride_status() RPC ──
+  const updateLeadStatus = async (brideId: string, newStatus: string) => {
+    setUpdatingStatusId(brideId);
+    const prevLeads = leads;
+    setLeads((prev) =>
+      prev.map((l) => (l.id === brideId ? { ...l, current_status: newStatus } : l)),
     );
-    if (selectedLead?.id === leadId) {
-      setSelectedLead((prev) => (prev ? { ...prev, status: newStatus } : prev));
+    if (selectedLead?.id === brideId) {
+      setSelectedLead((prev) => (prev ? { ...prev, current_status: newStatus } : prev));
     }
     try {
-      const { error: updateError } = await supabase
-        .from('clarity_session_leads')
-        .update({ status: newStatus })
-        .eq('id', leadId);
-      if (updateError) throw updateError;
+      const { error: rpcError } = await supabase.rpc('update_bride_status', {
+        p_bride_id: brideId,
+        p_new_status: newStatus,
+      });
+      if (rpcError) throw rpcError;
     } catch (err) {
       console.error('Error updating status:', err);
-      setClarityLeads(prevLeads);
-      if (selectedLead?.id === leadId) {
+      setLeads(prevLeads);
+      if (selectedLead?.id === brideId) {
         setSelectedLead((prev) =>
-          prev ? { ...prev, status: prevLeads.find((l) => l.id === leadId)?.status ?? prev.status } : prev,
+          prev ? { ...prev, current_status: prevLeads.find((l) => l.id === brideId)?.current_status ?? prev.current_status } : prev,
         );
       }
       setError('Failed to update status');
@@ -208,14 +288,14 @@ export default function AdminDashboard() {
     }
   };
 
-  // ── Notes ──
-  const loadNotes = useCallback(async (leadId: string) => {
+  // ── Notes (keyed by bride_id) ──
+  const loadNotes = useCallback(async (brideId: string) => {
     setNotesLoading(true);
     try {
       const { data, error: queryError } = await supabase
-        .from('clarity_session_lead_notes')
+        .from('lead_notes')
         .select('*')
-        .eq('lead_id', leadId)
+        .eq('bride_id', brideId)
         .order('created_at', { ascending: false });
       if (queryError) throw queryError;
       setNotes((data as LeadNote[]) || []);
@@ -232,8 +312,8 @@ export default function AdminDashboard() {
     setNoteSaving(true);
     try {
       const { error: insertError } = await supabase
-        .from('clarity_session_lead_notes')
-        .insert([{ lead_id: selectedLead.id, note: noteText.trim() }]);
+        .from('lead_notes')
+        .insert([{ bride_id: selectedLead.id, note: noteText.trim() }]);
       if (insertError) throw insertError;
       setNoteText('');
       await loadNotes(selectedLead.id);
@@ -244,7 +324,7 @@ export default function AdminDashboard() {
     }
   };
 
-  const openLeadDetail = (lead: ClaritySessionLead) => {
+  const openLeadDetail = (lead: LeadRow) => {
     setSelectedLead(lead);
     setNoteText('');
     loadNotes(lead.id);
@@ -257,15 +337,15 @@ export default function AdminDashboard() {
   };
 
   // ── Filtering ──
-  const filteredClarityLeads = clarityLeads.filter((lead) => {
+  const filteredLeads = leads.filter((lead) => {
     const matchesSearch =
       !searchTerm ||
-      (lead.name?.toLowerCase().includes(searchTerm.toLowerCase()) ?? false) ||
-      (lead.email?.toLowerCase().includes(searchTerm.toLowerCase()) ?? false) ||
-      (lead.phone?.includes(searchTerm) ?? false) ||
-      (lead.status?.toLowerCase().includes(searchTerm.toLowerCase()) ?? false);
+      (lead.submission_name?.toLowerCase().includes(searchTerm.toLowerCase()) ?? false) ||
+      (lead.submission_email?.toLowerCase().includes(searchTerm.toLowerCase()) ?? false) ||
+      (lead.submission_phone?.includes(searchTerm) ?? false) ||
+      (lead.current_status?.toLowerCase().includes(searchTerm.toLowerCase()) ?? false);
     const matchesStatus =
-      statusFilter === 'all' || (lead.status ?? 'new') === statusFilter;
+      statusFilter === 'all' || lead.current_status === statusFilter;
     return matchesSearch && matchesStatus;
   });
 
@@ -282,6 +362,7 @@ export default function AdminDashboard() {
   const exportToCSV = () => {
     if (activeTab === 'clarity') {
       const headers = [
+        'Bride Code',
         'Name',
         'Email',
         'Phone',
@@ -291,18 +372,23 @@ export default function AdminDashboard() {
         'Planned Budget',
         'Guest Size',
         'Status',
+        'Source',
+        'Submitted At',
         'Created Date',
       ];
-      const csvData = filteredClarityLeads.map((lead) => [
-        lead.name || '',
-        lead.email || '',
-        lead.phone || '',
+      const csvData = filteredLeads.map((lead) => [
+        lead.bride_code || '',
+        lead.submission_name || '',
+        lead.submission_email || '',
+        lead.submission_phone || '',
         lead.preferred_contact_method || '',
-        lead.preferred_session_date ? formatDate(lead.preferred_session_date) : '',
-        lead.wedding_date ? formatDate(lead.wedding_date) : '',
+        lead.preferred_session_date ? formatDateOnly(lead.preferred_session_date) : '',
+        lead.submission_wedding_date ? formatDateOnly(lead.submission_wedding_date) : '',
         lead.planned_budget || '',
         lead.guest_size || '',
-        lead.status || '',
+        displayStatus(lead.current_status),
+        lead.source || '',
+        lead.submitted_at ? formatDate(lead.submitted_at) : '',
         formatDate(lead.created_at),
       ]);
       const csvContent = [headers.join(','), ...csvData.map((row) => row.map((c) => `"${c.replace(/"/g, '""')}"`).join(','))].join('\n');
@@ -315,7 +401,7 @@ export default function AdminDashboard() {
         lead.phone,
         new Date(lead.downloaded_at).toLocaleString(),
       ]);
-      const csvContent = [headers.join(','), ...csvData.map((row) => row.join(','))].join('\n');
+      const csvContent = [headers.join(','), ...csvData.map((row) => row.map((c) => `"${c.replace(/"/g, '""')}"`).join(','))].join('\n');
       downloadCSV(csvContent, `ashiwaju-leads-${new Date().toISOString().split('T')[0]}.csv`);
     }
   };
@@ -430,8 +516,7 @@ export default function AdminDashboard() {
   }
 
   // ── Render: dashboard ──
-  const activeLeads = activeTab === 'clarity' ? filteredClarityLeads : filteredGuideDownloads;
-  const totalCount = activeTab === 'clarity' ? clarityLeads.length : guideDownloads.length;
+  const activeLeads = activeTab === 'clarity' ? filteredLeads : filteredGuideDownloads;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-rose-50 via-white to-amber-50">
@@ -513,8 +598,10 @@ export default function AdminDashboard() {
                   <option value="all">All Statuses</option>
                   <option value="new">New</option>
                   <option value="contacted">Contacted</option>
-                  <option value="booked">Booked</option>
-                  <option value="lost">Lost</option>
+                  <option value="session_booked">Session Booked</option>
+                  <option value="session_completed">Session Completed</option>
+                  <option value="converted_to_client">Converted to Client</option>
+                  <option value="closed_not_proceeding">Closed — Not Proceeding</option>
                 </select>
               )}
 
@@ -544,7 +631,7 @@ export default function AdminDashboard() {
             {/* Clarity Session Leads table */}
             {activeTab === 'clarity' && (
               <>
-                {filteredClarityLeads.length === 0 ? (
+                {filteredLeads.length === 0 ? (
                   <div className="text-center py-12 text-gray-500">
                     {searchTerm || statusFilter !== 'all'
                       ? 'No leads match your filters'
@@ -566,18 +653,23 @@ export default function AdminDashboard() {
                         </tr>
                       </thead>
                       <tbody>
-                        {filteredClarityLeads.map((lead) => (
+                        {filteredLeads.map((lead) => (
                           <tr key={lead.id} className="border-b border-gray-100 hover:bg-gray-50 transition-colors">
                             <td className="py-4 px-4">
                               <div className="flex items-center gap-2">
                                 <User className="w-4 h-4 text-gray-400" />
-                                <span className="font-medium text-gray-900">{lead.name}</span>
+                                <div>
+                                  <span className="font-medium text-gray-900">{lead.submission_name}</span>
+                                  {lead.bride_code && (
+                                    <span className="ml-2 text-xs text-gray-400">{lead.bride_code}</span>
+                                  )}
+                                </div>
                               </div>
                             </td>
                             <td className="py-4 px-4">
-                              <a href={`tel:${lead.phone}`} className="flex items-center gap-2 text-gray-700 hover:text-rose-600 transition-colors">
+                              <a href={`tel:${lead.submission_phone}`} className="flex items-center gap-2 text-gray-700 hover:text-rose-600 transition-colors">
                                 <Phone className="w-4 h-4" />
-                                {lead.phone}
+                                {lead.submission_phone || '—'}
                               </a>
                             </td>
                             <td className="py-4 px-4 text-gray-600 text-sm">
@@ -587,15 +679,15 @@ export default function AdminDashboard() {
                               {formatDateOnly(lead.preferred_session_date)}
                             </td>
                             <td className="py-4 px-4 text-gray-600 text-sm">
-                              {formatDateOnly(lead.wedding_date)}
+                              {formatDateOnly(lead.submission_wedding_date)}
                             </td>
                             <td className="py-4 px-4">
                               <div className="relative inline-block">
                                 <select
-                                  value={lead.status ?? 'new'}
+                                  value={lead.current_status}
                                   onChange={(e) => updateLeadStatus(lead.id, e.target.value)}
                                   disabled={updatingStatusId === lead.id}
-                                  className={`appearance-none pl-2 pr-6 py-1.5 rounded-full text-xs font-semibold border cursor-pointer transition-colors disabled:opacity-50 ${statusBadgeClass(lead.status)}`}
+                                  className={`appearance-none pl-2 pr-6 py-1.5 rounded-full text-xs font-semibold border cursor-pointer transition-colors disabled:opacity-50 ${statusBadgeClass(lead.current_status)}`}
                                   style={{ backgroundImage: 'none' }}
                                 >
                                   {STATUS_OPTIONS.map((s) => (
@@ -694,8 +786,10 @@ export default function AdminDashboard() {
             {/* Modal header */}
             <div className="bg-gradient-to-r from-rose-600 to-amber-600 p-5 flex justify-between items-center sticky top-0 z-10">
               <div>
-                <h2 className="text-xl font-bold text-white">{selectedLead.name}</h2>
-                <p className="text-rose-100 text-sm">Lead Details</p>
+                <h2 className="text-xl font-bold text-white">{selectedLead.submission_name}</h2>
+                <p className="text-rose-100 text-sm">
+                  Lead Details{selectedLead.bride_code ? ` · ${selectedLead.bride_code}` : ''}
+                </p>
               </div>
               <button
                 onClick={closeLeadDetail}
@@ -708,14 +802,15 @@ export default function AdminDashboard() {
             <div className="p-6 space-y-6">
               {/* Contact info */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <DetailField icon={<Mail className="w-4 h-4 text-gray-400" />} label="Email" value={selectedLead.email} />
-                <DetailField icon={<Phone className="w-4 h-4 text-gray-400" />} label="Phone" value={selectedLead.phone} />
+                <DetailField icon={<Mail className="w-4 h-4 text-gray-400" />} label="Email" value={selectedLead.submission_email || 'Not provided'} />
+                <DetailField icon={<Phone className="w-4 h-4 text-gray-400" />} label="Phone" value={selectedLead.submission_phone || 'Not provided'} />
                 <DetailField label="Preferred Contact Method" value={selectedLead.preferred_contact_method || 'Not provided'} />
                 <DetailField label="Preferred Session Date" value={formatDateOnly(selectedLead.preferred_session_date)} />
-                <DetailField label="Wedding Date" value={formatDateOnly(selectedLead.wedding_date)} />
+                <DetailField label="Wedding Date" value={formatDateOnly(selectedLead.submission_wedding_date)} />
                 <DetailField label="Planned Budget" value={selectedLead.planned_budget || 'Not provided'} />
                 <DetailField label="Guest Size" value={selectedLead.guest_size || 'Not provided'} />
                 <DetailField label="Source" value={selectedLead.source || 'Not provided'} />
+                <DetailField label="Submitted At" value={formatDate(selectedLead.submitted_at)} />
                 <DetailField label="Created Date" value={formatDate(selectedLead.created_at)} />
               </div>
 
@@ -724,10 +819,10 @@ export default function AdminDashboard() {
                 <label className="block text-sm font-semibold text-gray-700 mb-2">Status</label>
                 <div className="relative inline-block">
                   <select
-                    value={selectedLead.status ?? 'new'}
+                    value={selectedLead.current_status}
                     onChange={(e) => updateLeadStatus(selectedLead.id, e.target.value)}
                     disabled={updatingStatusId === selectedLead.id}
-                    className={`appearance-none pl-3 pr-8 py-2 rounded-full text-sm font-semibold border cursor-pointer transition-colors disabled:opacity-50 ${statusBadgeClass(selectedLead.status)}`}
+                    className={`appearance-none pl-3 pr-8 py-2 rounded-full text-sm font-semibold border cursor-pointer transition-colors disabled:opacity-50 ${statusBadgeClass(selectedLead.current_status)}`}
                     style={{ backgroundImage: 'none' }}
                   >
                     {STATUS_OPTIONS.map((s) => (
