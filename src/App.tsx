@@ -16,12 +16,19 @@ import FloatingCallButton from './components/ui/FloatingCallButton';
 import MobileCTABar from './components/ui/MobileCTABar';
 import ScrollToTop from './components/ui/ScrollToTop';
 import AdminDashboard from './pages/AdminDashboard';
+import ResetPassword from './pages/ResetPassword';
 
 export default function App() {
-  const isAdminRoute = window.location.pathname === '/admin';
+  const pathname = window.location.pathname;
+  const isAdminRoute = pathname === '/admin';
+  const isResetRoute = pathname === '/reset-password';
 
   if (isAdminRoute) {
     return <AdminDashboard />;
+  }
+
+  if (isResetRoute) {
+    return <ResetPassword />;
   }
 
   return (
