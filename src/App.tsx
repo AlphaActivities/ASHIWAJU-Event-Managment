@@ -1,4 +1,3 @@
-import { lazy, Suspense } from 'react';
 import Navbar from './components/Navbar';
 import HeroSection from './components/sections/HeroSection';
 import UnderstandingSection from './components/sections/UnderstandingSection';
@@ -16,8 +15,8 @@ import FooterSection from './components/sections/FooterSection';
 import FloatingCallButton from './components/ui/FloatingCallButton';
 import MobileCTABar from './components/ui/MobileCTABar';
 import ScrollToTop from './components/ui/ScrollToTop';
-const AdminDashboard = lazy(() => import('./pages/AdminDashboard'));
-const ResetPassword = lazy(() => import('./pages/ResetPassword'));
+import AdminDashboard from './pages/AdminDashboard';
+import ResetPassword from './pages/ResetPassword';
 
 export default function App() {
   const pathname = window.location.pathname;
@@ -25,31 +24,11 @@ export default function App() {
   const isResetRoute = pathname === '/reset-password';
 
   if (isAdminRoute) {
-    return (
-      <Suspense
-        fallback={
-          <div className="min-h-screen bg-gradient-to-br from-rose-50 via-white to-amber-50 flex items-center justify-center">
-            <div className="text-gray-500">Loading admin dashboard...</div>
-          </div>
-        }
-      >
-        <AdminDashboard />
-      </Suspense>
-    );
+    return <AdminDashboard />;
   }
 
   if (isResetRoute) {
-    return (
-      <Suspense
-        fallback={
-          <div className="min-h-screen bg-gradient-to-br from-rose-50 via-white to-amber-50 flex items-center justify-center">
-            <div className="text-gray-500">Loading...</div>
-          </div>
-        }
-      >
-        <ResetPassword />
-      </Suspense>
-    );
+    return <ResetPassword />;
   }
 
   return (
