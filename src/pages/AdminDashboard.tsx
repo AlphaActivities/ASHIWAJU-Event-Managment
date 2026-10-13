@@ -20,7 +20,9 @@ import {
   XCircle,
 } from 'lucide-react';
 import type { Session, User as SupabaseUser } from '@supabase/supabase-js';
-import { supabaseAdmin as supabase } from '../utils/supabaseAdmin';
+import { supabaseAdmin, adminConfigAvailable } from '../utils/supabaseAdmin';
+
+const supabase = supabaseAdmin as NonNullable<typeof supabaseAdmin>;
 
 interface GuideDownload {
   id: string;
@@ -80,6 +82,13 @@ interface LeadNote {
   note: string;
   created_by: string | null;
   created_at: string;
+  author_name: string | null;
+}
+
+interface AdminProfile {
+  user_id: string;
+  display_name: string | null;
+  email: string;
 }
 
 interface FollowUp {
@@ -160,7 +169,7 @@ const STATUS_LABELS: Record<string, string> = {
   closed_not_proceeding: 'Closed — Not Proceeding',
 };
 
-export default function AdminDashboard() {
+function AdminDashboardInner() {
   const [session, setSession] = useState<Session | null>(null);
   const [user, setUser] = useState<SupabaseUser | null>(null);
   const [authChecked, setAuthChecked] = useState(false);
@@ -206,6 +215,8 @@ export default function AdminDashboard() {
   const [allUpcomingSessions, setAllUpcomingSessions] = useState<ClaritySession[]>([]);
   const [sessionSuccess, setSessionSuccess] = useState('');
   const [sessionError, setSessionError] = useState('');
+  const [totalSubmissions, setTotalSubmissions] = useState(0);
+  const [adminProfiles, setAdminProfiles] = useState<Map<string, string>>(new Map());
 
   // ── Auth: check existing session on mount ──
   useEffect(() => {
@@ -240,6 +251,7 @@ export default function AdminDashboard() {
       loadGuideDownloads();
       loadAllFollowUps();
       loadAllUpcomingSessions();
+      loadAdminProfiles();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session]);
@@ -291,6 +303,7 @@ export default function AdminDashboard() {
         .order('created_at', { ascending: false });
       if (submissionsError) throw submissionsError;
       const submissions = (submissionsData as FormSubmission[]) || [];
+      setTotalSubmissions(submissions.length);
 
       const latestSubmissionByBride = new Map<string, FormSubmission>();
       for (const sub of submissions) {
@@ -339,6 +352,23 @@ export default function AdminDashboard() {
     }
   };
 
+  const loadAdminProfiles = async () => {
+    try {
+      const { data, error: queryError } = await supabase
+        .from('admin_profiles')
+        .select('user_id, display_name, email');
+      if (queryError) throw queryError;
+      const profiles = (data as AdminProfile[]) || [];
+      const map = new Map<string, string>();
+      for (const p of profiles) {
+        map.set(p.user_id, p.display_name || p.email);
+      }
+      setAdminProfiles(map);
+    } catch (err) {
+      console.error('Error loading admin profiles:', err);
+    }
+  };
+
   // ── Status update via update_bride_status() RPC ──
   const updateLeadStatus = async (brideId: string, newStatus: string) => {
     setUpdatingStatusId(brideId);
@@ -379,14 +409,19 @@ export default function AdminDashboard() {
         .eq('bride_id', brideId)
         .order('created_at', { ascending: false });
       if (queryError) throw queryError;
-      setNotes((data as LeadNote[]) || []);
+      const rawNotes = (data as LeadNote[]) || [];
+      const notesWithAuthors = rawNotes.map((n) => ({
+        ...n,
+        author_name: n.created_by ? adminProfiles.get(n.created_by) ?? null : null,
+      }));
+      setNotes(notesWithAuthors);
     } catch (err) {
       console.error('Error loading notes:', err);
       setNotes([]);
     } finally {
       setNotesLoading(false);
     }
-  }, []);
+  }, [adminProfiles]);
 
   const handleAddNote = async () => {
     if (!selectedLead || !noteText.trim()) return;
@@ -883,6 +918,39 @@ export default function AdminDashboard() {
               </div>
             )}
 
+            {/* Statistics cards */}
+            {activeTab === 'clarity' && (() => {
+              const statusCounts = STATUS_OPTIONS.reduce((acc, s) => {
+                acc[s] = leads.filter((l) => l.current_status === s).length;
+                return acc;
+              }, {} as Record<string, number>);
+              const convertedCount = statusCounts['converted_to_client'] || 0;
+              const conversionRate = leads.length > 0
+                ? ((convertedCount / leads.length) * 100).toFixed(1)
+                : '0.0';
+              const statCards = [
+                { label: 'Total Brides', value: leads.length, color: 'text-rose-600', bg: 'bg-rose-50' },
+                { label: 'Total Submissions', value: totalSubmissions, color: 'text-amber-600', bg: 'bg-amber-50' },
+                { label: 'Conversion Rate', value: `${conversionRate}%`, color: 'text-green-600', bg: 'bg-green-50' },
+                { label: 'New', value: statusCounts['new'] || 0, color: 'text-blue-600', bg: 'bg-blue-50' },
+                { label: 'Contacted', value: statusCounts['contacted'] || 0, color: 'text-amber-600', bg: 'bg-amber-50' },
+                { label: 'Session Booked', value: statusCounts['session_booked'] || 0, color: 'text-purple-600', bg: 'bg-purple-50' },
+                { label: 'Session Completed', value: statusCounts['session_completed'] || 0, color: 'text-cyan-600', bg: 'bg-cyan-50' },
+                { label: 'Converted to Client', value: convertedCount, color: 'text-green-600', bg: 'bg-green-50' },
+                { label: 'Closed — Not Proceeding', value: statusCounts['closed_not_proceeding'] || 0, color: 'text-gray-600', bg: 'bg-gray-100' },
+              ];
+              return (
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 mb-6">
+                  {statCards.map((card) => (
+                    <div key={card.label} className={`${card.bg} rounded-xl p-3 border border-gray-100`}>
+                      <p className={`text-2xl font-bold ${card.color}`}>{card.value}</p>
+                      <p className="text-xs text-gray-600 mt-1 font-medium leading-tight">{card.label}</p>
+                    </div>
+                  ))}
+                </div>
+              );
+            })()}
+
             {/* Search + filters */}
             <div className="flex flex-col sm:flex-row gap-4 mb-6">
               <div className="flex-1 relative">
@@ -1290,7 +1358,15 @@ export default function AdminDashboard() {
                     {notes.map((note) => (
                       <div key={note.id} className="bg-gray-50 rounded-lg p-4 border border-gray-100">
                         <p className="text-gray-700 text-sm whitespace-pre-wrap">{note.note}</p>
-                        <p className="text-gray-400 text-xs mt-2">{formatDate(note.created_at)}</p>
+                        <div className="flex items-center gap-2 mt-2 text-xs text-gray-400">
+                          {note.author_name && (
+                            <span className="inline-flex items-center gap-1 font-medium text-gray-500">
+                              <User className="w-3 h-3" />
+                              {note.author_name}
+                            </span>
+                          )}
+                          <span>{formatWAT(note.created_at)} WAT</span>
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -1540,6 +1616,24 @@ export default function AdminDashboard() {
       )}
     </div>
   );
+}
+
+export default function AdminDashboard() {
+  if (!adminConfigAvailable || !supabase) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-rose-50 via-white to-amber-50 flex items-center justify-center p-4">
+        <div className="bg-white rounded-2xl shadow-xl p-8 w-full max-w-md text-center">
+          <h1 className="text-2xl font-bold text-gray-900 mb-3">Admin Configuration Required</h1>
+          <p className="text-gray-600">
+            The admin dashboard requires dedicated environment configuration that is not
+            available in this preview environment. The production admin dashboard remains
+            fully operational.
+          </p>
+        </div>
+      </div>
+    );
+  }
+  return <AdminDashboardInner />;
 }
 
 function DetailField({ icon, label, value }: { icon?: React.ReactNode; label: string; value: string }) {

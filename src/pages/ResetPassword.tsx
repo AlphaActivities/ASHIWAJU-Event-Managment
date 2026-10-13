@@ -1,10 +1,30 @@
 import { useState, useEffect, useRef } from 'react';
 import { Lock, CheckCircle, AlertCircle, ArrowLeft } from 'lucide-react';
-import { supabaseAdmin as supabase } from '../utils/supabaseAdmin';
+import { supabaseAdmin, adminConfigAvailable } from '../utils/supabaseAdmin';
+
+const supabase = supabaseAdmin as NonNullable<typeof supabaseAdmin>;
 
 type Stage = 'verifying' | 'ready' | 'submitting' | 'success' | 'error';
 
 export default function ResetPassword() {
+  if (!adminConfigAvailable || !supabase) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-rose-50 via-white to-amber-50 flex items-center justify-center p-4">
+        <div className="bg-white rounded-2xl shadow-xl p-8 w-full max-w-md text-center">
+          <h1 className="text-2xl font-bold text-gray-900 mb-3">Admin Configuration Required</h1>
+          <p className="text-gray-600">
+            The password reset page requires dedicated environment configuration that is not
+            available in this preview environment. The production admin dashboard remains
+            fully operational.
+          </p>
+        </div>
+      </div>
+    );
+  }
+  return <ResetPasswordInner />;
+}
+
+function ResetPasswordInner() {
   const [stage, setStage] = useState<Stage>('verifying');
   const [errorMsg, setErrorMsg] = useState('');
   const [newPassword, setNewPassword] = useState('');
