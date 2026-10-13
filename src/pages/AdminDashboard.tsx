@@ -303,7 +303,7 @@ function AdminDashboardInner() {
         .from('form_submissions')
         .select('*')
         .in('bride_id', brideIds)
-        .order('created_at', { ascending: false });
+        .order('original_submitted_at', { ascending: false, nullsFirst: false });
       if (submissionsError) throw submissionsError;
       const submissions = (submissionsData as FormSubmission[]) || [];
       setTotalSubmissions(submissions.length);
@@ -331,6 +331,8 @@ function AdminDashboardInner() {
           submitted_at: sub?.original_submitted_at ?? sub?.created_at ?? bride.created_at,
         };
       });
+
+      rows.sort((a, b) => new Date(b.submitted_at).getTime() - new Date(a.submitted_at).getTime());
 
       setLeads(rows);
     } catch (err) {
