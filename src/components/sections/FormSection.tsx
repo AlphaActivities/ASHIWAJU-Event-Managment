@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { LuxFadeIn } from "../ui/LuxFadeIn";
-import { supabase } from "../../utils/supabase";
 
 export default function FormSection() {
   const [weddingDate, setWeddingDate] = useState("");
@@ -24,24 +23,6 @@ export default function FormSection() {
       });
 
       if (response.ok) {
-        try {
-          const { error } = await supabase.from('clarity_session_leads').insert([
-            {
-              name: (formData.get('name') as string) || '',
-              email: (formData.get('email') as string) || '',
-              phone: (formData.get('phone') as string) || '',
-              preferred_contact_method: contactMethod || '',
-              wedding_date: weddingDate || null,
-              planned_budget: plannedBudget || null,
-              guest_size: guestSize || null,
-            },
-          ]);
-          if (error) {
-            console.error('CRM lead insert failed:', error);
-          }
-        } catch (dbError) {
-          console.error('CRM lead insert failed:', dbError);
-        }
         window.location.href = '/thank-you.html';
       } else {
         throw new Error('Form submission failed');
