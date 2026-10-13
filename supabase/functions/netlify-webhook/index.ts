@@ -27,12 +27,93 @@ async function getWebhookSecret(): Promise<string | null> {
     .eq("is_active", true)
     .maybeSingle();
   if (error || !data) {
-    console.error("Failed to read webhook secret:", error?.message);
+    console.error("Failed to read webhook secret from database");
     return null;
   }
   cachedSecret = data.secret;
   cachedSecretAt = Date.now();
   return cachedSecret;
+}
+
+// ── JWS signature verification (Netlify's X-Webhook-Signature header) ──
+// Netlify signs the raw request body with HS256 using a JWS secret token.
+// The JWT payload contains { iss: "netlify", sha256: "<hex of body>" }.
+// We verify the JWT and check that sha256 matches the raw body hash.
+async function verifyJwsSignature(
+  signatureHeader: string,
+  rawBody: Uint8Array,
+  secret: string,
+): Promise<boolean> {
+  try {
+    // Manually decode the JWT (unverified) to extract the header and payload
+    const parts = signatureHeader.split(".");
+    if (parts.length !== 3) return false;
+
+    // Decode header
+    const headerJson = new TextDecoder().decode(
+      base64UrlDecode(parts[0]),
+    );
+    const header = JSON.parse(headerJson);
+    if (header.alg !== "HS256") return false;
+
+    // Verify the signature using HMAC-SHA256
+    const key = await crypto.subtle.importKey(
+      "raw",
+      new TextEncoder().encode(secret),
+      { name: "HMAC", hash: "SHA-256" },
+      false,
+      ["verify"],
+    );
+
+    const signedData = new TextEncoder().encode(parts[0] + "." + parts[1]);
+    const signatureBytes = base64UrlDecode(parts[2]);
+
+    const valid = await crypto.subtle.verify(
+      "HMAC",
+      key,
+      signatureBytes,
+      signedData,
+    );
+    if (!valid) return false;
+
+    // Decode payload and verify claims
+    const payloadJson = new TextDecoder().decode(base64UrlDecode(parts[1]));
+    const payload = JSON.parse(payloadJson);
+
+    if (payload.iss !== "netlify") return false;
+
+    // Verify body hash
+    const bodyHash = await crypto.subtle.digest("SHA-256", rawBody);
+    const bodyHashHex = Array.from(new Uint8Array(bodyHash))
+      .map((b) => b.toString(16).padStart(2, "0"))
+      .join("");
+
+    return payload.sha256 === bodyHashHex;
+  } catch {
+    return false;
+  }
+}
+
+function base64UrlDecode(input: string): Uint8Array {
+  const padded = input.replace(/-/g, "+").replace(/_/g, "/");
+  const pad = padded.length % 4;
+  const b64 = pad ? padded + "=".repeat(4 - pad) : padded;
+  const binary = atob(b64);
+  const bytes = new Uint8Array(binary.length);
+  for (let i = 0; i < binary.length; i++) {
+    bytes[i] = binary.charCodeAt(i);
+  }
+  return bytes;
+}
+
+// ── Timing-safe string comparison ──
+function timingSafeEqual(a: string, b: string): boolean {
+  if (a.length !== b.length) return false;
+  let result = 0;
+  for (let i = 0; i < a.length; i++) {
+    result |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  }
+  return result === 0;
 }
 
 const REQUIRED_FIELDS = ["name", "email", "phone"] as const;
@@ -77,11 +158,15 @@ async function getSystemAdminId(): Promise<string> {
     .order("created_at")
     .limit(1)
     .maybeSingle();
-  if (error || !data) throw new Error("No admin found in admin_profiles to attribute webhook creates");
+  if (error || !data) {
+    throw new Error("No admin found in admin_profiles to attribute webhook creates");
+  }
   return data.user_id;
 }
 
-async function processSubmission(payload: NetlifyPayload): Promise<{ submissionId: string; brideId: string; created: boolean }> {
+async function processSubmission(
+  payload: NetlifyPayload,
+): Promise<{ submissionId: string; brideId: string; created: boolean }> {
   const source = "netlify_form";
   const sourceId = payload.id;
   const d = payload.data || {};
@@ -110,7 +195,7 @@ async function processSubmission(payload: NetlifyPayload): Promise<{ submissionI
         status: "failed",
         error_message: `Missing required fields: ${missing.join(", ")}`,
       },
-      { onConflict: "source,source_id" }
+      { onConflict: "source,source_id" },
     );
     if (syncErr) throw new Error(`Failed to log sync_event: ${syncErr.message}`);
     throw new Error(`Missing required fields: ${missing.join(", ")}`);
@@ -155,7 +240,9 @@ async function processSubmission(payload: NetlifyPayload): Promise<{ submissionI
           .ilike("email", email)
           .is("deleted_at", null)
           .maybeSingle();
-        if (retryErr || !retry) throw new Error("Bride creation race condition retry failed");
+        if (retryErr || !retry) {
+          throw new Error("Bride creation race condition retry failed");
+        }
         brideId = retry.id;
       } else {
         throw new Error(`Bride creation failed: ${insertErr.message}`);
@@ -196,7 +283,9 @@ async function processSubmission(payload: NetlifyPayload): Promise<{ submissionI
         .eq("source", source)
         .eq("source_id", sourceId)
         .maybeSingle();
-      if (fetchErr || !existing2) throw new Error("Duplicate detection but fetch failed");
+      if (fetchErr || !existing2) {
+        throw new Error("Duplicate detection but fetch failed");
+      }
       submissionId = existing2.id;
 
       // Mark sync_event as duplicate
@@ -208,7 +297,7 @@ async function processSubmission(payload: NetlifyPayload): Promise<{ submissionI
           form_submission_id: submissionId,
           processed_at: new Date().toISOString(),
         },
-        { onConflict: "source,source_id" }
+        { onConflict: "source,source_id" },
       );
 
       return { submissionId, brideId, created };
@@ -227,7 +316,7 @@ async function processSubmission(payload: NetlifyPayload): Promise<{ submissionI
       form_submission_id: submissionId,
       processed_at: new Date().toISOString(),
     },
-    { onConflict: "source,source_id" }
+    { onConflict: "source,source_id" },
   );
   if (syncErr) throw new Error(`Sync event log failed: ${syncErr.message}`);
 
@@ -244,28 +333,48 @@ Deno.serve(async (req: Request) => {
   }
 
   try {
-    // Authenticate the webhook request
+    // Read the raw body once — needed for JWS signature verification
+    const rawBody = await req.text();
+    const rawBytes = new TextEncoder().encode(rawBody);
+
+    // ── Authentication ──
+    // Primary: Netlify JWS signature (X-Webhook-Signature header + JWS secret in Netlify UI)
+    // Fallback: secret in query parameter (for environments without JWS support)
     const webhookSecret = await getWebhookSecret();
     if (!webhookSecret) {
       console.error("Webhook secret not configured in webhook_secrets table");
       return jsonResponse(500, { error: "Server misconfigured" });
     }
 
-    const providedSecret = req.headers.get("X-Webhook-Secret");
-    if (!providedSecret || providedSecret !== webhookSecret) {
+    const signatureHeader = req.headers.get("X-Webhook-Signature");
+    let authenticated = false;
+
+    if (signatureHeader) {
+      // Verify JWS signature (Netlify's recommended method)
+      authenticated = await verifyJwsSignature(signatureHeader, rawBytes, webhookSecret);
+    }
+
+    if (!authenticated) {
+      // Fallback: check query parameter ?secret=...
+      const url = new URL(req.url);
+      const querySecret = url.searchParams.get("secret");
+      if (querySecret) {
+        authenticated = timingSafeEqual(querySecret, webhookSecret);
+      }
+    }
+
+    if (!authenticated) {
       return jsonResponse(401, { error: "Unauthorized" });
     }
 
-    const body = await req.text();
+    // ── Parse and validate payload ──
     let payload: NetlifyPayload;
-
     try {
-      payload = JSON.parse(body);
+      payload = JSON.parse(rawBody);
     } catch {
       return jsonResponse(400, { error: "Invalid JSON" });
     }
 
-    // Validate required payload structure
     if (!payload.id || typeof payload.id !== "string") {
       return jsonResponse(400, { error: "Missing submission id" });
     }
