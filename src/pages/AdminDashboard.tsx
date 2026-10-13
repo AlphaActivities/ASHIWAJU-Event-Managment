@@ -11,6 +11,10 @@ import {
   StickyNote,
   Plus,
   ChevronRight,
+  Bell,
+  Clock,
+  CheckCircle,
+  AlertCircle,
 } from 'lucide-react';
 import type { Session, User as SupabaseUser } from '@supabase/supabase-js';
 import { supabaseAdmin as supabase } from '../utils/supabaseAdmin';
@@ -75,6 +79,17 @@ interface LeadNote {
   created_at: string;
 }
 
+interface FollowUp {
+  id: string;
+  bride_id: string;
+  description: string;
+  due_date: string;
+  completed_at: string | null;
+  completed_by: string | null;
+  created_by: string | null;
+  created_at: string;
+}
+
 type TabKey = 'clarity' | 'guide';
 
 const STATUS_OPTIONS = [
@@ -130,6 +145,15 @@ export default function AdminDashboard() {
 
   const [updatingStatusId, setUpdatingStatusId] = useState<string | null>(null);
 
+  const [followUps, setFollowUps] = useState<FollowUp[]>([]);
+  const [followUpsLoading, setFollowUpsLoading] = useState(false);
+  const [followUpDate, setFollowUpDate] = useState('');
+  const [followUpTime, setFollowUpTime] = useState('');
+  const [followUpDesc, setFollowUpDesc] = useState('');
+  const [followUpSaving, setFollowUpSaving] = useState(false);
+  const [completingFollowUpId, setCompletingFollowUpId] = useState<string | null>(null);
+  const [allFollowUps, setAllFollowUps] = useState<FollowUp[]>([]);
+
   // ── Auth: check existing session on mount ──
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
@@ -146,6 +170,7 @@ export default function AdminDashboard() {
         setGuideDownloads([]);
         setSelectedLead(null);
         setNotes([]);
+        setAllFollowUps([]);
       }
     });
 
@@ -159,6 +184,7 @@ export default function AdminDashboard() {
     if (session) {
       loadLeads();
       loadGuideDownloads();
+      loadAllFollowUps();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session]);
@@ -327,13 +353,93 @@ export default function AdminDashboard() {
   const openLeadDetail = (lead: LeadRow) => {
     setSelectedLead(lead);
     setNoteText('');
+    setFollowUpDate('');
+    setFollowUpTime('');
+    setFollowUpDesc('');
     loadNotes(lead.id);
+    loadFollowUps(lead.id);
   };
 
   const closeLeadDetail = () => {
     setSelectedLead(null);
     setNotes([]);
     setNoteText('');
+    setFollowUps([]);
+    setFollowUpDate('');
+    setFollowUpTime('');
+    setFollowUpDesc('');
+  };
+
+  // ── Follow-ups ──
+  const loadFollowUps = useCallback(async (brideId: string) => {
+    setFollowUpsLoading(true);
+    try {
+      const { data, error: queryError } = await supabase
+        .from('follow_ups')
+        .select('*')
+        .eq('bride_id', brideId)
+        .order('due_date', { ascending: true });
+      if (queryError) throw queryError;
+      setFollowUps((data as FollowUp[]) || []);
+    } catch (err) {
+      console.error('Error loading follow-ups:', err);
+      setFollowUps([]);
+    } finally {
+      setFollowUpsLoading(false);
+    }
+  }, []);
+
+  const loadAllFollowUps = async () => {
+    try {
+      const { data, error: queryError } = await supabase
+        .from('follow_ups')
+        .select('*')
+        .is('completed_at', null)
+        .order('due_date', { ascending: true });
+      if (queryError) throw queryError;
+      setAllFollowUps((data as FollowUp[]) || []);
+    } catch (err) {
+      console.error('Error loading all follow-ups:', err);
+    }
+  };
+
+  const handleAddFollowUp = async () => {
+    if (!selectedLead || !followUpDate || !followUpTime || !followUpDesc.trim()) return;
+    setFollowUpSaving(true);
+    const dueDateISO = new Date(`${followUpDate}T${followUpTime}`).toISOString();
+    try {
+      const { error: insertError } = await supabase
+        .from('follow_ups')
+        .insert([{ bride_id: selectedLead.id, description: followUpDesc.trim(), due_date: dueDateISO }]);
+      if (insertError) throw insertError;
+      setFollowUpDate('');
+      setFollowUpTime('');
+      setFollowUpDesc('');
+      await loadFollowUps(selectedLead.id);
+      await loadAllFollowUps();
+    } catch (err) {
+      console.error('Error adding follow-up:', err);
+    } finally {
+      setFollowUpSaving(false);
+    }
+  };
+
+  const handleCompleteFollowUp = async (followUpId: string) => {
+    setCompletingFollowUpId(followUpId);
+    try {
+      const { error: rpcError } = await supabase.rpc('complete_follow_up', {
+        p_follow_up_id: followUpId,
+      });
+      if (rpcError) throw rpcError;
+      if (selectedLead) {
+        await loadFollowUps(selectedLead.id);
+      }
+      await loadAllFollowUps();
+    } catch (err) {
+      console.error('Error completing follow-up:', err);
+    } finally {
+      setCompletingFollowUpId(null);
+    }
   };
 
   // ── Filtering ──
@@ -419,12 +525,44 @@ export default function AdminDashboard() {
   // ── Utilities ──
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleString('en-US', {
+      timeZone: 'Africa/Lagos',
       month: 'short',
       day: 'numeric',
       year: 'numeric',
       hour: '2-digit',
       minute: '2-digit',
     });
+  };
+
+  const formatWAT = (dateString: string) => {
+    return new Date(dateString).toLocaleString('en-US', {
+      timeZone: 'Africa/Lagos',
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+  };
+
+  const isOverdue = (dueDate: string, completedAt: string | null) => {
+    if (completedAt) return false;
+    return new Date(dueDate) < new Date();
+  };
+
+  const isUpcoming = (dueDate: string, completedAt: string | null) => {
+    if (completedAt) return false;
+    const now = new Date();
+    const due = new Date(dueDate);
+    const diffMs = due.getTime() - now.getTime();
+    return diffMs > 0 && diffMs <= 7 * 24 * 60 * 60 * 1000;
+  };
+
+  const followUpStatusForBride = (brideId: string): 'overdue' | 'upcoming' | null => {
+    const brideFollowUps = allFollowUps.filter((f) => f.bride_id === brideId);
+    if (brideFollowUps.some((f) => isOverdue(f.due_date, f.completed_at))) return 'overdue';
+    if (brideFollowUps.some((f) => isUpcoming(f.due_date, f.completed_at))) return 'upcoming';
+    return null;
   };
 
   const formatDateOnly = (dateString: string | null) => {
@@ -628,6 +766,56 @@ export default function AdminDashboard() {
               {loading && <div className="text-gray-500 text-sm">Loading...</div>}
             </div>
 
+            {/* Follow-up reminders section */}
+            {activeTab === 'clarity' && (() => {
+  const overdueFollowUps = allFollowUps.filter((f) => isOverdue(f.due_date, f.completed_at));
+  const upcomingFollowUps = allFollowUps.filter((f) => isUpcoming(f.due_date, f.completed_at));
+  if (overdueFollowUps.length === 0 && upcomingFollowUps.length === 0) return null;
+  const brideNameById = new Map(leads.map((l) => [l.id, l.submission_name]));
+  return (
+    <div className="mb-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+      {overdueFollowUps.length > 0 && (
+        <div className="bg-red-50 border border-red-200 rounded-xl p-4">
+          <div className="flex items-center gap-2 mb-3">
+            <AlertCircle className="w-5 h-5 text-red-600" />
+            <h3 className="font-semibold text-red-800 text-sm">Overdue Follow-ups ({overdueFollowUps.length})</h3>
+          </div>
+          <div className="space-y-2 max-h-48 overflow-y-auto">
+            {overdueFollowUps.map((f) => (
+              <div key={f.id} className="flex items-center justify-between bg-white rounded-lg px-3 py-2 border border-red-100">
+                <div className="min-w-0">
+                  <p className="text-sm font-medium text-gray-900 truncate">{brideNameById.get(f.bride_id) || 'Unknown'}</p>
+                  <p className="text-xs text-gray-500 truncate">{f.description}</p>
+                </div>
+                <span className="text-xs text-red-600 font-semibold whitespace-nowrap ml-2">{formatWAT(f.due_date)}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      {upcomingFollowUps.length > 0 && (
+        <div className="bg-amber-50 border border-amber-200 rounded-xl p-4">
+          <div className="flex items-center gap-2 mb-3">
+            <Clock className="w-5 h-5 text-amber-600" />
+            <h3 className="font-semibold text-amber-800 text-sm">Upcoming Follow-ups ({upcomingFollowUps.length})</h3>
+          </div>
+          <div className="space-y-2 max-h-48 overflow-y-auto">
+            {upcomingFollowUps.map((f) => (
+              <div key={f.id} className="flex items-center justify-between bg-white rounded-lg px-3 py-2 border border-amber-100">
+                <div className="min-w-0">
+                  <p className="text-sm font-medium text-gray-900 truncate">{brideNameById.get(f.bride_id) || 'Unknown'}</p>
+                  <p className="text-xs text-gray-500 truncate">{f.description}</p>
+                </div>
+                <span className="text-xs text-amber-600 font-semibold whitespace-nowrap ml-2">{formatWAT(f.due_date)}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+})()}
+
             {/* Clarity Session Leads table */}
             {activeTab === 'clarity' && (
               <>
@@ -648,6 +836,7 @@ export default function AdminDashboard() {
                           <th className="text-left py-4 px-4 font-semibold text-gray-700">Session Date</th>
                           <th className="text-left py-4 px-4 font-semibold text-gray-700">Wedding Date</th>
                           <th className="text-left py-4 px-4 font-semibold text-gray-700">Status</th>
+                          <th className="text-left py-4 px-4 font-semibold text-gray-700">Follow-up</th>
                           <th className="text-left py-4 px-4 font-semibold text-gray-700">Created</th>
                           <th className="text-left py-4 px-4 font-semibold text-gray-700">Actions</th>
                         </tr>
@@ -700,18 +889,38 @@ export default function AdminDashboard() {
                               </div>
                             </td>
                             <td className="py-4 px-4">
+                              {(() => {
+                                const fuStatus = followUpStatusForBride(lead.id);
+                                if (!fuStatus) return <span className="text-gray-300 text-xs">—</span>;
+                                if (fuStatus === 'overdue') return (
+                                  <span className="inline-flex items-center gap-1 text-xs font-semibold text-red-600 bg-red-50 border border-red-200 rounded-full px-2 py-1">
+                                    <AlertCircle className="w-3 h-3" />
+                                    Overdue
+                                  </span>
+                                );
+                                return (
+                                  <span className="inline-flex items-center gap-1 text-xs font-semibold text-amber-600 bg-amber-50 border border-amber-200 rounded-full px-2 py-1">
+                                    <Clock className="w-3 h-3" />
+                                    Upcoming
+                                  </span>
+                                );
+                              })()}
+                            </td>
+                            <td className="py-4 px-4">
                               <div className="flex items-center gap-2 text-gray-600 text-sm">
                                 <Calendar className="w-4 h-4" />
                                 {formatDate(lead.created_at)}
                               </div>
                             </td>
                             <td className="py-4 px-4">
-                              <button
-                                onClick={() => openLeadDetail(lead)}
-                                className="text-rose-600 hover:text-rose-700 text-sm font-semibold transition-colors"
-                              >
-                                View Details
-                              </button>
+                              <div className="flex items-center gap-2">
+                                <button
+                                  onClick={() => openLeadDetail(lead)}
+                                  className="text-rose-600 hover:text-rose-700 text-sm font-semibold transition-colors"
+                                >
+                                  View Details
+                                </button>
+                              </div>
                             </td>
                           </tr>
                         ))}
@@ -874,6 +1083,102 @@ export default function AdminDashboard() {
                         <p className="text-gray-400 text-xs mt-2">{formatDate(note.created_at)}</p>
                       </div>
                     ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Follow-ups section */}
+              <div>
+                <div className="flex items-center gap-2 mb-3">
+                  <Bell className="w-5 h-5 text-gray-500" />
+                  <h3 className="text-lg font-semibold text-gray-800">Follow-up Reminders</h3>
+                </div>
+
+                {/* Add follow-up */}
+                <div className="mb-4 space-y-2">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    <input
+                      type="date"
+                      value={followUpDate}
+                      onChange={(e) => setFollowUpDate(e.target.value)}
+                      className="px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none text-sm"
+                      style={{ colorScheme: 'light' }}
+                    />
+                    <input
+                      type="time"
+                      value={followUpTime}
+                      onChange={(e) => setFollowUpTime(e.target.value)}
+                      className="px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none text-sm"
+                      style={{ colorScheme: 'light' }}
+                    />
+                  </div>
+                  <input
+                    type="text"
+                    value={followUpDesc}
+                    onChange={(e) => setFollowUpDesc(e.target.value)}
+                    placeholder="Brief note about this follow-up..."
+                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none text-sm"
+                  />
+                  <button
+                    onClick={handleAddFollowUp}
+                    disabled={!followUpDate || !followUpTime || !followUpDesc.trim() || followUpSaving}
+                    className="flex items-center gap-2 bg-rose-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-rose-700 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed"
+                  >
+                    <Plus className="w-4 h-4" />
+                    {followUpSaving ? 'Saving...' : 'Add Follow-up'}
+                  </button>
+                </div>
+
+                {/* Follow-ups list */}
+                {followUpsLoading ? (
+                  <div className="text-gray-500 text-sm py-4">Loading follow-ups...</div>
+                ) : followUps.length === 0 ? (
+                  <div className="text-gray-400 text-sm py-4 text-center">No follow-ups yet</div>
+                ) : (
+                  <div className="space-y-3">
+                    {followUps.map((fu) => {
+                      const overdue = isOverdue(fu.due_date, fu.completed_at);
+                      const upcoming = isUpcoming(fu.due_date, fu.completed_at);
+                      return (
+                        <div
+                          key={fu.id}
+                          className={`rounded-lg p-4 border ${
+                            fu.completed_at
+                              ? 'bg-green-50 border-green-100'
+                              : overdue
+                                ? 'bg-red-50 border-red-100'
+                                : upcoming
+                                  ? 'bg-amber-50 border-amber-100'
+                                  : 'bg-gray-50 border-gray-100'
+                          }`}
+                        >
+                          <div className="flex items-start justify-between gap-3">
+                            <div className="min-w-0 flex-1">
+                              <p className="text-gray-700 text-sm font-medium">{fu.description}</p>
+                              <p className="text-gray-400 text-xs mt-1">
+                                Due: {formatWAT(fu.due_date)} WAT
+                              </p>
+                              {fu.completed_at && (
+                                <p className="text-green-600 text-xs mt-1 flex items-center gap-1">
+                                  <CheckCircle className="w-3 h-3" />
+                                  Completed {formatWAT(fu.completed_at)} WAT
+                                </p>
+                              )}
+                            </div>
+                            {!fu.completed_at && (
+                              <button
+                                onClick={() => handleCompleteFollowUp(fu.id)}
+                                disabled={completingFollowUpId === fu.id}
+                                className="flex-shrink-0 flex items-center gap-1 text-green-600 hover:text-green-700 text-xs font-semibold transition-colors disabled:opacity-50"
+                              >
+                                <CheckCircle className="w-4 h-4" />
+                                {completingFollowUpId === fu.id ? '...' : 'Done'}
+                              </button>
+                            )}
+                          </div>
+                        </div>
+                      );
+                    })}
                   </div>
                 )}
               </div>
