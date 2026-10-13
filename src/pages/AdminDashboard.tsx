@@ -25,15 +25,6 @@ import { supabaseAdmin, adminConfigAvailable } from '../utils/supabaseAdmin';
 
 const supabase = supabaseAdmin as NonNullable<typeof supabaseAdmin>;
 
-interface GuideDownload {
-  id: string;
-  full_name: string;
-  email: string;
-  phone: string;
-  downloaded_at: string;
-  created_at: string;
-}
-
 interface Bride {
   id: string;
   bride_code: string | null;
@@ -117,7 +108,7 @@ interface ClaritySession {
   updated_at: string;
 }
 
-type TabKey = 'clarity' | 'guide' | 'clients';
+type TabKey = 'clarity' | 'clients';
 
 const SESSION_STATUS_OPTIONS = ['scheduled', 'completed', 'cancelled', 'rescheduled'] as const;
 const SESSION_METHOD_OPTIONS = ['phone', 'video', 'in_person'] as const;
@@ -181,7 +172,6 @@ function AdminDashboardInner() {
 
   const [activeTab, setActiveTab] = useState<TabKey>('clarity');
   const [leads, setLeads] = useState<LeadRow[]>([]);
-  const [guideDownloads, setGuideDownloads] = useState<GuideDownload[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState<string>('all');
   const [loading, setLoading] = useState(false);
@@ -234,7 +224,6 @@ function AdminDashboardInner() {
       setUser(newSession?.user ?? null);
       if (!newSession) {
         setLeads([]);
-        setGuideDownloads([]);
         setSelectedLead(null);
         setNotes([]);
         setAllFollowUps([]);
@@ -251,7 +240,6 @@ function AdminDashboardInner() {
   useEffect(() => {
     if (session) {
       loadLeads();
-      loadGuideDownloads();
       loadAllFollowUps();
       loadAllUpcomingSessions();
       loadAdminProfiles();
@@ -341,19 +329,6 @@ function AdminDashboardInner() {
       setLeads([]);
     } finally {
       setLoading(false);
-    }
-  };
-
-  const loadGuideDownloads = async () => {
-    try {
-      const { data, error: queryError } = await supabase
-        .from('guide_downloads')
-        .select('*')
-        .order('created_at', { ascending: false });
-      if (queryError) throw queryError;
-      setGuideDownloads((data as GuideDownload[]) || []);
-    } catch (err) {
-      console.error('Error loading guide downloads:', err);
     }
   };
 
@@ -679,15 +654,6 @@ function AdminDashboardInner() {
     return matchesSearch && matchesStatus;
   });
 
-  const filteredGuideDownloads = guideDownloads.filter((lead) => {
-    if (!searchTerm) return true;
-    return (
-      lead.full_name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      lead.email?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      lead.phone?.includes(searchTerm)
-    );
-  });
-
   // ── CSV export ──
   const exportToCSV = () => {
     if (activeTab === 'clarity') {
@@ -723,16 +689,6 @@ function AdminDashboardInner() {
       ]);
       const csvContent = [headers.join(','), ...csvData.map((row) => row.map((c) => `"${c.replace(/"/g, '""')}"`).join(','))].join('\n');
       downloadCSV(csvContent, `ashiwaju-clarity-leads-${new Date().toISOString().split('T')[0]}.csv`);
-    } else {
-      const headers = ['Name', 'Email', 'Phone', 'Downloaded At'];
-      const csvData = filteredGuideDownloads.map((lead) => [
-        lead.full_name,
-        lead.email,
-        lead.phone,
-        new Date(lead.downloaded_at).toLocaleString(),
-      ]);
-      const csvContent = [headers.join(','), ...csvData.map((row) => row.map((c) => `"${c.replace(/"/g, '""')}"`).join(','))].join('\n');
-      downloadCSV(csvContent, `ashiwaju-leads-${new Date().toISOString().split('T')[0]}.csv`);
     }
   };
 
@@ -889,7 +845,7 @@ function AdminDashboardInner() {
 
   // ── Render: dashboard ──
   const convertedClients = leads.filter((l) => l.current_status === 'converted_to_client');
-  const activeLeads = activeTab === 'clarity' ? filteredLeads : activeTab === 'clients' ? convertedClients : filteredGuideDownloads;
+  const activeLeads = activeTab === 'clarity' ? filteredLeads : convertedClients;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-rose-50 via-white to-amber-50">
@@ -925,16 +881,6 @@ function AdminDashboardInner() {
               }`}
             >
               Clarity Session Leads
-            </button>
-            <button
-              onClick={() => setActiveTab('guide')}
-              className={`px-4 py-2.5 text-sm font-semibold rounded-t-lg transition-colors ${
-                activeTab === 'guide'
-                  ? 'bg-rose-50 text-rose-700 border-b-2 border-rose-600'
-                  : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50'
-              }`}
-            >
-              Guide Downloads
             </button>
             <button
               onClick={() => setActiveTab('clients')}
@@ -995,11 +941,7 @@ function AdminDashboardInner() {
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
                 <input
                   type="text"
-                  placeholder={
-                    activeTab === 'clarity'
-                      ? 'Search by name, email, phone, or status...'
-                      : 'Search by name, email, or phone...'
-                  }
+                  placeholder="Search by name, email, phone, or status..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none"
@@ -1033,16 +975,6 @@ function AdminDashboardInner() {
                 </button>
               )}
 
-              {activeTab === 'guide' && (
-                <button
-                  onClick={exportToCSV}
-                  disabled={activeLeads.length === 0}
-                  className="flex items-center justify-center gap-2 bg-rose-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-rose-700 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed"
-                >
-                  <Download className="w-5 h-5" />
-                  Export CSV
-                </button>
-              )}
             </div>
             )}
 
@@ -1345,59 +1277,6 @@ function AdminDashboardInner() {
               </>
             )}
 
-            {/* Guide Downloads table */}
-            {activeTab === 'guide' && (
-              <>
-                {filteredGuideDownloads.length === 0 ? (
-                  <div className="text-center py-12 text-gray-500">
-                    {searchTerm ? 'No leads match your search' : 'No guide downloads yet'}
-                  </div>
-                ) : (
-                  <div className="overflow-x-auto">
-                    <table className="w-full">
-                      <thead>
-                        <tr className="border-b border-gray-200">
-                          <th className="text-left py-4 px-4 font-semibold text-gray-700">Name</th>
-                          <th className="text-left py-4 px-4 font-semibold text-gray-700">Email</th>
-                          <th className="text-left py-4 px-4 font-semibold text-gray-700">Phone</th>
-                          <th className="text-left py-4 px-4 font-semibold text-gray-700">Downloaded</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {filteredGuideDownloads.map((lead) => (
-                          <tr key={lead.id} className="border-b border-gray-100 hover:bg-gray-50 transition-colors">
-                            <td className="py-4 px-4">
-                              <div className="flex items-center gap-2">
-                                <User className="w-4 h-4 text-gray-400" />
-                                <span className="font-medium text-gray-900">{lead.full_name}</span>
-                              </div>
-                            </td>
-                            <td className="py-4 px-4">
-                              <a href={`mailto:${lead.email}`} className="flex items-center gap-2 text-rose-600 hover:text-rose-700 transition-colors">
-                                <Mail className="w-4 h-4" />
-                                {lead.email}
-                              </a>
-                            </td>
-                            <td className="py-4 px-4">
-                              <a href={`tel:${lead.phone}`} className="flex items-center gap-2 text-gray-700 hover:text-rose-600 transition-colors">
-                                <Phone className="w-4 h-4" />
-                                {lead.phone}
-                              </a>
-                            </td>
-                            <td className="py-4 px-4">
-                              <div className="flex items-center gap-2 text-gray-600 text-sm">
-                                <Calendar className="w-4 h-4" />
-                                {formatDate(lead.downloaded_at)}
-                              </div>
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                )}
-              </>
-            )}
           </div>
         </div>
       </div>
