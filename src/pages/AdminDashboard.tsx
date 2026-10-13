@@ -116,7 +116,7 @@ interface ClaritySession {
   updated_at: string;
 }
 
-type TabKey = 'clarity' | 'guide';
+type TabKey = 'clarity' | 'guide' | 'clients';
 
 const SESSION_STATUS_OPTIONS = ['scheduled', 'completed', 'cancelled', 'rescheduled'] as const;
 const SESSION_METHOD_OPTIONS = ['phone', 'video', 'in_person'] as const;
@@ -862,7 +862,8 @@ function AdminDashboardInner() {
   }
 
   // ── Render: dashboard ──
-  const activeLeads = activeTab === 'clarity' ? filteredLeads : filteredGuideDownloads;
+  const convertedClients = leads.filter((l) => l.current_status === 'converted_to_client');
+  const activeLeads = activeTab === 'clarity' ? filteredLeads : activeTab === 'clients' ? convertedClients : filteredGuideDownloads;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-rose-50 via-white to-amber-50">
@@ -909,6 +910,16 @@ function AdminDashboardInner() {
             >
               Guide Downloads
             </button>
+            <button
+              onClick={() => setActiveTab('clients')}
+              className={`px-4 py-2.5 text-sm font-semibold rounded-t-lg transition-colors ${
+                activeTab === 'clients'
+                  ? 'bg-rose-50 text-rose-700 border-b-2 border-rose-600'
+                  : 'text-gray-500 hover:text-gray-700 hover:bg-gray-50'
+              }`}
+            >
+              Active Clients
+            </button>
           </div>
 
           <div className="p-6">
@@ -952,6 +963,7 @@ function AdminDashboardInner() {
             })()}
 
             {/* Search + filters */}
+            {activeTab !== 'clients' && (
             <div className="flex flex-col sm:flex-row gap-4 mb-6">
               <div className="flex-1 relative">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
@@ -984,23 +996,39 @@ function AdminDashboardInner() {
                 </select>
               )}
 
-              <button
-                onClick={exportToCSV}
-                disabled={activeLeads.length === 0}
-                className="flex items-center justify-center gap-2 bg-rose-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-rose-700 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed"
-              >
-                <Download className="w-5 h-5" />
-                Export CSV
-              </button>
+              {activeTab === 'clarity' && (
+                <button
+                  onClick={exportToCSV}
+                  disabled={activeLeads.length === 0}
+                  className="flex items-center justify-center gap-2 bg-rose-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-rose-700 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed"
+                >
+                  <Download className="w-5 h-5" />
+                  Export CSV
+                </button>
+              )}
+
+              {activeTab === 'guide' && (
+                <button
+                  onClick={exportToCSV}
+                  disabled={activeLeads.length === 0}
+                  className="flex items-center justify-center gap-2 bg-rose-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-rose-700 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed"
+                >
+                  <Download className="w-5 h-5" />
+                  Export CSV
+                </button>
+              )}
             </div>
+            )}
 
             {/* Count bar */}
             <div className="bg-gray-50 rounded-lg p-4 mb-6 flex items-center justify-between">
               <div className="text-gray-700">
                 <span className="font-semibold text-2xl text-rose-600">{activeLeads.length}</span>
                 <span className="ml-2 text-gray-600">
-                  {activeLeads.length === 1 ? 'lead' : 'leads'}
-                  {searchTerm && ' (filtered)'}
+                  {activeTab === 'clients'
+                    ? activeLeads.length === 1 ? 'active client' : 'active clients'
+                    : activeLeads.length === 1 ? 'lead' : 'leads'}
+                  {searchTerm && activeTab !== 'clients' && ' (filtered)'}
                   {activeTab === 'clarity' && statusFilter !== 'all' && ' (filtered)'}
                 </span>
               </div>
@@ -1199,6 +1227,88 @@ function AdminDashboardInner() {
                                   View Details
                                 </button>
                               </div>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+              </>
+            )}
+
+            {/* Active Clients table */}
+            {activeTab === 'clients' && (
+              <>
+                {convertedClients.length === 0 ? (
+                  <div className="text-center py-16">
+                    <div className="w-16 h-16 mx-auto mb-4 bg-green-50 rounded-full flex items-center justify-center">
+                      <CheckCircle className="w-8 h-8 text-green-400" />
+                    </div>
+                    <p className="text-gray-500 font-medium">No active clients yet</p>
+                    <p className="text-gray-400 text-sm mt-1">Brides with "Converted to Client" status will appear here</p>
+                  </div>
+                ) : (
+                  <div className="overflow-x-auto">
+                    <table className="w-full">
+                      <thead>
+                        <tr className="border-b border-gray-200">
+                          <th className="text-left py-4 px-4 font-semibold text-gray-700">Name</th>
+                          <th className="text-left py-4 px-4 font-semibold text-gray-700">Email</th>
+                          <th className="text-left py-4 px-4 font-semibold text-gray-700">Phone</th>
+                          <th className="text-left py-4 px-4 font-semibold text-gray-700">Wedding Date</th>
+                          <th className="text-left py-4 px-4 font-semibold text-gray-700">Appt</th>
+                          <th className="text-left py-4 px-4 font-semibold text-gray-700">Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {convertedClients.map((lead) => (
+                          <tr key={lead.id} className="border-b border-gray-100 hover:bg-gray-50 transition-colors">
+                            <td className="py-4 px-4">
+                              <div className="flex items-center gap-2">
+                                <User className="w-4 h-4 text-gray-400" />
+                                <div>
+                                  <span className="font-medium text-gray-900">{lead.submission_name}</span>
+                                  {lead.bride_code && (
+                                    <span className="ml-2 text-xs text-gray-400">{lead.bride_code}</span>
+                                  )}
+                                </div>
+                              </div>
+                            </td>
+                            <td className="py-4 px-4">
+                              <a href={`mailto:${lead.submission_email}`} className="flex items-center gap-2 text-rose-600 hover:text-rose-700 transition-colors">
+                                <Mail className="w-4 h-4" />
+                                {lead.submission_email || '—'}
+                              </a>
+                            </td>
+                            <td className="py-4 px-4">
+                              <a href={`tel:${lead.submission_phone}`} className="flex items-center gap-2 text-gray-700 hover:text-rose-600 transition-colors">
+                                <Phone className="w-4 h-4" />
+                                {lead.submission_phone || '—'}
+                              </a>
+                            </td>
+                            <td className="py-4 px-4 text-gray-600 text-sm">
+                              {formatDateOnly(lead.submission_wedding_date)}
+                            </td>
+                            <td className="py-4 px-4">
+                              {(() => {
+                                const appt = sessionStatusForBride(lead.id);
+                                if (!appt) return <span className="text-gray-300 text-xs">—</span>;
+                                return (
+                                  <span className="inline-flex items-center gap-1 text-xs font-semibold text-blue-600 bg-blue-50 border border-blue-200 rounded-full px-2 py-1">
+                                    <Calendar className="w-3 h-3" />
+                                    Scheduled
+                                  </span>
+                                );
+                              })()}
+                            </td>
+                            <td className="py-4 px-4">
+                              <button
+                                onClick={() => openLeadDetail(lead)}
+                                className="text-rose-600 hover:text-rose-700 text-sm font-semibold transition-colors"
+                              >
+                                View Details
+                              </button>
                             </td>
                           </tr>
                         ))}
