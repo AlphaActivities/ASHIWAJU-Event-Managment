@@ -1425,7 +1425,7 @@ function AdminDashboardInner() {
                     onChange={(e) => setNoteText(e.target.value)}
                     placeholder="Type a note..."
                     rows={3}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none resize-none text-sm"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none resize-none text-base"
                   />
                   <button
                     onClick={handleAddNote}
@@ -1476,14 +1476,14 @@ function AdminDashboardInner() {
                       type="date"
                       value={followUpDate}
                       onChange={(e) => setFollowUpDate(e.target.value)}
-                      className="px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none text-sm"
+                      className="px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none text-base"
                       style={{ colorScheme: 'light' }}
                     />
                     <input
                       type="time"
                       value={followUpTime}
                       onChange={(e) => setFollowUpTime(e.target.value)}
-                      className="px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none text-sm"
+                      className="px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none text-base"
                       style={{ colorScheme: 'light' }}
                     />
                   </div>
@@ -1492,7 +1492,7 @@ function AdminDashboardInner() {
                     value={followUpDesc}
                     onChange={(e) => setFollowUpDesc(e.target.value)}
                     placeholder="Brief note about this follow-up..."
-                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none text-sm"
+                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none text-base"
                   />
                   <button
                     onClick={handleAddFollowUp}
@@ -1583,21 +1583,21 @@ function AdminDashboardInner() {
                       type="date"
                       value={sessionDate}
                       onChange={(e) => setSessionDate(e.target.value)}
-                      className="px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none text-sm"
+                      className="px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none text-base"
                       style={{ colorScheme: 'light' }}
                     />
                     <input
                       type="time"
                       value={sessionTime}
                       onChange={(e) => setSessionTime(e.target.value)}
-                      className="px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none text-sm"
+                      className="px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none text-base"
                       style={{ colorScheme: 'light' }}
                     />
                   </div>
                   <select
                     value={sessionMethod}
                     onChange={(e) => setSessionMethod(e.target.value)}
-                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none text-sm bg-white text-gray-700"
+                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none text-base bg-white text-gray-700"
                   >
                     {SESSION_METHOD_OPTIONS.map((m) => (
                       <option key={m} value={m}>{SESSION_METHOD_LABELS[m]}</option>
@@ -1608,14 +1608,14 @@ function AdminDashboardInner() {
                     value={sessionLocation}
                     onChange={(e) => setSessionLocation(e.target.value)}
                     placeholder="Location or meeting link (optional)..."
-                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none text-sm"
+                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none text-base"
                   />
                   <input
                     type="text"
                     value={sessionNotes}
                     onChange={(e) => setSessionNotes(e.target.value)}
                     placeholder="Session notes (optional)..."
-                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none text-sm"
+                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none text-base"
                   />
                   <button
                     onClick={handleAddSession}
