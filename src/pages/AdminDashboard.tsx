@@ -494,7 +494,7 @@ function AdminDashboardInner() {
   const handleAddFollowUp = async () => {
     if (!selectedLead || !followUpDate || !followUpTime || !followUpDesc.trim()) return;
     setFollowUpSaving(true);
-    const dueDateISO = new Date(`${followUpDate}T${followUpTime}`).toISOString();
+    const dueDateISO = lagosToUTC(followUpDate, followUpTime);
     try {
       const { error: insertError } = await supabase
         .from('follow_ups')
@@ -570,7 +570,7 @@ function AdminDashboardInner() {
     setSessionSaving(true);
     setSessionSuccess('');
     setSessionError('');
-    const scheduledISO = new Date(`${sessionDate}T${sessionTime}`).toISOString();
+    const scheduledISO = lagosToUTC(sessionDate, sessionTime);
     try {
       const { error: insertError } = await supabase
         .from('clarity_sessions')
@@ -703,6 +703,30 @@ function AdminDashboardInner() {
   };
 
   // ── Utilities ──
+  const lagosToUTC = (dateStr: string, timeStr: string): string => {
+    const ref = new Date(`${dateStr}T${timeStr}:00.000Z`);
+    const lagosParts = new Intl.DateTimeFormat('en-US', {
+      timeZone: 'Africa/Lagos',
+      year: 'numeric', month: '2-digit', day: '2-digit',
+      hour: '2-digit', minute: '2-digit', second: '2-digit',
+      hour12: false,
+    }).formatToParts(ref);
+    const l: Record<string, string> = {};
+    for (const p of lagosParts) if (p.type !== 'literal') l[p.type] = p.value;
+    const lagosEpoch = new Date(`${l.year}-${l.month}-${l.day}T${l.hour}:${l.minute}:${l.second}Z`).getTime();
+    const utcParts = new Intl.DateTimeFormat('en-US', {
+      timeZone: 'UTC',
+      year: 'numeric', month: '2-digit', day: '2-digit',
+      hour: '2-digit', minute: '2-digit', second: '2-digit',
+      hour12: false,
+    }).formatToParts(ref);
+    const u: Record<string, string> = {};
+    for (const p of utcParts) if (p.type !== 'literal') u[p.type] = p.value;
+    const utcEpoch = new Date(`${u.year}-${u.month}-${u.day}T${u.hour}:${u.minute}:${u.second}Z`).getTime();
+    const offsetMs = lagosEpoch - utcEpoch;
+    return new Date(ref.getTime() - offsetMs).toISOString();
+  };
+
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleString('en-US', {
       timeZone: 'Africa/Lagos',
@@ -1471,6 +1495,7 @@ function AdminDashboardInner() {
 
                 {/* Add follow-up */}
                 <div className="mb-4 space-y-2">
+                  <p className="text-xs text-gray-500 font-medium">Lagos time (WAT)</p>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     <input
                       type="date"
@@ -1578,6 +1603,7 @@ function AdminDashboardInner() {
 
                 {/* Add session */}
                 <div className="mb-4 space-y-2">
+                  <p className="text-xs text-gray-500 font-medium">Lagos time (WAT)</p>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     <input
                       type="date"

@@ -348,10 +348,12 @@ Deno.serve(async (req: Request) => {
 
     const signatureHeader = req.headers.get("X-Webhook-Signature");
     let authenticated = false;
+    let authMethod = "none";
 
     if (signatureHeader) {
       // Verify JWS signature (Netlify's recommended method)
       authenticated = await verifyJwsSignature(signatureHeader, rawBytes, webhookSecret);
+      if (authenticated) authMethod = "jws_signature";
     }
 
     if (!authenticated) {
@@ -360,12 +362,15 @@ Deno.serve(async (req: Request) => {
       const querySecret = url.searchParams.get("secret");
       if (querySecret) {
         authenticated = timingSafeEqual(querySecret, webhookSecret);
+        if (authenticated) authMethod = "query_secret";
       }
     }
 
     if (!authenticated) {
       return jsonResponse(401, { error: "Unauthorized" });
     }
+
+    console.log(`Webhook authenticated via ${authMethod}`);
 
     // ── Parse and validate payload ──
     let payload: NetlifyPayload;
