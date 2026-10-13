@@ -16,9 +16,8 @@ import FooterSection from './components/sections/FooterSection';
 import FloatingCallButton from './components/ui/FloatingCallButton';
 import MobileCTABar from './components/ui/MobileCTABar';
 import ScrollToTop from './components/ui/ScrollToTop';
-import ResetPassword from './pages/ResetPassword';
-
 const AdminDashboard = lazy(() => import('./pages/AdminDashboard'));
+const ResetPassword = lazy(() => import('./pages/ResetPassword'));
 
 export default function App() {
   const pathname = window.location.pathname;
@@ -40,7 +39,17 @@ export default function App() {
   }
 
   if (isResetRoute) {
-    return <ResetPassword />;
+    return (
+      <Suspense
+        fallback={
+          <div className="min-h-screen bg-gradient-to-br from-rose-50 via-white to-amber-50 flex items-center justify-center">
+            <div className="text-gray-500">Loading...</div>
+          </div>
+        }
+      >
+        <ResetPassword />
+      </Suspense>
+    );
   }
 
   return (
