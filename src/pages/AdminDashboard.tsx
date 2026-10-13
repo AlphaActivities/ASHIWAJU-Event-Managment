@@ -15,6 +15,9 @@ import {
   Clock,
   CheckCircle,
   AlertCircle,
+  Video,
+  MapPin,
+  XCircle,
 } from 'lucide-react';
 import type { Session, User as SupabaseUser } from '@supabase/supabase-js';
 import { supabaseAdmin as supabase } from '../utils/supabaseAdmin';
@@ -90,7 +93,44 @@ interface FollowUp {
   created_at: string;
 }
 
+interface ClaritySession {
+  id: string;
+  bride_id: string;
+  scheduled_at: string;
+  status: string;
+  method: string | null;
+  location: string | null;
+  notes: string | null;
+  replaces_session_id: string | null;
+  created_by: string | null;
+  created_at: string;
+  updated_at: string;
+}
+
 type TabKey = 'clarity' | 'guide';
+
+const SESSION_STATUS_OPTIONS = ['scheduled', 'completed', 'cancelled', 'rescheduled'] as const;
+const SESSION_METHOD_OPTIONS = ['phone', 'video', 'in_person'] as const;
+
+const SESSION_STATUS_LABELS: Record<string, string> = {
+  scheduled: 'Scheduled',
+  completed: 'Completed',
+  cancelled: 'Cancelled',
+  rescheduled: 'Rescheduled',
+};
+
+const SESSION_STATUS_STYLES: Record<string, string> = {
+  scheduled: 'bg-blue-100 text-blue-700 border-blue-200',
+  completed: 'bg-green-100 text-green-700 border-green-200',
+  cancelled: 'bg-gray-200 text-gray-600 border-gray-300',
+  rescheduled: 'bg-amber-100 text-amber-700 border-amber-200',
+};
+
+const SESSION_METHOD_LABELS: Record<string, string> = {
+  phone: 'Phone Call',
+  video: 'Video Call',
+  in_person: 'In Person',
+};
 
 const STATUS_OPTIONS = [
   'new',
@@ -154,6 +194,19 @@ export default function AdminDashboard() {
   const [completingFollowUpId, setCompletingFollowUpId] = useState<string | null>(null);
   const [allFollowUps, setAllFollowUps] = useState<FollowUp[]>([]);
 
+  const [sessions, setSessions] = useState<ClaritySession[]>([]);
+  const [sessionsLoading, setSessionsLoading] = useState(false);
+  const [sessionDate, setSessionDate] = useState('');
+  const [sessionTime, setSessionTime] = useState('');
+  const [sessionMethod, setSessionMethod] = useState<string>('phone');
+  const [sessionLocation, setSessionLocation] = useState('');
+  const [sessionNotes, setSessionNotes] = useState('');
+  const [sessionSaving, setSessionSaving] = useState(false);
+  const [updatingSessionId, setUpdatingSessionId] = useState<string | null>(null);
+  const [allUpcomingSessions, setAllUpcomingSessions] = useState<ClaritySession[]>([]);
+  const [sessionSuccess, setSessionSuccess] = useState('');
+  const [sessionError, setSessionError] = useState('');
+
   // ── Auth: check existing session on mount ──
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
@@ -171,6 +224,7 @@ export default function AdminDashboard() {
         setSelectedLead(null);
         setNotes([]);
         setAllFollowUps([]);
+        setAllUpcomingSessions([]);
       }
     });
 
@@ -185,6 +239,7 @@ export default function AdminDashboard() {
       loadLeads();
       loadGuideDownloads();
       loadAllFollowUps();
+      loadAllUpcomingSessions();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session]);
@@ -356,8 +411,16 @@ export default function AdminDashboard() {
     setFollowUpDate('');
     setFollowUpTime('');
     setFollowUpDesc('');
+    setSessionDate('');
+    setSessionTime('');
+    setSessionMethod('phone');
+    setSessionLocation('');
+    setSessionNotes('');
+    setSessionSuccess('');
+    setSessionError('');
     loadNotes(lead.id);
     loadFollowUps(lead.id);
+    loadSessions(lead.id);
   };
 
   const closeLeadDetail = () => {
@@ -368,6 +431,14 @@ export default function AdminDashboard() {
     setFollowUpDate('');
     setFollowUpTime('');
     setFollowUpDesc('');
+    setSessions([]);
+    setSessionDate('');
+    setSessionTime('');
+    setSessionMethod('phone');
+    setSessionLocation('');
+    setSessionNotes('');
+    setSessionSuccess('');
+    setSessionError('');
   };
 
   // ── Follow-ups ──
@@ -439,6 +510,98 @@ export default function AdminDashboard() {
       console.error('Error completing follow-up:', err);
     } finally {
       setCompletingFollowUpId(null);
+    }
+  };
+
+  // ── Clarity Sessions ──
+  const loadSessions = useCallback(async (brideId: string) => {
+    setSessionsLoading(true);
+    try {
+      const { data, error: queryError } = await supabase
+        .from('clarity_sessions')
+        .select('*')
+        .eq('bride_id', brideId)
+        .order('scheduled_at', { ascending: false });
+      if (queryError) throw queryError;
+      setSessions((data as ClaritySession[]) || []);
+    } catch (err) {
+      console.error('Error loading sessions:', err);
+      setSessions([]);
+    } finally {
+      setSessionsLoading(false);
+    }
+  }, []);
+
+  const loadAllUpcomingSessions = async () => {
+    try {
+      const { data, error: queryError } = await supabase
+        .from('clarity_sessions')
+        .select('*')
+        .eq('status', 'scheduled')
+        .gte('scheduled_at', new Date().toISOString())
+        .order('scheduled_at', { ascending: true })
+        .limit(10);
+      if (queryError) throw queryError;
+      setAllUpcomingSessions((data as ClaritySession[]) || []);
+    } catch (err) {
+      console.error('Error loading upcoming sessions:', err);
+    }
+  };
+
+  const handleAddSession = async () => {
+    if (!selectedLead || !sessionDate || !sessionTime) return;
+    setSessionSaving(true);
+    setSessionSuccess('');
+    setSessionError('');
+    const scheduledISO = new Date(`${sessionDate}T${sessionTime}`).toISOString();
+    try {
+      const { error: insertError } = await supabase
+        .from('clarity_sessions')
+        .insert([{
+          bride_id: selectedLead.id,
+          scheduled_at: scheduledISO,
+          status: 'scheduled',
+          method: sessionMethod,
+          location: sessionLocation.trim() || null,
+          notes: sessionNotes.trim() || null,
+        }]);
+      if (insertError) throw insertError;
+      setSessionDate('');
+      setSessionTime('');
+      setSessionMethod('phone');
+      setSessionLocation('');
+      setSessionNotes('');
+      setSessionSuccess('Appointment scheduled successfully.');
+      await loadSessions(selectedLead.id);
+      await loadAllUpcomingSessions();
+    } catch (err) {
+      console.error('Error adding session:', err);
+      setSessionError('Failed to schedule appointment. Please try again.');
+    } finally {
+      setSessionSaving(false);
+    }
+  };
+
+  const handleUpdateSessionStatus = async (sessionId: string, newStatus: string) => {
+    setUpdatingSessionId(sessionId);
+    setSessionSuccess('');
+    setSessionError('');
+    try {
+      const { error: updateError } = await supabase
+        .from('clarity_sessions')
+        .update({ status: newStatus })
+        .eq('id', sessionId);
+      if (updateError) throw updateError;
+      setSessionSuccess(`Appointment marked as ${SESSION_STATUS_LABELS[newStatus]?.toLowerCase() || newStatus}.`);
+      if (selectedLead) {
+        await loadSessions(selectedLead.id);
+      }
+      await loadAllUpcomingSessions();
+    } catch (err) {
+      console.error('Error updating session:', err);
+      setSessionError('Failed to update appointment. Please try again.');
+    } finally {
+      setUpdatingSessionId(null);
     }
   };
 
@@ -563,6 +726,16 @@ export default function AdminDashboard() {
     if (brideFollowUps.some((f) => isOverdue(f.due_date, f.completed_at))) return 'overdue';
     if (brideFollowUps.some((f) => isUpcoming(f.due_date, f.completed_at))) return 'upcoming';
     return null;
+  };
+
+  const sessionStatusForBride = (brideId: string): 'scheduled' | null => {
+    return allUpcomingSessions.some((s) => s.bride_id === brideId) ? 'scheduled' : null;
+  };
+
+  const sessionMethodIcon = (method: string | null) => {
+    if (method === 'video') return <Video className="w-3 h-3" />;
+    if (method === 'in_person') return <MapPin className="w-3 h-3" />;
+    return <Phone className="w-3 h-3" />;
   };
 
   const formatDateOnly = (dateString: string | null) => {
@@ -766,12 +939,14 @@ export default function AdminDashboard() {
               {loading && <div className="text-gray-500 text-sm">Loading...</div>}
             </div>
 
-            {/* Follow-up reminders section */}
+            {/* Follow-up reminders + Upcoming sessions section */}
             {activeTab === 'clarity' && (() => {
   const overdueFollowUps = allFollowUps.filter((f) => isOverdue(f.due_date, f.completed_at));
   const upcomingFollowUps = allFollowUps.filter((f) => isUpcoming(f.due_date, f.completed_at));
-  if (overdueFollowUps.length === 0 && upcomingFollowUps.length === 0) return null;
   const brideNameById = new Map(leads.map((l) => [l.id, l.submission_name]));
+  const hasFollowUps = overdueFollowUps.length > 0 || upcomingFollowUps.length > 0;
+  const hasSessions = allUpcomingSessions.length > 0;
+  if (!hasFollowUps && !hasSessions) return null;
   return (
     <div className="mb-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
       {overdueFollowUps.length > 0 && (
@@ -812,6 +987,28 @@ export default function AdminDashboard() {
           </div>
         </div>
       )}
+      {hasSessions && (
+        <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
+          <div className="flex items-center gap-2 mb-3">
+            <Calendar className="w-5 h-5 text-blue-600" />
+            <h3 className="font-semibold text-blue-800 text-sm">Upcoming Appointments ({allUpcomingSessions.length})</h3>
+          </div>
+          <div className="space-y-2 max-h-48 overflow-y-auto">
+            {allUpcomingSessions.map((s) => (
+              <div key={s.id} className="flex items-center justify-between bg-white rounded-lg px-3 py-2 border border-blue-100">
+                <div className="min-w-0">
+                  <p className="text-sm font-medium text-gray-900 truncate">{brideNameById.get(s.bride_id) || 'Unknown'}</p>
+                  <p className="text-xs text-gray-500 truncate flex items-center gap-1">
+                    {sessionMethodIcon(s.method)}
+                    {s.method ? SESSION_METHOD_LABELS[s.method] : 'Method TBD'}
+                  </p>
+                </div>
+                <span className="text-xs text-blue-600 font-semibold whitespace-nowrap ml-2">{formatWAT(s.scheduled_at)}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 })()}
@@ -837,6 +1034,7 @@ export default function AdminDashboard() {
                           <th className="text-left py-4 px-4 font-semibold text-gray-700">Wedding Date</th>
                           <th className="text-left py-4 px-4 font-semibold text-gray-700">Status</th>
                           <th className="text-left py-4 px-4 font-semibold text-gray-700">Follow-up</th>
+                          <th className="text-left py-4 px-4 font-semibold text-gray-700">Appt</th>
                           <th className="text-left py-4 px-4 font-semibold text-gray-700">Created</th>
                           <th className="text-left py-4 px-4 font-semibold text-gray-700">Actions</th>
                         </tr>
@@ -902,6 +1100,18 @@ export default function AdminDashboard() {
                                   <span className="inline-flex items-center gap-1 text-xs font-semibold text-amber-600 bg-amber-50 border border-amber-200 rounded-full px-2 py-1">
                                     <Clock className="w-3 h-3" />
                                     Upcoming
+                                  </span>
+                                );
+                              })()}
+                            </td>
+                            <td className="py-4 px-4">
+                              {(() => {
+                                const appt = sessionStatusForBride(lead.id);
+                                if (!appt) return <span className="text-gray-300 text-xs">—</span>;
+                                return (
+                                  <span className="inline-flex items-center gap-1 text-xs font-semibold text-blue-600 bg-blue-50 border border-blue-200 rounded-full px-2 py-1">
+                                    <Calendar className="w-3 h-3" />
+                                    Scheduled
                                   </span>
                                 );
                               })()}
@@ -1179,6 +1389,148 @@ export default function AdminDashboard() {
                         </div>
                       );
                     })}
+                  </div>
+                )}
+              </div>
+
+              {/* Clarity Sessions section */}
+              <div>
+                <div className="flex items-center gap-2 mb-3">
+                  <Calendar className="w-5 h-5 text-gray-500" />
+                  <h3 className="text-lg font-semibold text-gray-800">Clarity Session Appointments</h3>
+                </div>
+
+                {sessionSuccess && (
+                  <div className="bg-green-50 text-green-700 px-4 py-3 rounded-lg text-sm mb-3 border border-green-200">
+                    {sessionSuccess}
+                  </div>
+                )}
+                {sessionError && (
+                  <div className="bg-red-50 text-red-600 px-4 py-3 rounded-lg text-sm mb-3 border border-red-200">
+                    {sessionError}
+                  </div>
+                )}
+
+                {/* Add session */}
+                <div className="mb-4 space-y-2">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    <input
+                      type="date"
+                      value={sessionDate}
+                      onChange={(e) => setSessionDate(e.target.value)}
+                      className="px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none text-sm"
+                      style={{ colorScheme: 'light' }}
+                    />
+                    <input
+                      type="time"
+                      value={sessionTime}
+                      onChange={(e) => setSessionTime(e.target.value)}
+                      className="px-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none text-sm"
+                      style={{ colorScheme: 'light' }}
+                    />
+                  </div>
+                  <select
+                    value={sessionMethod}
+                    onChange={(e) => setSessionMethod(e.target.value)}
+                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none text-sm bg-white text-gray-700"
+                  >
+                    {SESSION_METHOD_OPTIONS.map((m) => (
+                      <option key={m} value={m}>{SESSION_METHOD_LABELS[m]}</option>
+                    ))}
+                  </select>
+                  <input
+                    type="text"
+                    value={sessionLocation}
+                    onChange={(e) => setSessionLocation(e.target.value)}
+                    placeholder="Location or meeting link (optional)..."
+                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none text-sm"
+                  />
+                  <input
+                    type="text"
+                    value={sessionNotes}
+                    onChange={(e) => setSessionNotes(e.target.value)}
+                    placeholder="Session notes (optional)..."
+                    className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none text-sm"
+                  />
+                  <button
+                    onClick={handleAddSession}
+                    disabled={!sessionDate || !sessionTime || sessionSaving}
+                    className="flex items-center gap-2 bg-rose-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-rose-700 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed"
+                  >
+                    <Plus className="w-4 h-4" />
+                    {sessionSaving ? 'Saving...' : 'Schedule Appointment'}
+                  </button>
+                </div>
+
+                {/* Sessions list */}
+                {sessionsLoading ? (
+                  <div className="text-gray-500 text-sm py-4">Loading appointments...</div>
+                ) : sessions.length === 0 ? (
+                  <div className="text-gray-400 text-sm py-4 text-center">No appointments recorded yet</div>
+                ) : (
+                  <div className="space-y-3">
+                    {sessions.map((s) => (
+                      <div
+                        key={s.id}
+                        className={`rounded-lg p-4 border ${
+                          s.status === 'cancelled'
+                            ? 'bg-gray-50 border-gray-200 opacity-75'
+                            : s.status === 'completed'
+                              ? 'bg-green-50 border-green-100'
+                              : s.status === 'rescheduled'
+                                ? 'bg-amber-50 border-amber-100'
+                                : 'bg-blue-50 border-blue-100'
+                        }`}
+                      >
+                        <div className="flex items-start justify-between gap-3">
+                          <div className="min-w-0 flex-1">
+                            <div className="flex items-center gap-2 mb-1">
+                              <span className={`inline-flex items-center gap-1 text-xs font-semibold rounded-full px-2 py-0.5 border ${SESSION_STATUS_STYLES[s.status] || SESSION_STATUS_STYLES['scheduled']}`}>
+                                {SESSION_STATUS_LABELS[s.status] || s.status}
+                              </span>
+                              {s.method && (
+                                <span className="text-xs text-gray-500 flex items-center gap-1">
+                                  {sessionMethodIcon(s.method)}
+                                  {SESSION_METHOD_LABELS[s.method] || s.method}
+                                </span>
+                              )}
+                            </div>
+                            <p className="text-gray-700 text-sm font-medium">
+                              {formatWAT(s.scheduled_at)} WAT
+                            </p>
+                            {s.location && (
+                              <p className="text-gray-500 text-xs mt-1 flex items-center gap-1">
+                                <MapPin className="w-3 h-3" />
+                                {s.location}
+                              </p>
+                            )}
+                            {s.notes && (
+                              <p className="text-gray-500 text-xs mt-1">{s.notes}</p>
+                            )}
+                          </div>
+                          {s.status === 'scheduled' && (
+                            <div className="flex-shrink-0 flex flex-col gap-1.5">
+                              <button
+                                onClick={() => handleUpdateSessionStatus(s.id, 'completed')}
+                                disabled={updatingSessionId === s.id}
+                                className="flex items-center gap-1 text-green-600 hover:text-green-700 text-xs font-semibold transition-colors disabled:opacity-50"
+                              >
+                                <CheckCircle className="w-4 h-4" />
+                                {updatingSessionId === s.id ? '...' : 'Complete'}
+                              </button>
+                              <button
+                                onClick={() => handleUpdateSessionStatus(s.id, 'cancelled')}
+                                disabled={updatingSessionId === s.id}
+                                className="flex items-center gap-1 text-gray-500 hover:text-red-600 text-xs font-semibold transition-colors disabled:opacity-50"
+                              >
+                                <XCircle className="w-4 h-4" />
+                                {updatingSessionId === s.id ? '...' : 'Cancel'}
+                              </button>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 )}
               </div>
