@@ -1,3 +1,4 @@
+import { lazy, Suspense } from 'react';
 import Navbar from './components/Navbar';
 import HeroSection from './components/sections/HeroSection';
 import UnderstandingSection from './components/sections/UnderstandingSection';
@@ -15,8 +16,9 @@ import FooterSection from './components/sections/FooterSection';
 import FloatingCallButton from './components/ui/FloatingCallButton';
 import MobileCTABar from './components/ui/MobileCTABar';
 import ScrollToTop from './components/ui/ScrollToTop';
-import AdminDashboard from './pages/AdminDashboard';
 import ResetPassword from './pages/ResetPassword';
+
+const AdminDashboard = lazy(() => import('./pages/AdminDashboard'));
 
 export default function App() {
   const pathname = window.location.pathname;
@@ -24,7 +26,17 @@ export default function App() {
   const isResetRoute = pathname === '/reset-password';
 
   if (isAdminRoute) {
-    return <AdminDashboard />;
+    return (
+      <Suspense
+        fallback={
+          <div className="min-h-screen bg-gradient-to-br from-rose-50 via-white to-amber-50 flex items-center justify-center">
+            <div className="text-gray-500">Loading admin dashboard...</div>
+          </div>
+        }
+      >
+        <AdminDashboard />
+      </Suspense>
+    );
   }
 
   if (isResetRoute) {
