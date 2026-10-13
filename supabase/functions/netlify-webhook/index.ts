@@ -13,26 +13,25 @@ const supabase = createClient(SUPABASE_URL, SERVICE_ROLE_KEY, {
   auth: { persistSession: false },
 });
 
-let cachedSecret: string | null = null;
-let cachedSecretAt = 0;
+let cachedSecrets: string[] | null = null;
+let cachedSecretsAt = 0;
 const SECRET_CACHE_MS = 60_000;
 
-async function getWebhookSecret(): Promise<string | null> {
-  if (cachedSecret && Date.now() - cachedSecretAt < SECRET_CACHE_MS) {
-    return cachedSecret;
+async function getWebhookSecrets(): Promise<string[] | null> {
+  if (cachedSecrets && Date.now() - cachedSecretsAt < SECRET_CACHE_MS) {
+    return cachedSecrets;
   }
   const { data, error } = await supabase
     .from("webhook_secrets")
     .select("secret")
-    .eq("is_active", true)
-    .maybeSingle();
-  if (error || !data) {
-    console.error("Failed to read webhook secret from database");
+    .eq("is_active", true);
+  if (error || !data || data.length === 0) {
+    console.error("Failed to read webhook secrets from database");
     return null;
   }
-  cachedSecret = data.secret;
-  cachedSecretAt = Date.now();
-  return cachedSecret;
+  cachedSecrets = data.map((row: { secret: string }) => row.secret);
+  cachedSecretsAt = Date.now();
+  return cachedSecrets;
 }
 
 // ── JWS signature verification (Netlify's X-Webhook-Signature header) ──
@@ -329,8 +328,9 @@ Deno.serve(async (req: Request) => {
 
     // ── Authentication ──
     // Netlify JWS signature (X-Webhook-Signature header + JWS secret in Netlify UI)
-    const webhookSecret = await getWebhookSecret();
-    if (!webhookSecret) {
+    // Multiple active secrets are supported to allow zero-downtime rotation.
+    const webhookSecrets = await getWebhookSecrets();
+    if (!webhookSecrets || webhookSecrets.length === 0) {
       console.error("Webhook secret not configured in webhook_secrets table");
       return jsonResponse(500, { error: "Server misconfigured" });
     }
@@ -340,7 +340,13 @@ Deno.serve(async (req: Request) => {
       return jsonResponse(401, { error: "Unauthorized" });
     }
 
-    const authenticated = await verifyJwsSignature(signatureHeader, rawBytes, webhookSecret);
+    let authenticated = false;
+    for (const secret of webhookSecrets) {
+      if (await verifyJwsSignature(signatureHeader, rawBytes, secret)) {
+        authenticated = true;
+        break;
+      }
+    }
     if (!authenticated) {
       return jsonResponse(401, { error: "Unauthorized" });
     }
