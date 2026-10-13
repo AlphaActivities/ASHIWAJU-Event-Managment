@@ -106,16 +106,6 @@ function base64UrlDecode(input: string): Uint8Array {
   return bytes;
 }
 
-// ── Timing-safe string comparison ──
-function timingSafeEqual(a: string, b: string): boolean {
-  if (a.length !== b.length) return false;
-  let result = 0;
-  for (let i = 0; i < a.length; i++) {
-    result |= a.charCodeAt(i) ^ b.charCodeAt(i);
-  }
-  return result === 0;
-}
-
 const REQUIRED_FIELDS = ["name", "email", "phone"] as const;
 
 interface NetlifyPayload {
@@ -338,8 +328,7 @@ Deno.serve(async (req: Request) => {
     const rawBytes = new TextEncoder().encode(rawBody);
 
     // ── Authentication ──
-    // Primary: Netlify JWS signature (X-Webhook-Signature header + JWS secret in Netlify UI)
-    // Fallback: secret in query parameter (for environments without JWS support)
+    // Netlify JWS signature (X-Webhook-Signature header + JWS secret in Netlify UI)
     const webhookSecret = await getWebhookSecret();
     if (!webhookSecret) {
       console.error("Webhook secret not configured in webhook_secrets table");
@@ -347,30 +336,14 @@ Deno.serve(async (req: Request) => {
     }
 
     const signatureHeader = req.headers.get("X-Webhook-Signature");
-    let authenticated = false;
-    let authMethod = "none";
-
-    if (signatureHeader) {
-      // Verify JWS signature (Netlify's recommended method)
-      authenticated = await verifyJwsSignature(signatureHeader, rawBytes, webhookSecret);
-      if (authenticated) authMethod = "jws_signature";
-    }
-
-    if (!authenticated) {
-      // Fallback: check query parameter ?secret=...
-      const url = new URL(req.url);
-      const querySecret = url.searchParams.get("secret");
-      if (querySecret) {
-        authenticated = timingSafeEqual(querySecret, webhookSecret);
-        if (authenticated) authMethod = "query_secret";
-      }
-    }
-
-    if (!authenticated) {
+    if (!signatureHeader) {
       return jsonResponse(401, { error: "Unauthorized" });
     }
 
-    console.log(`Webhook authenticated via ${authMethod}`);
+    const authenticated = await verifyJwsSignature(signatureHeader, rawBytes, webhookSecret);
+    if (!authenticated) {
+      return jsonResponse(401, { error: "Unauthorized" });
+    }
 
     // ── Parse and validate payload ──
     let payload: NetlifyPayload;
