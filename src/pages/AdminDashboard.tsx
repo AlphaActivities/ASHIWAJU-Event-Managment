@@ -18,6 +18,7 @@ import {
   Video,
   MapPin,
   XCircle,
+  History,
 } from 'lucide-react';
 import type { Session, User as SupabaseUser } from '@supabase/supabase-js';
 import { supabaseAdmin, adminConfigAvailable } from '../utils/supabaseAdmin';
@@ -217,6 +218,8 @@ function AdminDashboardInner() {
   const [sessionError, setSessionError] = useState('');
   const [totalSubmissions, setTotalSubmissions] = useState(0);
   const [adminProfiles, setAdminProfiles] = useState<Map<string, string>>(new Map());
+  const [brideSubmissions, setBrideSubmissions] = useState<FormSubmission[]>([]);
+  const [brideSubmissionsLoading, setBrideSubmissionsLoading] = useState(false);
 
   // ── Auth: check existing session on mount ──
   useEffect(() => {
@@ -456,6 +459,7 @@ function AdminDashboardInner() {
     loadNotes(lead.id);
     loadFollowUps(lead.id);
     loadSessions(lead.id);
+    loadBrideSubmissions(lead.id);
   };
 
   const closeLeadDetail = () => {
@@ -474,6 +478,7 @@ function AdminDashboardInner() {
     setSessionNotes('');
     setSessionSuccess('');
     setSessionError('');
+    setBrideSubmissions([]);
   };
 
   // ── Follow-ups ──
@@ -639,6 +644,25 @@ function AdminDashboardInner() {
       setUpdatingSessionId(null);
     }
   };
+
+  // ── Submission history for selected bride ──
+  const loadBrideSubmissions = useCallback(async (brideId: string) => {
+    setBrideSubmissionsLoading(true);
+    try {
+      const { data, error: queryError } = await supabase
+        .from('form_submissions')
+        .select('*')
+        .eq('bride_id', brideId)
+        .order('original_submitted_at', { ascending: false });
+      if (queryError) throw queryError;
+      setBrideSubmissions((data as FormSubmission[]) || []);
+    } catch (err) {
+      console.error('Error loading submission history:', err);
+      setBrideSubmissions([]);
+    } finally {
+      setBrideSubmissionsLoading(false);
+    }
+  }, []);
 
   // ── Filtering ──
   const filteredLeads = leads.filter((lead) => {
@@ -1430,6 +1454,80 @@ function AdminDashboardInner() {
                   </select>
                   <ChevronRight className="w-4 h-4 text-gray-400 absolute right-2 top-1/2 -translate-y-1/2 rotate-90 pointer-events-none" />
                 </div>
+              </div>
+
+              {/* Submission History */}
+              <div>
+                <div className="flex items-center gap-2 mb-3">
+                  <History className="w-5 h-5 text-gray-500" />
+                  <h3 className="text-lg font-semibold text-gray-800">Submission History</h3>
+                  {brideSubmissions.length > 0 && (
+                    <span className="text-xs text-gray-400 font-medium">{brideSubmissions.length} total</span>
+                  )}
+                </div>
+
+                {brideSubmissionsLoading ? (
+                  <div className="text-gray-500 text-sm py-4">Loading submission history...</div>
+                ) : brideSubmissions.length === 0 ? (
+                  <div className="text-gray-400 text-sm py-4 text-center">No submission history recorded</div>
+                ) : (
+                  <div className="space-y-3">
+                    {brideSubmissions.map((sub, idx) => (
+                      <div
+                        key={sub.id}
+                        className={`rounded-lg p-4 border ${
+                          idx === 0
+                            ? 'bg-rose-50 border-rose-200'
+                            : 'bg-gray-50 border-gray-100'
+                        }`}
+                      >
+                        {idx === 0 && (
+                          <span className="inline-flex items-center gap-1 text-xs font-semibold text-rose-600 bg-white border border-rose-200 rounded-full px-2 py-0.5 mb-2">
+                            <CheckCircle className="w-3 h-3" />
+                            Latest
+                          </span>
+                        )}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
+                          <div>
+                            <span className="text-gray-400 text-xs font-semibold uppercase">Name</span>
+                            <p className="text-gray-800">{sub.name || 'Not provided'}</p>
+                          </div>
+                          <div>
+                            <span className="text-gray-400 text-xs font-semibold uppercase">Email</span>
+                            <p className="text-gray-800 truncate">{sub.email || 'Not provided'}</p>
+                          </div>
+                          <div>
+                            <span className="text-gray-400 text-xs font-semibold uppercase">Phone</span>
+                            <p className="text-gray-800">{sub.phone || 'Not provided'}</p>
+                          </div>
+                          <div>
+                            <span className="text-gray-400 text-xs font-semibold uppercase">Contact Method</span>
+                            <p className="text-gray-800">{sub.preferred_contact_method || 'Not provided'}</p>
+                          </div>
+                          <div>
+                            <span className="text-gray-400 text-xs font-semibold uppercase">Wedding Date</span>
+                            <p className="text-gray-800">{formatDateOnly(sub.wedding_date)}</p>
+                          </div>
+                          <div>
+                            <span className="text-gray-400 text-xs font-semibold uppercase">Budget</span>
+                            <p className="text-gray-800">{sub.planned_budget || 'Not provided'}</p>
+                          </div>
+                          <div>
+                            <span className="text-gray-400 text-xs font-semibold uppercase">Guest Size</span>
+                            <p className="text-gray-800">{sub.guest_size || 'Not provided'}</p>
+                          </div>
+                          <div>
+                            <span className="text-gray-400 text-xs font-semibold uppercase">Source</span>
+                            <p className="text-gray-800 capitalize">{sub.source?.replace(/_/g, ' ') || 'Not provided'}</p>
+                          </div>
+                        </div>
+                        <div className="mt-2 pt-2 border-t border-gray-100">
+                          <span className="text-gray-400 text-xs">Submitted: {formatWAT(sub.original_submitted_at)} WAT</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
 
               {/* Notes section */}
