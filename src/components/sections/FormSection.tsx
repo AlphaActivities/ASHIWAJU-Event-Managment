@@ -173,9 +173,12 @@ export default function FormSection() {
                     <label className="text-xs md:text-sm font-medium tracking-wide text-[#151515]">
                       Planned Budget (Estimate)
                     </label>
+                    <p className="text-[11px] md:text-xs text-[#151515]/60 leading-relaxed">
+                      Our wedding planning services are designed for weddings with budgets starting from ₦10 million.
+                    </p>
                     <input type="hidden" name="plannedBudget" value={plannedBudget} />
-                    <div className="grid grid-cols-2 md:grid-cols-3 gap-2.5">
-                      {['₦3M – ₦5M', '₦5M – ₦10M', '₦10M – ₦20M', 'Above ₦20M'].map((option) => (
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                      {['₦10M – ₦15M', '₦15M – ₦20M', 'Above ₦20M'].map((option) => (
                         <button
                           key={option}
                           type="button"
