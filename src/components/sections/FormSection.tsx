@@ -174,7 +174,7 @@ export default function FormSection() {
                       Planned Budget (Estimate)
                     </label>
                     <p className="text-[11px] md:text-xs text-[#151515]/60 leading-relaxed">
-                      Our wedding planning services are designed for weddings with budgets starting from ₦10 million.
+                      For brides planning weddings with budgets of ₦10 million and above.
                     </p>
                     <input type="hidden" name="plannedBudget" value={plannedBudget} />
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
