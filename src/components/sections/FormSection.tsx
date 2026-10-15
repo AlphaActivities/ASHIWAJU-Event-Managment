@@ -207,7 +207,7 @@ export default function FormSection() {
                     </label>
                     <input type="hidden" name="guestSize" value={guestSize} />
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-2.5">
-                      {['Under 100', '100 – 200', '200 – 300', '300 – 500', 'Above 500'].map((option) => (
+                      {['100–150', '150–200', '200–300', '300+'].map((option) => (
                         <button
                           key={option}
                           type="button"
