@@ -7,9 +7,17 @@ export default function FormSection() {
   const [guestSize, setGuestSize] = useState("");
   const [contactMethod, setContactMethod] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [budgetError, setBudgetError] = useState(false);
+  const [guestError, setGuestError] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    let hasError = false;
+    if (!plannedBudget) { setBudgetError(true); hasError = true; }
+    if (!guestSize) { setGuestError(true); hasError = true; }
+    if (hasError) return;
+
     setIsSubmitting(true);
 
     const form = e.currentTarget;
@@ -171,19 +179,20 @@ export default function FormSection() {
 
                   <div className="space-y-2">
                     <label className="text-xs md:text-sm font-medium tracking-wide text-[#151515]">
-                      Planned Budget (Estimate)
+                      Planned Budget (Estimate) <span className="text-[#C99524]">*</span>
                     </label>
                     <p className="text-[11px] md:text-xs text-[#151515]/60 leading-relaxed">
                       For brides planning weddings with budgets of ₦10 million and above.
                     </p>
-                    <input type="hidden" name="plannedBudget" value={plannedBudget} />
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                    <input type="hidden" name="plannedBudget" value={plannedBudget} required />
+                    <div className={`grid grid-cols-1 sm:grid-cols-3 gap-2.5 ${budgetError ? 'ring-1 ring-red-400/50 rounded-lg p-1' : ''}`}>
                       {['₦10M – ₦15M', '₦15M – ₦20M', 'Above ₦20M'].map((option) => (
                         <button
                           key={option}
                           type="button"
                           onClick={(e) => {
                             setPlannedBudget(option);
+                            setBudgetError(false);
                             e.currentTarget.blur();
                           }}
                           className={`px-3.5 py-3 rounded-lg text-xs md:text-sm font-medium transition-all ${
@@ -196,23 +205,26 @@ export default function FormSection() {
                         </button>
                       ))}
                     </div>
-                    <p className="text-[11px] md:text-xs text-[#151515]/50 mt-1.5">
-                      Tap one option (optional)
-                    </p>
+                    {budgetError && (
+                      <p className="text-[11px] md:text-xs text-red-600 mt-1.5 font-medium">
+                        Please select your estimated budget to continue.
+                      </p>
+                    )}
                   </div>
 
                   <div className="space-y-2">
                     <label className="text-xs md:text-sm font-medium tracking-wide text-[#151515]">
-                      Estimated Guest Size
+                      Estimated Guest Size <span className="text-[#C99524]">*</span>
                     </label>
-                    <input type="hidden" name="guestSize" value={guestSize} />
-                    <div className="grid grid-cols-2 md:grid-cols-3 gap-2.5">
+                    <input type="hidden" name="guestSize" value={guestSize} required />
+                    <div className={`grid grid-cols-2 md:grid-cols-3 gap-2.5 ${guestError ? 'ring-1 ring-red-400/50 rounded-lg p-1' : ''}`}>
                       {['100–150', '150–200', '200–300', '300+'].map((option) => (
                         <button
                           key={option}
                           type="button"
                           onClick={(e) => {
                             setGuestSize(option);
+                            setGuestError(false);
                             e.currentTarget.blur();
                           }}
                           className={`px-3.5 py-3 rounded-lg text-xs md:text-sm font-medium transition-all ${
@@ -225,9 +237,11 @@ export default function FormSection() {
                         </button>
                       ))}
                     </div>
-                    <p className="text-[11px] md:text-xs text-[#151515]/50 mt-1.5">
-                      Tap one option (optional)
-                    </p>
+                    {guestError && (
+                      <p className="text-[11px] md:text-xs text-red-600 mt-1.5 font-medium">
+                        Please select your estimated guest size to continue.
+                      </p>
+                    )}
                   </div>
 
                   <div className="pt-1">
